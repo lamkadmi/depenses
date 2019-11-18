@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:adapter="@{viewModel.openSourceItemsLiveData}"
-                tools:listitem="@layout/item_blog_view" />
+                tools:listitem="@layout/item_prevevision_view" />
 
         </LinearLayout>
 

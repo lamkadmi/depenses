@@ -18,15 +18,18 @@ package com.mindorks.framework.mvvm.ui.feed.dashboard;
 
 import android.content.Intent;
 import android.net.Uri;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import com.mindorks.framework.mvvm.data.model.api.BlogResponse;
 import com.mindorks.framework.mvvm.databinding.ItemBlogEmptyViewBinding;
-import com.mindorks.framework.mvvm.databinding.ItemBlogViewBinding;
+import com.mindorks.framework.mvvm.databinding.ItemPrevevisionViewBinding;
 import com.mindorks.framework.mvvm.ui.base.BaseViewHolder;
 import com.mindorks.framework.mvvm.utils.AppLogger;
+
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by lamkadmi on 17/11/19.
@@ -73,7 +76,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case VIEW_TYPE_NORMAL:
-                ItemBlogViewBinding blogViewBinding = ItemBlogViewBinding.inflate(LayoutInflater.from(parent.getContext()),
+                ItemPrevevisionViewBinding blogViewBinding = ItemPrevevisionViewBinding.inflate(LayoutInflater.from(parent.getContext()),
                         parent, false);
                 return new BlogViewHolder(blogViewBinding);
             case VIEW_TYPE_EMPTY:
@@ -104,11 +107,11 @@ public class BlogAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     public class BlogViewHolder extends BaseViewHolder implements BlogItemViewModel.BlogItemViewModelListener {
 
-        private ItemBlogViewBinding mBinding;
+        private ItemPrevevisionViewBinding mBinding;
 
         private BlogItemViewModel mBlogItemViewModel;
 
-        public BlogViewHolder(ItemBlogViewBinding binding) {
+        public BlogViewHolder(ItemPrevevisionViewBinding binding) {
             super(binding.getRoot());
             this.mBinding = binding;
         }

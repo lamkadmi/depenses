@@ -16,37 +16,61 @@
 
 package com.mindorks.framework.mvvm.ui.feed.dashboard;
 
-import androidx.lifecycle.ViewModelProviders;
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.View;
+
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.MPPointF;
 import com.mindorks.framework.mvvm.BR;
 import com.mindorks.framework.mvvm.R;
 import com.mindorks.framework.mvvm.ViewModelProviderFactory;
 import com.mindorks.framework.mvvm.data.model.api.BlogResponse;
-import com.mindorks.framework.mvvm.databinding.FragmentBlogBinding;
+import com.mindorks.framework.mvvm.databinding.FragmentDashboardBinding;
 import com.mindorks.framework.mvvm.ui.base.BaseFragment;
+
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
 import javax.inject.Inject;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 /**
  * Created by lamkadmi on 17/11/19.
  */
 
-public class DashboardFragment extends BaseFragment<FragmentBlogBinding, DashboardViewModel>
-        implements DashboardNavigator, BlogAdapter.BlogAdapterListener {
+public class DashboardFragment extends BaseFragment<FragmentDashboardBinding, DashboardViewModel>
+        implements DashboardNavigator, BlogAdapter.BlogAdapterListener, OnChartValueSelectedListener {
 
     @Inject
     BlogAdapter mBlogAdapter;
-    FragmentBlogBinding mFragmentBlogBinding;
+
+    FragmentDashboardBinding mFragmentBlogBinding;
+
     @Inject
     LinearLayoutManager mLayoutManager;
+
     @Inject
     ViewModelProviderFactory factory;
-    private DashboardViewModel mBlogViewModel;
+
+    private DashboardViewModel mDashboardViewModel;
+
+    private PieChart mContainerPieView;
 
     public static DashboardFragment newInstance() {
         Bundle args = new Bundle();
@@ -62,13 +86,13 @@ public class DashboardFragment extends BaseFragment<FragmentBlogBinding, Dashboa
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_blog;
+        return R.layout.fragment_dashboard;
     }
 
     @Override
     public DashboardViewModel getViewModel() {
-        mBlogViewModel = ViewModelProviders.of(this, factory).get(DashboardViewModel.class);
-        return mBlogViewModel;
+        mDashboardViewModel = ViewModelProviders.of(this, factory).get(DashboardViewModel.class);
+        return mDashboardViewModel;
     }
 
     @Override
@@ -79,13 +103,13 @@ public class DashboardFragment extends BaseFragment<FragmentBlogBinding, Dashboa
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBlogViewModel.setNavigator(this);
+        mDashboardViewModel.setNavigator(this);
         mBlogAdapter.setListener(this);
     }
 
     @Override
     public void onRetryClick() {
-        mBlogViewModel.fetchBlogs();
+        mDashboardViewModel.fetchBlogs();
     }
 
     @Override
@@ -98,12 +122,107 @@ public class DashboardFragment extends BaseFragment<FragmentBlogBinding, Dashboa
     @Override
     public void updateBlog(List<BlogResponse.Blog> blogList) {
         mBlogAdapter.addItems(blogList);
+        Collection<PieEntry> pieEntries = getItemPieEntries(blogList);
+        mContainerPieView.setData(getPieData(pieEntries));
+        mContainerPieView.setOnChartValueSelectedListener(this);
+        mContainerPieView.setTransparentCircleRadius(58f);
+        mContainerPieView.setHoleRadius(58f);
+        mContainerPieView.setUsePercentValues(true);
     }
 
+
+    @SuppressLint("WrongConstant")
     private void setUp() {
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mFragmentBlogBinding.blogRecyclerView.setLayoutManager(mLayoutManager);
         mFragmentBlogBinding.blogRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mFragmentBlogBinding.blogRecyclerView.setAdapter(mBlogAdapter);
+
+        mContainerPieView = mFragmentBlogBinding.chart;
+
+        setupPieContainerView();
+        subscribeToLiveData();
+    }
+
+    private void subscribeToLiveData() {
+        mDashboardViewModel.getBlogListLiveData().observe(this, questionCardDatas -> {
+            //mDashboardViewModel.setQuestionDataList(questionCardDatas);
+            Collection<PieEntry> pieEntries = getItemPieEntries(questionCardDatas);
+            mContainerPieView.setData(getPieData(pieEntries));
+            mContainerPieView.setOnChartValueSelectedListener(this);
+            mContainerPieView.setTransparentCircleRadius(58f);
+            mContainerPieView.setHoleRadius(58f);
+            mContainerPieView.setUsePercentValues(true);
+        });
+    }
+
+
+    private void setupPieContainerView() {
+        mContainerPieView.setUsePercentValues(true);
+        mContainerPieView.getDescription().setEnabled(false);
+        mContainerPieView.setExtraOffsets(5, 10, 5, 5);
+        mContainerPieView.setDragDecelerationFrictionCoef(0.95f);
+        // mContainerPieView.setCenterText(generateCenterSpannableText());
+        mContainerPieView.setDrawHoleEnabled(true);
+        mContainerPieView.setHoleColor(Color.WHITE);
+        mContainerPieView.setTransparentCircleColor(Color.WHITE);
+        mContainerPieView.setTransparentCircleAlpha(110);
+        mContainerPieView.setHoleRadius(58f);
+        mContainerPieView.setTransparentCircleRadius(61f);
+        mContainerPieView.setDrawCenterText(true);
+        mContainerPieView.setRotationAngle(0);
+        mContainerPieView.setRotationEnabled(true);
+        mContainerPieView.setHighlightPerTapEnabled(true);
+        mContainerPieView.animateY(1400, Easing.EaseInSine);
+        mContainerPieView.setEntryLabelColor(Color.WHITE);
+        mContainerPieView.setEntryLabelTextSize(14f);
+    }
+
+    /**
+     * Permet de créer les element du camembert
+     * @param questionCardDatas
+     * @return
+     */
+    @NonNull
+    private Collection<PieEntry> getItemPieEntries(@NonNull List<BlogResponse.Blog> questionCardDatas) {
+        List<PieEntry> pieEntries = new ArrayList<>();
+        for (BlogResponse.Blog item : questionCardDatas) {
+            PieEntry pieEntry = new PieEntry(5, item.getTitle(), item);
+            pieEntries.add(pieEntry);
+        }
+        return pieEntries;
+    }
+
+    /**
+     * Permet d'initialiser le diagramme
+     * @param pieEntries
+     * @return
+     */
+    private PieData getPieData(@NonNull Collection<PieEntry> pieEntries) {
+        PieDataSet dataSet = new PieDataSet(new ArrayList<>(pieEntries), "");
+        dataSet.setDrawIcons(false);
+        dataSet.setSliceSpace(3f);
+        dataSet.setIconsOffset(new MPPointF(0, 40));
+        dataSet.setSelectionShift(20f);
+        dataSet.setHighlightEnabled(true);
+        dataSet.setValueLinePart1OffsetPercentage(90.f);
+        dataSet.setValueLinePart1Length(0.2f);
+        dataSet.setValueLinePart2Length(0.4f);
+        dataSet.setXValuePosition(PieDataSet.ValuePosition.INSIDE_SLICE);
+        PieData data = new PieData(dataSet);
+        data.setValueFormatter(new PercentFormatter());
+        data.setValueTextSize(12f);
+        data.setValueTextColor(Color.WHITE);
+        return data;
+    }
+
+    @Override
+    public void onValueSelected(Entry e, Highlight h) {
+
+    }
+
+    @Override
+    public void onNothingSelected() {
+
     }
 }

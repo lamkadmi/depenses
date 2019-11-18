@@ -1,6 +1,7 @@
 package com.mindorks.framework.mvvm.data.local.db.dao;
 
-import com.mindorks.framework.mvvm.data.model.db.Categorie;
+import com.mindorks.framework.mvvm.data.model.db.Depense;
+import com.mindorks.framework.mvvm.data.model.db.Prevision;
 
 import java.util.List;
 
@@ -11,14 +12,14 @@ import androidx.room.Query;
 import io.reactivex.Single;
 
 @Dao
-public interface CategorieDao {
+public interface PrevisionDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Categorie categorie);
+    void insert(Prevision categorie);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<Categorie> categories);
+    void insertAll(List<Prevision> previsions);
 
-    @Query("SELECT * FROM categorie")
-    Single<List<Categorie>> loadAll();
+    @Query("SELECT * FROM prevision")
+    Single<List<Prevision>> loadAll();
 }

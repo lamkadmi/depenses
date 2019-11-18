@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.Application;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor;
+import com.facebook.stetho.Stetho;
 import com.mindorks.framework.mvvm.di.component.DaggerAppComponent;
 import com.mindorks.framework.mvvm.utils.AppLogger;
 import dagger.android.DispatchingAndroidInjector;
@@ -61,5 +62,7 @@ public class MvvmApp extends Application implements HasActivityInjector {
         }
 
         CalligraphyConfig.initDefault(mCalligraphyConfig);
+
+        Stetho.initializeWithDefaults(this);
     }
 }

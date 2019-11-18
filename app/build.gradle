@@ -113,6 +113,7 @@ dependencies {
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$rootProject.lifecycleVersion"
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.1'
 }
 
 configurations.all {

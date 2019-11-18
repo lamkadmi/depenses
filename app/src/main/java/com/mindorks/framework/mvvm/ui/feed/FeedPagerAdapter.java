@@ -19,11 +19,11 @@ package com.mindorks.framework.mvvm.ui.feed;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import com.mindorks.framework.mvvm.ui.feed.dashboard.BlogFragment;
+import com.mindorks.framework.mvvm.ui.feed.dashboard.DashboardFragment;
 import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceFragment;
 
 /**
- * Created by amitshekhar on 10/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public class FeedPagerAdapter extends FragmentStatePagerAdapter {
@@ -48,7 +48,7 @@ public class FeedPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return BlogFragment.newInstance();
+                return DashboardFragment.newInstance();
             case 1:
                 return OpenSourceFragment.newInstance();
             default:

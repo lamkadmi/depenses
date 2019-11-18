@@ -30,7 +30,7 @@ import com.mindorks.placeholderview.annotations.Resolve;
 import com.mindorks.placeholderview.annotations.View;
 
 /**
- * Created by amitshekhar on 08/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 @NonReusable

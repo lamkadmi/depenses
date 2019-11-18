@@ -19,7 +19,7 @@ package com.mindorks.framework.mvvm.data.remote;
 import com.mindorks.framework.mvvm.BuildConfig;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public final class ApiEndPoint {

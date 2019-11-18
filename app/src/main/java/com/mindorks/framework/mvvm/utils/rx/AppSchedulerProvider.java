@@ -21,7 +21,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public class AppSchedulerProvider implements SchedulerProvider {

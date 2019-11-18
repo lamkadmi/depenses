@@ -30,7 +30,7 @@ import com.mindorks.framework.mvvm.ui.main.MainActivity;
 import javax.inject.Inject;
 
 /**
- * Created by amitshekhar on 08/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> implements LoginNavigator {

@@ -29,7 +29,7 @@ import java.util.List;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * Created by amitshekhar on 10/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public class ObjectifAdapter extends RecyclerView.Adapter<BaseViewHolder> {

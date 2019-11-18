@@ -25,15 +25,15 @@ import com.mindorks.framework.mvvm.utils.rx.SchedulerProvider;
 import java.util.List;
 
 /**
- * Created by amitshekhar on 10/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
-public class BlogViewModel extends BaseViewModel<BlogNavigator> {
+public class DashboardViewModel extends BaseViewModel<DashboardNavigator> {
 
     private final MutableLiveData<List<BlogResponse.Blog>> blogListLiveData;
 
-    public BlogViewModel(DataManager dataManager,
-                         SchedulerProvider schedulerProvider) {
+    public DashboardViewModel(DataManager dataManager,
+                              SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
         blogListLiveData = new MutableLiveData<>();
         fetchBlogs();

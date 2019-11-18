@@ -27,7 +27,7 @@ import com.mindorks.framework.mvvm.ui.base.BaseFragment;
 import javax.inject.Inject;
 
 /**
- * Created by amitshekhar on 09/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public class AboutFragment extends BaseFragment<FragmentAboutBinding, AboutViewModel> implements AboutNavigator {

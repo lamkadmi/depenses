@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.mindorks.framework.mvvm.data.DataManager;
 import com.mindorks.framework.mvvm.ui.about.AboutViewModel;
 import com.mindorks.framework.mvvm.ui.feed.FeedViewModel;
-import com.mindorks.framework.mvvm.ui.feed.dashboard.BlogViewModel;
+import com.mindorks.framework.mvvm.ui.feed.dashboard.DashboardViewModel;
 import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceViewModel;
 import com.mindorks.framework.mvvm.ui.login.LoginViewModel;
 import com.mindorks.framework.mvvm.ui.main.MainViewModel;
@@ -47,9 +47,9 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
       //noinspection unchecked
       return (T) new MainViewModel(dataManager,schedulerProvider);
     }
-    else if (modelClass.isAssignableFrom(BlogViewModel.class)) {
+    else if (modelClass.isAssignableFrom(DashboardViewModel.class)) {
       //noinspection unchecked
-      return (T) new BlogViewModel(dataManager,schedulerProvider);
+      return (T) new DashboardViewModel(dataManager,schedulerProvider);
     }
     else if (modelClass.isAssignableFrom(RateUsViewModel.class)) {
       //noinspection unchecked

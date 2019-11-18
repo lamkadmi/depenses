@@ -30,7 +30,7 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
- * Created by amitshekhar on 10/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public class OpenSourceViewModel extends BaseViewModel<OpenSourceNavigator> {

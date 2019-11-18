@@ -24,7 +24,7 @@ import androidx.core.content.ContextCompat;
 import com.mindorks.framework.mvvm.R;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public final class ViewUtils {

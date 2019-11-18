@@ -36,7 +36,7 @@ import dagger.android.AndroidInjection;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseViewModel> extends AppCompatActivity

@@ -20,7 +20,7 @@ import androidx.databinding.ObservableField;
 import com.mindorks.framework.mvvm.data.model.api.BlogResponse;
 
 /**
- * Created by amitshekhar on 10/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public class BlogItemViewModel {

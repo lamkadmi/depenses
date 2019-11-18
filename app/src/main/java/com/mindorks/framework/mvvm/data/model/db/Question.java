@@ -23,7 +23,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by amitshekhar on 08/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 @Entity(tableName = "questions")
 public class Question {

@@ -22,10 +22,10 @@ import dagger.Provides;
 import java.util.ArrayList;
 
 /**
- * Created by amitshekhar on 14/09/17.
+ * Created by lamkadmi on 17/11/19.
  */
 @Module
-public class BlogFragmentModule {
+public class DashboardFragmentModule {
 
     @Provides
     BlogAdapter provideBlogAdapter() {
@@ -33,7 +33,7 @@ public class BlogFragmentModule {
     }
 
     @Provides
-    LinearLayoutManager provideLinearLayoutManager(BlogFragment fragment) {
+    LinearLayoutManager provideLinearLayoutManager(DashboardFragment fragment) {
         return new LinearLayoutManager(fragment.getActivity());
     }
 }

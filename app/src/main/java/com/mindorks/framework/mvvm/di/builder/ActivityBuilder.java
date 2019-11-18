@@ -19,7 +19,7 @@ package com.mindorks.framework.mvvm.di.builder;
 import com.mindorks.framework.mvvm.ui.about.AboutFragmentProvider;
 import com.mindorks.framework.mvvm.ui.feed.FeedActivity;
 import com.mindorks.framework.mvvm.ui.feed.FeedActivityModule;
-import com.mindorks.framework.mvvm.ui.feed.dashboard.BlogFragmentProvider;
+import com.mindorks.framework.mvvm.ui.feed.dashboard.DashboardFragmentProvider;
 import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceFragmentProvider;
 import com.mindorks.framework.mvvm.ui.login.LoginActivity;
 import com.mindorks.framework.mvvm.ui.main.MainActivity;
@@ -30,14 +30,14 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
 /**
- * Created by amitshekhar on 14/09/17.
+ * Created by lamkadmi on 17/11/19.
  */
 @Module
 public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = {
             FeedActivityModule.class,
-            BlogFragmentProvider.class,
+            DashboardFragmentProvider.class,
             OpenSourceFragmentProvider.class})
     abstract FeedActivity bindFeedActivity();
 

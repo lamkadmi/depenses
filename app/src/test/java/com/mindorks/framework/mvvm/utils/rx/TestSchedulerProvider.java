@@ -20,7 +20,7 @@ import io.reactivex.Scheduler;
 import io.reactivex.schedulers.TestScheduler;
 
 /**
- * Created by amitshekhar on 11/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public class TestSchedulerProvider implements SchedulerProvider {

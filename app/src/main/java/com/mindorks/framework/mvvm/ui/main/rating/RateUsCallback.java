@@ -17,7 +17,7 @@
 package com.mindorks.framework.mvvm.ui.main.rating;
 
 /**
- * Created by amitshekhar on 10/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public interface RateUsCallback {

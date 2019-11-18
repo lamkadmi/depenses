@@ -23,7 +23,7 @@
 
         <variable
             name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.feed.dashboard.BlogViewModel" />
+            type="com.mindorks.framework.mvvm.ui.feed.dashboard.DashboardViewModel" />
 
     </data>
 
@@ -31,12 +31,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:orientation="vertical">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/chartCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                app:cardCornerRadius="7dp"
+                app:cardElevation="4dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/chart"
+                        android:background="@android:color/transparent"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="9"/>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/blogRecyclerView"
                 android:layout_width="match_parent"

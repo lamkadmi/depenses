@@ -26,7 +26,7 @@ import java.util.List;
 import io.reactivex.Single;
 
 /**
- * Created by amitshekhar on 08/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 @Dao
 public interface QuestionDao {

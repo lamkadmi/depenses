@@ -34,7 +34,7 @@ import com.mindorks.framework.mvvm.utils.rx.SchedulerProvider;
 import java.util.List;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public class MainViewModel extends BaseViewModel<MainNavigator> {

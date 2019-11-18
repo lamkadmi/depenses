@@ -21,7 +21,7 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * Created by amitshekhar on 14/09/17.
+ * Created by lamkadmi on 17/11/19.
  */
 @Module
 public class OpenSourceFragmentModule {

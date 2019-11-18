@@ -21,7 +21,7 @@ import com.mindorks.framework.mvvm.data.model.db.Question;
 import java.util.List;
 
 /**
- * Created by amitshekhar on 09/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public class QuestionCardData {

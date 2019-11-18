@@ -33,11 +33,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
- * Created by amitshekhar on 10/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
-public class BlogFragment extends BaseFragment<FragmentBlogBinding, BlogViewModel>
-        implements BlogNavigator, BlogAdapter.BlogAdapterListener {
+public class DashboardFragment extends BaseFragment<FragmentBlogBinding, DashboardViewModel>
+        implements DashboardNavigator, BlogAdapter.BlogAdapterListener {
 
     @Inject
     BlogAdapter mBlogAdapter;
@@ -46,11 +46,11 @@ public class BlogFragment extends BaseFragment<FragmentBlogBinding, BlogViewMode
     LinearLayoutManager mLayoutManager;
     @Inject
     ViewModelProviderFactory factory;
-    private BlogViewModel mBlogViewModel;
+    private DashboardViewModel mBlogViewModel;
 
-    public static BlogFragment newInstance() {
+    public static DashboardFragment newInstance() {
         Bundle args = new Bundle();
-        BlogFragment fragment = new BlogFragment();
+        DashboardFragment fragment = new DashboardFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -66,8 +66,8 @@ public class BlogFragment extends BaseFragment<FragmentBlogBinding, BlogViewMode
     }
 
     @Override
-    public BlogViewModel getViewModel() {
-        mBlogViewModel = ViewModelProviders.of(this, factory).get(BlogViewModel.class);
+    public DashboardViewModel getViewModel() {
+        mBlogViewModel = ViewModelProviders.of(this, factory).get(DashboardViewModel.class);
         return mBlogViewModel;
     }
 

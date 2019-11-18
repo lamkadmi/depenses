@@ -34,7 +34,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 /**
- * Created by amitshekhar on 11/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class LoginViewModelTest {

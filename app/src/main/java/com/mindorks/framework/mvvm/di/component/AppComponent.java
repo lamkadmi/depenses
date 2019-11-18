@@ -26,7 +26,7 @@ import dagger.android.AndroidInjectionModule;
 import javax.inject.Singleton;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 @Singleton
 @Component(modules = {AndroidInjectionModule.class, AppModule.class, ActivityBuilder.class})

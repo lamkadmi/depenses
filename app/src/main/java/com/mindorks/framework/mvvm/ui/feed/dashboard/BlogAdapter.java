@@ -29,7 +29,7 @@ import com.mindorks.framework.mvvm.utils.AppLogger;
 import java.util.List;
 
 /**
- * Created by amitshekhar on 10/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public class BlogAdapter extends RecyclerView.Adapter<BaseViewHolder> {

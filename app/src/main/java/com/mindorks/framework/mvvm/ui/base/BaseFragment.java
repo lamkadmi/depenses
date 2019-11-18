@@ -30,7 +30,7 @@ import android.view.ViewGroup;
 import dagger.android.support.AndroidSupportInjection;
 
 /**
- * Created by amitshekhar on 09/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseViewModel> extends Fragment {

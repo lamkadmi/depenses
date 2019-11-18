@@ -29,6 +29,7 @@ import com.mindorks.framework.mvvm.data.model.api.LoginRequest;
 import com.mindorks.framework.mvvm.data.model.api.LoginResponse;
 import com.mindorks.framework.mvvm.data.model.api.LogoutResponse;
 import com.mindorks.framework.mvvm.data.model.api.OpenSourceResponse;
+import com.mindorks.framework.mvvm.data.model.db.Categorie;
 import com.mindorks.framework.mvvm.data.model.db.Option;
 import com.mindorks.framework.mvvm.data.model.db.Question;
 import com.mindorks.framework.mvvm.data.model.db.User;
@@ -45,7 +46,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 @Singleton
 public class AppDataManager implements DataManager {
@@ -239,6 +240,10 @@ public class AppDataManager implements DataManager {
     public Observable<Boolean> saveQuestionList(List<Question> questionList) {
         return mDbHelper.saveQuestionList(questionList);
     }
+
+    @Override
+    public Observable<Boolean> saveCategorie(Categorie categorie) {
+        return mDbHelper.saveCategorie(categorie);    }
 
     @Override
     public Observable<Boolean> seedDatabaseOptions() {

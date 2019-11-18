@@ -16,16 +16,15 @@
 
 package com.mindorks.framework.mvvm.ui.feed.dashboard;
 
-import com.mindorks.framework.mvvm.data.model.api.BlogResponse;
-import java.util.List;
+import dagger.Module;
+import dagger.android.ContributesAndroidInjector;
 
 /**
- * Created by amitshekhar on 10/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
+@Module
+public abstract class DashboardFragmentProvider {
 
-public interface BlogNavigator {
-
-    void handleError(Throwable throwable);
-
-    void updateBlog(List<BlogResponse.Blog> blogList);
+    @ContributesAndroidInjector(modules = DashboardFragmentModule.class)
+    abstract DashboardFragment provideBlogFragmentFactory();
 }

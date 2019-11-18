@@ -32,7 +32,7 @@ import dagger.android.support.AndroidSupportInjection;
 import javax.inject.Inject;
 
 /**
- * Created by amitshekhar on 10/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public class RateUsDialog extends BaseDialog implements RateUsCallback {

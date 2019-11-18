@@ -19,7 +19,7 @@ package com.mindorks.framework.mvvm.ui.feed.opensource;
 import androidx.databinding.ObservableField;
 
 /**
- * Created by amitshekhar on 10/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public class OpenSourceItemViewModel {

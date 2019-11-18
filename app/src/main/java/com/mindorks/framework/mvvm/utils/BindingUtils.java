@@ -36,7 +36,7 @@ import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * Created by amitshekhar on 11/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public final class BindingUtils {

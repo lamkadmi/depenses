@@ -32,7 +32,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 
 /**
- * Created by amitshekhar on 09/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 public class RoundedImageView extends AppCompatImageView {

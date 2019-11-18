@@ -29,7 +29,7 @@ import com.mindorks.framework.mvvm.data.model.db.Question;
 import com.mindorks.framework.mvvm.data.model.db.User;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by lamkadmi on 17/11/19.
  */
 
 @Database(entities = {User.class, Question.class, Option.class,Categorie.class}, version = 3)

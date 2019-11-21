@@ -24,7 +24,7 @@ import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceFragmentProvider
 import com.mindorks.framework.mvvm.ui.login.LoginActivity;
 import com.mindorks.framework.mvvm.ui.main.MainActivity;
 import com.mindorks.framework.mvvm.ui.main.MainActivityModule;
-import com.mindorks.framework.mvvm.ui.main.rating.RateUsDialogProvider;
+import com.mindorks.framework.mvvm.ui.main.rating.PrevisionDialogProvider;
 import com.mindorks.framework.mvvm.ui.splash.SplashActivity;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -38,6 +38,7 @@ public abstract class ActivityBuilder {
     @ContributesAndroidInjector(modules = {
             FeedActivityModule.class,
             DashboardFragmentProvider.class,
+            PrevisionDialogProvider.class,
             OpenSourceFragmentProvider.class})
     abstract FeedActivity bindFeedActivity();
 
@@ -47,7 +48,7 @@ public abstract class ActivityBuilder {
     @ContributesAndroidInjector(modules = {
             MainActivityModule.class,
             AboutFragmentProvider.class,
-            RateUsDialogProvider.class})
+            PrevisionDialogProvider.class})
     abstract MainActivity bindMainActivity();
 
     @ContributesAndroidInjector

@@ -17,6 +17,8 @@
 package com.mindorks.framework.mvvm.ui.feed.dashboard;
 
 import com.mindorks.framework.mvvm.data.model.api.BlogResponse;
+import com.mindorks.framework.mvvm.data.model.others.PrevisionByCategorie;
+
 import java.util.List;
 
 /**
@@ -27,5 +29,7 @@ public interface DashboardNavigator {
 
     void handleError(Throwable throwable);
 
-    void updateBlog(List<BlogResponse.Blog> blogList);
+    void updateBlog(List<PrevisionByCategorie> blogList);
+
+    void dismissDialog();
 }

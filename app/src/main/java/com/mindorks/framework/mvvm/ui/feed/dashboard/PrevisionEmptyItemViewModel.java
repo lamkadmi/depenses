@@ -20,11 +20,11 @@ package com.mindorks.framework.mvvm.ui.feed.dashboard;
  * Created by lamkadmi on 17/11/19.
  */
 
-public class BlogEmptyItemViewModel {
+public class PrevisionEmptyItemViewModel {
 
     private BlogEmptyItemViewModelListener mListener;
 
-    public BlogEmptyItemViewModel(BlogEmptyItemViewModelListener listener) {
+    public PrevisionEmptyItemViewModel(BlogEmptyItemViewModelListener listener) {
         this.mListener = listener;
     }
 

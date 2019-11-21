@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "categorie")
 public class Categorie {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private Long id;
 
     private String libelle;
@@ -25,5 +25,10 @@ public class Categorie {
 
     public void setLibelle(String libelle) {
         this.libelle = libelle;
+    }
+
+    @Override
+    public String toString() {
+        return libelle;
     }
 }

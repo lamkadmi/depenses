@@ -21,7 +21,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.mindorks.framework.mvvm.data.model.api.BlogResponse;
+import com.mindorks.framework.mvvm.data.model.others.PrevisionByCategorie;
 import com.mindorks.framework.mvvm.databinding.ItemBlogEmptyViewBinding;
 import com.mindorks.framework.mvvm.databinding.ItemPrevevisionViewBinding;
 import com.mindorks.framework.mvvm.ui.base.BaseViewHolder;
@@ -35,17 +35,17 @@ import androidx.recyclerview.widget.RecyclerView;
  * Created by lamkadmi on 17/11/19.
  */
 
-public class BlogAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class PrevisionAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     public static final int VIEW_TYPE_EMPTY = 0;
 
     public static final int VIEW_TYPE_NORMAL = 1;
 
-    private List<BlogResponse.Blog> mBlogResponseList;
+    private List<PrevisionByCategorie> mBlogResponseList;
 
     private BlogAdapterListener mListener;
 
-    public BlogAdapter(List<BlogResponse.Blog> blogResponseList) {
+    public PrevisionAdapter(List<PrevisionByCategorie> blogResponseList) {
         this.mBlogResponseList = blogResponseList;
     }
 
@@ -70,6 +70,17 @@ public class BlogAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
         holder.onBind(position);
+//        if(position % 2 == 0) {
+//            if(holder instanceof PrevisionViewHolder){
+//                ((PrevisionViewHolder)holder).mBinding.layRoot.setBackgroundResource(R.color.translucent_white);
+//            }
+//
+//        }
+//        else {
+//            if(holder instanceof PrevisionViewHolder){
+//                ((PrevisionViewHolder)holder).mBinding.layRoot.setBackgroundResource(R.color.shadow);
+//            }
+//        }
     }
 
     @Override
@@ -78,7 +89,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             case VIEW_TYPE_NORMAL:
                 ItemPrevevisionViewBinding blogViewBinding = ItemPrevevisionViewBinding.inflate(LayoutInflater.from(parent.getContext()),
                         parent, false);
-                return new BlogViewHolder(blogViewBinding);
+                return new PrevisionViewHolder(blogViewBinding);
             case VIEW_TYPE_EMPTY:
             default:
                 ItemBlogEmptyViewBinding emptyViewBinding = ItemBlogEmptyViewBinding.inflate(LayoutInflater.from(parent.getContext()),
@@ -87,7 +98,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
     }
 
-    public void addItems(List<BlogResponse.Blog> blogList) {
+    public void addItems(List<PrevisionByCategorie> blogList) {
         mBlogResponseList.addAll(blogList);
         notifyDataSetChanged();
     }
@@ -105,21 +116,21 @@ public class BlogAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         void onRetryClick();
     }
 
-    public class BlogViewHolder extends BaseViewHolder implements BlogItemViewModel.BlogItemViewModelListener {
+    public class PrevisionViewHolder extends BaseViewHolder implements PrevisionItemViewModel.BlogItemViewModelListener {
 
         private ItemPrevevisionViewBinding mBinding;
 
-        private BlogItemViewModel mBlogItemViewModel;
+        private PrevisionItemViewModel mBlogItemViewModel;
 
-        public BlogViewHolder(ItemPrevevisionViewBinding binding) {
+        public PrevisionViewHolder(ItemPrevevisionViewBinding binding) {
             super(binding.getRoot());
             this.mBinding = binding;
         }
 
         @Override
         public void onBind(int position) {
-            final BlogResponse.Blog blog = mBlogResponseList.get(position);
-            mBlogItemViewModel = new BlogItemViewModel(blog, this);
+            final PrevisionByCategorie blog = mBlogResponseList.get(position);
+            mBlogItemViewModel = new PrevisionItemViewModel(blog, this);
             mBinding.setViewModel(mBlogItemViewModel);
 
             // Immediate Binding
@@ -145,7 +156,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
     }
 
-    public class EmptyViewHolder extends BaseViewHolder implements BlogEmptyItemViewModel.BlogEmptyItemViewModelListener {
+    public class EmptyViewHolder extends BaseViewHolder implements PrevisionEmptyItemViewModel.BlogEmptyItemViewModelListener {
 
         private ItemBlogEmptyViewBinding mBinding;
 
@@ -156,7 +167,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         @Override
         public void onBind(int position) {
-            BlogEmptyItemViewModel emptyItemViewModel = new BlogEmptyItemViewModel(this);
+            PrevisionEmptyItemViewModel emptyItemViewModel = new PrevisionEmptyItemViewModel(this);
             mBinding.setViewModel(emptyItemViewModel);
         }
 

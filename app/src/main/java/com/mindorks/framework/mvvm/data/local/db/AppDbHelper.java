@@ -18,8 +18,10 @@ package com.mindorks.framework.mvvm.data.local.db;
 
 import com.mindorks.framework.mvvm.data.model.db.Categorie;
 import com.mindorks.framework.mvvm.data.model.db.Option;
+import com.mindorks.framework.mvvm.data.model.db.Prevision;
 import com.mindorks.framework.mvvm.data.model.db.Question;
 import com.mindorks.framework.mvvm.data.model.db.User;
+import com.mindorks.framework.mvvm.data.model.others.PrevisionByCategorie;
 
 import java.util.List;
 
@@ -60,11 +62,35 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
+    public Observable<List<PrevisionByCategorie>> getPrevisions() {
+        return mAppDatabase.previsionDao().loadPrevisionsByCategories()
+                .toObservable();
+    }
+
+    @Override
+    public Observable<List<PrevisionByCategorie>> getPrevisionsByDate(String date) {
+        return mAppDatabase.previsionDao().loadPrevisionsByDate(date).toObservable();
+    }
+
+    @Override
     public Observable<Boolean> insertUser(final User user) {
         return Observable.fromCallable(() -> {
             mAppDatabase.userDao().insert(user);
             return true;
         });
+    }
+
+    @Override
+    public Observable<Boolean> savePrevision(final Prevision prevision) {
+        return Observable.fromCallable(() -> {
+            mAppDatabase.previsionDao().insert(prevision);
+            return true;
+        });
+    }
+
+    @Override
+    public Observable<List<Categorie>> getCategories() {
+        return mAppDatabase.categorieDao().loadAll().toObservable();
     }
 
     @Override

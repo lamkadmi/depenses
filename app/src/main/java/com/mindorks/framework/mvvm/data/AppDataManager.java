@@ -31,8 +31,10 @@ import com.mindorks.framework.mvvm.data.model.api.LogoutResponse;
 import com.mindorks.framework.mvvm.data.model.api.OpenSourceResponse;
 import com.mindorks.framework.mvvm.data.model.db.Categorie;
 import com.mindorks.framework.mvvm.data.model.db.Option;
+import com.mindorks.framework.mvvm.data.model.db.Prevision;
 import com.mindorks.framework.mvvm.data.model.db.Question;
 import com.mindorks.framework.mvvm.data.model.db.User;
+import com.mindorks.framework.mvvm.data.model.others.PrevisionByCategorie;
 import com.mindorks.framework.mvvm.data.model.others.QuestionCardData;
 import com.mindorks.framework.mvvm.data.remote.ApiHeader;
 import com.mindorks.framework.mvvm.data.remote.ApiHelper;
@@ -207,6 +209,16 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<List<PrevisionByCategorie>> getPrevisions() {
+        return mDbHelper.getPrevisions();
+    }
+
+    @Override
+    public Observable<List<Categorie>> getCategories() {
+        return mDbHelper.getCategories();
+    }
+
+    @Override
     public Observable<Boolean> insertUser(User user) {
         return mDbHelper.insertUser(user);
     }
@@ -243,7 +255,13 @@ public class AppDataManager implements DataManager {
 
     @Override
     public Observable<Boolean> saveCategorie(Categorie categorie) {
-        return mDbHelper.saveCategorie(categorie);    }
+        return mDbHelper.saveCategorie(categorie);
+    }
+
+    @Override
+    public Observable<Boolean> savePrevision(Prevision prevision) {
+        return mDbHelper.savePrevision(prevision);
+    }
 
     @Override
     public Observable<Boolean> seedDatabaseOptions() {
@@ -307,5 +325,10 @@ public class AppDataManager implements DataManager {
         setCurrentUserProfilePicUrl(profilePicPath);
 
         updateApiHeader(userId, accessToken);
+    }
+
+    @Override
+    public Observable<List<PrevisionByCategorie>> getPrevisionsByDate(String date) {
+        return mDbHelper.getPrevisionsByDate(date);
     }
 }

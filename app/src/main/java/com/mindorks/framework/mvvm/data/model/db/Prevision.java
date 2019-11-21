@@ -15,7 +15,7 @@ import androidx.room.PrimaryKey;
         })
 public class Prevision {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private Long id;
 
     @ColumnInfo(name = "categorieId", index = true)
@@ -54,6 +54,12 @@ public class Prevision {
     }
 
     public void setMontant(Float montant) {
+        this.montant = montant;
+    }
+
+    public Prevision(Long categorieId, String mois_annee, Float montant) {
+        this.categorieId = categorieId;
+        this.mois_annee = mois_annee;
         this.montant = montant;
     }
 }

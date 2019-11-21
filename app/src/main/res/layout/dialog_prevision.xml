@@ -22,7 +22,7 @@
 
         <variable
             name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.main.rating.RateUsViewModel" />
+            type="com.mindorks.framework.mvvm.ui.feed.dashboard.DashboardViewModel" />
 
     </data>
 
@@ -52,18 +52,46 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/rate_us" />
+                    android:layout_marginTop="10dp"
+                    android:text="@string/prevision_titre" />
 
-                <RatingBar
-                    android:id="@+id/ratingBarFeedback"
-                    android:layout_width="wrap_content"
+                <!--<RatingBar-->
+                    <!--android:id="@+id/ratingBarFeedback"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_marginTop="20dp"-->
+                    <!--android:numStars="5"-->
+                    <!--android:stepSize="1"-->
+                    <!--tools:rating="3" />-->
+
+                <EditText
+                    android:id="@+id/champ_date_valeur"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Saisir une date"
+                    android:layout_gravity="center"
+                    android:text="@{viewModel.date}"
+                    android:drawableEnd="@drawable/ic_date"
+                    android:gravity="center"/>
+
+                <Spinner
+                    android:id="@+id/categorie"
+                    android:onItemSelected="@{(parent,view,pos,id)->viewModel.onSelectItem(parent,view,pos,id)}"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:numStars="5"
-                    android:stepSize="1"
-                    tools:rating="3" />
+                    android:layout_marginTop="20dp"/>
+
+                <EditText
+                    android:id="@+id/budjet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Budjet"
+                    android:layout_gravity="center"
+                    android:text="@={viewModel.montant}"
+                    android:drawableEnd="@drawable/ic_monetization"
+                    android:gravity="center"/>
 
             </LinearLayout>
 

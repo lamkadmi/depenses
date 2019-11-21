@@ -21,4 +21,6 @@ public interface CategorieDao {
 
     @Query("SELECT * FROM categorie")
     Single<List<Categorie>> loadAll();
+
+
 }

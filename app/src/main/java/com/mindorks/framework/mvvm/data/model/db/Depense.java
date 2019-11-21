@@ -25,7 +25,7 @@ import androidx.room.PrimaryKey;
 )
 public class Depense {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private Long id;
 
     @ColumnInfo(name = "categorieId", index = true)

@@ -20,7 +20,7 @@ package com.mindorks.framework.mvvm.ui.main.rating;
  * Created by lamkadmi on 17/11/19.
  */
 
-public interface RateUsCallback {
+public interface PrevisionCallback {
 
     void dismissDialog();
 }

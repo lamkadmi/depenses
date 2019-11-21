@@ -18,8 +18,10 @@
 
 buildscript {
     repositories {
-        google()
-        jcenter()
+        maven { url "http://librepos.ermont.infra.sncf.fr:8081/nexus/content/groups/isi_global" }
+        maven { url "http://librepos.ermont.infra.sncf.fr:8081/nexus/content/groups/isi_public" }
+        maven { url 'http://librepos.ermont.infra.sncf.fr:8081/nexus/content/repositories/android-support-libraries/android/arch/persistence' }
+        maven { url 'https://repository-achartengine.forge.cloudbees.com/snapshot' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
@@ -31,9 +33,11 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
-        jcenter()
-        maven { url "https://jitpack.io" }
+        maven { url "http://librepos.ermont.infra.sncf.fr:8081/nexus/content/groups/isi_global" }
+        maven { url "http://librepos.ermont.infra.sncf.fr:8081/nexus/content/groups/isi_public" }
+        maven { url 'http://librepos.ermont.infra.sncf.fr:8081/nexus/content/repositories/android-support-libraries/android/arch/persistence' }
+        maven { url 'https://repository-achartengine.forge.cloudbees.com/snapshot' }
+
     }
 }
 

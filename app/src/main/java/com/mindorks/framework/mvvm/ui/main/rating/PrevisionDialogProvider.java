@@ -16,25 +16,15 @@
 
 package com.mindorks.framework.mvvm.ui.main.rating;
 
-import com.mindorks.framework.mvvm.data.DataManager;
-import com.mindorks.framework.mvvm.ui.base.BaseViewModel;
-import com.mindorks.framework.mvvm.utils.rx.SchedulerProvider;
+import dagger.Module;
+import dagger.android.ContributesAndroidInjector;
 
 /**
  * Created by lamkadmi on 17/11/19.
  */
+@Module
+public abstract class PrevisionDialogProvider {
 
-public class RateUsViewModel extends BaseViewModel<RateUsCallback> {
-
-    public RateUsViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
-        super(dataManager, schedulerProvider);
-    }
-
-    public void onLaterClick() {
-        getNavigator().dismissDialog();
-    }
-
-    public void onSubmitClick() {
-        getNavigator().dismissDialog();
-    }
+    @ContributesAndroidInjector
+    abstract PrevisionDialog providePrevisionDialogFactory();
 }

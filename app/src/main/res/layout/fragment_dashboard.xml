@@ -31,50 +31,74 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:weightSum="20"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/chartCard"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <EditText
+                android:id="@+id/champ_date_valeur"
+                style="@style/ChampDateEtHeure"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="2"
-                android:layout_margin="8dp"
+                android:hint="Saisir une date"
+                android:layout_gravity="center"
+                android:drawableEnd="@drawable/ic_date"
+                android:gravity="center"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:background="@color/white"
-                android:orientation="vertical"
+                android:layout_weight="8"
+                android:layout_margin="5dp"
                 app:cardCornerRadius="7dp"
                 app:cardElevation="4dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
 
-                    <com.github.mikephil.charting.charts.PieChart
-                        android:id="@+id/chart"
-                        android:background="@android:color/transparent"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-                </LinearLayout>
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/chart"
+                    android:layout_marginTop="2dp"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/blogRecyclerView"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                app:adapter="@{viewModel.blogListLiveData}"
-                tools:listitem="@layout/item_prevevision_view" />
+                style="@style/TextStyle.Title"
+                android:textColor="@color/fb"
+                android:text="Mes Prévisions"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="9"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/blogRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:adapter="@{viewModel.dashboardListLiveData}"
+                    tools:listitem="@layout/item_prevevision_view" />
+
+            </LinearLayout>
+
+
+
 
         </LinearLayout>
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/addPrevision"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
+            android:layout_gravity="right|center"
             android:src="@drawable/ic_add_white_24px"
             android:contentDescription="@string/submit"
             android:layout_margin="16dp" />

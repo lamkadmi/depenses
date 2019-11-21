@@ -18,39 +18,40 @@ package com.mindorks.framework.mvvm.ui.feed.dashboard;
 
 import androidx.databinding.ObservableField;
 import com.mindorks.framework.mvvm.data.model.api.BlogResponse;
+import com.mindorks.framework.mvvm.data.model.others.PrevisionByCategorie;
 
 /**
  * Created by lamkadmi on 17/11/19.
  */
 
-public class BlogItemViewModel {
+public class PrevisionItemViewModel {
 
-    public final ObservableField<String> author;
+    public final ObservableField<String> categorie;
 
-    public final ObservableField<String> content;
+    public final ObservableField<String> montant;
 
     public final ObservableField<String> date;
 
-    public final ObservableField<String> imageUrl;
+    //public final ObservableField<String> imageUrl;
 
     public final BlogItemViewModelListener mListener;
 
-    public final ObservableField<String> title;
+    //public final ObservableField<String> title;
 
-    private final BlogResponse.Blog mBlog;
+    private final PrevisionByCategorie mBlog;
 
-    public BlogItemViewModel(BlogResponse.Blog blog, BlogItemViewModelListener listener) {
+    public PrevisionItemViewModel(PrevisionByCategorie blog, BlogItemViewModelListener listener) {
         this.mBlog = blog;
         this.mListener = listener;
-        imageUrl = new ObservableField<>(mBlog.getCoverImgUrl());
-        title = new ObservableField<>(mBlog.getTitle());
-        author = new ObservableField<>(mBlog.getAuthor());
+        //imageUrl = new ObservableField<>(mBlog.getCoverImgUrl());
+        categorie = new ObservableField<>(mBlog.getCategorie());
+        //author = new ObservableField<>(mBlog.getAuthor());
         date = new ObservableField<>(mBlog.getDate());
-        content = new ObservableField<>(mBlog.getDescription());
+        montant = new ObservableField<>(String.valueOf(mBlog.getMontant()));
     }
 
     public void onItemClick() {
-        mListener.onItemClick(mBlog.getBlogUrl());
+        //mListener.onItemClick(mBlog.getBlogUrl());
     }
 
     public interface BlogItemViewModelListener {

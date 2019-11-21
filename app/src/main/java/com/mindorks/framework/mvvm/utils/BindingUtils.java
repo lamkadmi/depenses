@@ -20,9 +20,9 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.mindorks.framework.mvvm.data.model.api.BlogResponse;
+import com.mindorks.framework.mvvm.data.model.others.PrevisionByCategorie;
 import com.mindorks.framework.mvvm.data.model.others.QuestionCardData;
-import com.mindorks.framework.mvvm.ui.feed.dashboard.BlogAdapter;
+import com.mindorks.framework.mvvm.ui.feed.dashboard.PrevisionAdapter;
 import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceAdapter;
 import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceItemViewModel;
 import com.mindorks.framework.mvvm.ui.main.MainViewModel;
@@ -46,8 +46,8 @@ public final class BindingUtils {
     }
 
     @BindingAdapter({"adapter"})
-    public static void addBlogItems(RecyclerView recyclerView, List<BlogResponse.Blog> blogs) {
-        BlogAdapter adapter = (BlogAdapter) recyclerView.getAdapter();
+    public static void addBlogItems(RecyclerView recyclerView, List<PrevisionByCategorie> blogs) {
+        PrevisionAdapter adapter = (PrevisionAdapter) recyclerView.getAdapter();
         if (adapter != null) {
             adapter.clearItems();
             adapter.addItems(blogs);
@@ -92,4 +92,5 @@ public final class BindingUtils {
         Context context = imageView.getContext();
         Glide.with(context).load(url).into(imageView);
     }
+
 }

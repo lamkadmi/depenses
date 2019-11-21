@@ -245,7 +245,7 @@ public class FeedActivity extends BaseActivity<ActivityFeedBinding, FeedViewMode
                             //showAboutFragment();
                             return true;
 //                        case R.id.navItemRateUs:
-//                            RateUsDialog.newInstance().show(getSupportFragmentManager());
+//                            PrevisionDialog.newInstance().show(getSupportFragmentManager());
 //                            return true;
                         case R.id.navItemFeed:
                             startActivity(FeedActivity.newIntent(FeedActivity.this));

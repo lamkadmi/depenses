@@ -28,8 +28,8 @@ import java.util.ArrayList;
 public class DashboardFragmentModule {
 
     @Provides
-    BlogAdapter provideBlogAdapter() {
-        return new BlogAdapter(new ArrayList<>());
+    PrevisionAdapter provideBlogAdapter() {
+        return new PrevisionAdapter(new ArrayList<>());
     }
 
     @Provides

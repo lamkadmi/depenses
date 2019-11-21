@@ -2,6 +2,7 @@ package com.mindorks.framework.mvvm.data.local.db.dao;
 
 import com.mindorks.framework.mvvm.data.model.db.Depense;
 import com.mindorks.framework.mvvm.data.model.db.Prevision;
+import com.mindorks.framework.mvvm.data.model.others.PrevisionByCategorie;
 
 import java.util.List;
 
@@ -22,4 +23,12 @@ public interface PrevisionDao {
 
     @Query("SELECT * FROM prevision")
     Single<List<Prevision>> loadAll();
+
+    @Query("SELECT prevision.id,categorie.libelle as categorie,prevision.mois_annee as date,prevision.montant " +
+            "FROM prevision,categorie where categorie.id=prevision.categorieId")
+    Single<List<PrevisionByCategorie>> loadPrevisionsByCategories();
+
+    @Query("SELECT prevision.id,categorie.libelle as categorie,prevision.mois_annee as date,prevision.montant " +
+            "FROM prevision,categorie where categorie.id=prevision.categorieId and prevision.mois_annee= :date")
+    Single<List<PrevisionByCategorie>> loadPrevisionsByDate(String date);
 }

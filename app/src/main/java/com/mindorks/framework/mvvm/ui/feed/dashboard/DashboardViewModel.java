@@ -16,19 +16,15 @@
 
 package com.mindorks.framework.mvvm.ui.feed.dashboard;
 
-import android.view.View;
-import android.widget.AdapterView;
-
-import androidx.databinding.ObservableField;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import com.mindorks.framework.mvvm.data.DataManager;
-import com.mindorks.framework.mvvm.data.model.db.Categorie;
-import com.mindorks.framework.mvvm.data.model.db.Prevision;
 import com.mindorks.framework.mvvm.data.model.others.PrevisionByCategorie;
 import com.mindorks.framework.mvvm.ui.base.BaseViewModel;
 import com.mindorks.framework.mvvm.utils.rx.SchedulerProvider;
+
 import java.util.List;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 /**
  * Created by lamkadmi on 17/11/19.
@@ -38,22 +34,13 @@ public class DashboardViewModel extends BaseViewModel<DashboardNavigator> {
 
     private final MutableLiveData<List<PrevisionByCategorie>> previsionListLiveData;
 
-    private final MutableLiveData<List<Categorie>> categorieListLiveData;
 
-    private final ObservableField<String> date = new ObservableField<>();
-
-    private final ObservableField<Categorie> categorie = new ObservableField<>();
-
-    private final ObservableField<String> montant = new ObservableField<>();
 
     public DashboardViewModel(DataManager dataManager,
                               SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
         previsionListLiveData = new MutableLiveData<>();
-        categorieListLiveData = new MutableLiveData<>();
-        date.set("1/2019");
         fetchPrevisions();
-        fetchCategories();
     }
 
     public void fetchPrevisions() {
@@ -62,9 +49,9 @@ public class DashboardViewModel extends BaseViewModel<DashboardNavigator> {
                 .getPrevisions()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(blogResponse -> {
-                    if (blogResponse != null) {
-                        previsionListLiveData.setValue(blogResponse);
+                .subscribe(previsions -> {
+                    if (previsions != null) {
+                        previsionListLiveData.setValue(previsions);
                     }
                     setIsLoading(false);
                 }, throwable -> {
@@ -79,9 +66,9 @@ public class DashboardViewModel extends BaseViewModel<DashboardNavigator> {
                 .getPrevisionsByDate(date)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(blogResponse -> {
-                    if (blogResponse != null) {
-                        previsionListLiveData.setValue(blogResponse);
+                .subscribe(previsions -> {
+                    if (previsions != null) {
+                        previsionListLiveData.setValue(previsions);
                     }
                     setIsLoading(false);
                 }, throwable -> {
@@ -90,80 +77,7 @@ public class DashboardViewModel extends BaseViewModel<DashboardNavigator> {
                 }));
     }
 
-    public void onLaterClick() {
-        getNavigator().dismissDialog();
-    }
-
-    public void onSubmitClick() {
-        setIsLoading(true);
-        getCompositeDisposable().add(getDataManager()
-                .savePrevision(new Prevision(getCategorie().get().getId(),
-                        getDate().get(),
-                        Float.valueOf(getMontant().get())
-                ))
-                .subscribeOn(getSchedulerProvider().io())
-                .observeOn(getSchedulerProvider().ui())
-                .subscribe(response -> {
-                    if (response != null) {
-                        getNavigator().dismissDialog();
-                    }
-                    setIsLoading(false);
-                }, throwable -> {
-                    setIsLoading(false);
-                    //getNavigator().handleError(throwable);
-                }));
-
-    }
-
-    public void fetchCategories() {
-        setIsLoading(true);
-        getCompositeDisposable().add(getDataManager()
-                .getCategories()
-                .subscribeOn(getSchedulerProvider().io())
-                .observeOn(getSchedulerProvider().ui())
-                .subscribe(blogResponse -> {
-                    if (blogResponse != null) {
-                        categorieListLiveData.setValue(blogResponse);
-                    }
-                    setIsLoading(false);
-                }, throwable -> {
-                    setIsLoading(false);
-                    //getNavigator().handleError(throwable);
-                }));
-    }
-
-    public void onSelectItem(AdapterView<?> parent, View view, int pos, long id){
-        categorie.set((Categorie) parent.getSelectedItem());
-        //pos                                 get selected item position
-        //view.getText()                      get lable of selected item
-        //parent.getAdapter().getItem(pos)    get item by pos
-        //parent.getAdapter().getCount()      get item count
-        //parent.getCount()                   get item count
-        //parent.getSelectedItem()            get selected item
-        //and other...
-    }
-
     public LiveData<List<PrevisionByCategorie>> getDashboardListLiveData() {
         return previsionListLiveData;
-    }
-
-    public ObservableField<String> getDate() {
-        return date;
-    }
-
-    public ObservableField<Categorie> getCategorie() {
-        return categorie;
-    }
-
-    public ObservableField<String> getMontant() {
-        return montant;
-    }
-
-    public MutableLiveData<List<PrevisionByCategorie>> getPrevisionListLiveData() {
-        return previsionListLiveData;
-    }
-
-    public MutableLiveData<List<Categorie>> getCategorieListLiveData() {
-        return categorieListLiveData;
     }
 }

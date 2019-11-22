@@ -37,8 +37,8 @@ import com.mindorks.framework.mvvm.ViewModelProviderFactory;
 import com.mindorks.framework.mvvm.data.model.others.PrevisionByCategorie;
 import com.mindorks.framework.mvvm.databinding.FragmentDashboardBinding;
 import com.mindorks.framework.mvvm.ui.base.BaseFragment;
-import com.mindorks.framework.mvvm.ui.main.rating.PrevisionCallback;
 import com.mindorks.framework.mvvm.ui.main.rating.PrevisionDialog;
+import com.mindorks.framework.mvvm.ui.main.rating.PrevisionDialogCallback;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -59,10 +59,10 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 
 public class DashboardFragment extends BaseFragment<FragmentDashboardBinding, DashboardViewModel>
-        implements DashboardNavigator, PrevisionAdapter.BlogAdapterListener, OnChartValueSelectedListener {
+        implements DashboardNavigator, PrevisionAdapter.PrevisionAdapterListener, OnChartValueSelectedListener, PrevisionDialogCallback {
 
     @Inject
-    PrevisionAdapter mPrevisionAdapter;
+    PrevisionAdapter mPrevisionRecyclerViewAdapter;
 
     FragmentDashboardBinding mFragmentDashboardBinding;
 
@@ -108,7 +108,7 @@ public class DashboardFragment extends BaseFragment<FragmentDashboardBinding, Da
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDashboardViewModel.setNavigator(this);
-        mPrevisionAdapter.setListener(this);
+        mPrevisionRecyclerViewAdapter.setListener(this);
     }
 
     @Override
@@ -120,12 +120,13 @@ public class DashboardFragment extends BaseFragment<FragmentDashboardBinding, Da
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mFragmentDashboardBinding = getViewDataBinding();
+        subscribeToLiveData();
         setUp();
     }
 
     @Override
-    public void updateBlog(List<PrevisionByCategorie> blogList) {
-        mPrevisionAdapter.addItems(blogList);
+    public void updatePrevisions(List<PrevisionByCategorie> blogList) {
+        mPrevisionRecyclerViewAdapter.addItems(blogList);
         Collection<PieEntry> pieEntries = getPrevisionPieEntries(blogList);
         mContainerPieView.setData(getPieData(pieEntries));
         mContainerPieView.setOnChartValueSelectedListener(this);
@@ -134,17 +135,11 @@ public class DashboardFragment extends BaseFragment<FragmentDashboardBinding, Da
         mContainerPieView.setUsePercentValues(true);
     }
 
-    @Override
-    public void dismissDialog() {
-
-    }
-
-
     private void setUp() {
         mLayoutManager.setOrientation(RecyclerView.VERTICAL);
         mFragmentDashboardBinding.blogRecyclerView.setLayoutManager(mLayoutManager);
         mFragmentDashboardBinding.blogRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mFragmentDashboardBinding.blogRecyclerView.setAdapter(mPrevisionAdapter);
+        mFragmentDashboardBinding.blogRecyclerView.setAdapter(mPrevisionRecyclerViewAdapter);
 
         mFragmentDashboardBinding.champDateValeur.setOnClickListener(view -> new RackMonthPicker(getContext())
                 .setLocale(Locale.ENGLISH)
@@ -160,11 +155,13 @@ public class DashboardFragment extends BaseFragment<FragmentDashboardBinding, Da
 
         mContainerPieView = mFragmentDashboardBinding.chart;
         mFragmentDashboardBinding.addPrevision.setOnClickListener(v -> {
-            PrevisionDialog.newInstance().show(getFragmentManager());
+            PrevisionDialog dialog =  PrevisionDialog.newInstance();
+            dialog.setListener(this);
+            dialog.show(getFragmentManager());
         });
 
         setupPieContainerView();
-        subscribeToLiveData();
+
     }
 
     private void subscribeToLiveData() {
@@ -172,6 +169,7 @@ public class DashboardFragment extends BaseFragment<FragmentDashboardBinding, Da
             setupPieContainerView();
             Collection<PieEntry> pieEntries = getPrevisionPieEntries(mPrevisions);
             mContainerPieView.setData(getPieData(pieEntries));
+            mPrevisionRecyclerViewAdapter.notifyDataSetChanged();
 
         });
     }
@@ -269,4 +267,9 @@ public class DashboardFragment extends BaseFragment<FragmentDashboardBinding, Da
 
     }
 
+
+    @Override
+    public void updateDashboard() {
+        mDashboardViewModel.fetchPrevisions();
+    }
 }

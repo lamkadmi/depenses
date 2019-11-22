@@ -35,7 +35,7 @@ import androidx.lifecycle.MutableLiveData;
  * Created by lamkadmi on 17/11/19.
  */
 
-public class PrevisionViewModel extends BaseViewModel<PrevisionCallback> {
+public class PrevisionDialogViewModel extends BaseViewModel<PrevisionDialogNavigator> {
 
     private final MutableLiveData<List<Categorie>> categorieListLiveData;
 
@@ -45,7 +45,7 @@ public class PrevisionViewModel extends BaseViewModel<PrevisionCallback> {
 
     private final ObservableField<String> montant = new ObservableField<>();
 
-    public PrevisionViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
+    public PrevisionDialogViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
         categorieListLiveData = new MutableLiveData<>();
         date.set("1/2019");

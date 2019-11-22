@@ -14,20 +14,13 @@
  *  limitations under the License
  */
 
-package com.mindorks.framework.mvvm.ui.feed.dashboard;
-
-import com.mindorks.framework.mvvm.data.model.others.PrevisionByCategorie;
-
-import java.util.List;
+package com.mindorks.framework.mvvm.ui.main.rating;
 
 /**
  * Created by lamkadmi on 17/11/19.
  */
 
-public interface DashboardNavigator {
+public interface PrevisionDialogCallback {
 
-    void handleError(Throwable throwable);
-
-    void updatePrevisions(List<PrevisionByCategorie> blogList);
-
+    void updateDashboard();
 }

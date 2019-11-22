@@ -41,18 +41,18 @@ public class PrevisionAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     public static final int VIEW_TYPE_NORMAL = 1;
 
-    private List<PrevisionByCategorie> mBlogResponseList;
+    private List<PrevisionByCategorie> mPrevisionList;
 
-    private BlogAdapterListener mListener;
+    private PrevisionAdapterListener mListener;
 
     public PrevisionAdapter(List<PrevisionByCategorie> blogResponseList) {
-        this.mBlogResponseList = blogResponseList;
+        this.mPrevisionList = blogResponseList;
     }
 
     @Override
     public int getItemCount() {
-        if (mBlogResponseList != null && mBlogResponseList.size() > 0) {
-            return mBlogResponseList.size();
+        if (mPrevisionList != null && mPrevisionList.size() > 0) {
+            return mPrevisionList.size();
         } else {
             return 1;
         }
@@ -60,7 +60,7 @@ public class PrevisionAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        if (mBlogResponseList != null && !mBlogResponseList.isEmpty()) {
+        if (mPrevisionList != null && !mPrevisionList.isEmpty()) {
             return VIEW_TYPE_NORMAL;
         } else {
             return VIEW_TYPE_EMPTY;
@@ -70,17 +70,6 @@ public class PrevisionAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
         holder.onBind(position);
-//        if(position % 2 == 0) {
-//            if(holder instanceof PrevisionViewHolder){
-//                ((PrevisionViewHolder)holder).mBinding.layRoot.setBackgroundResource(R.color.translucent_white);
-//            }
-//
-//        }
-//        else {
-//            if(holder instanceof PrevisionViewHolder){
-//                ((PrevisionViewHolder)holder).mBinding.layRoot.setBackgroundResource(R.color.shadow);
-//            }
-//        }
     }
 
     @Override
@@ -99,19 +88,19 @@ public class PrevisionAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     public void addItems(List<PrevisionByCategorie> blogList) {
-        mBlogResponseList.addAll(blogList);
+        mPrevisionList.addAll(blogList);
         notifyDataSetChanged();
     }
 
     public void clearItems() {
-        mBlogResponseList.clear();
+        mPrevisionList.clear();
     }
 
-    public void setListener(BlogAdapterListener listener) {
+    public void setListener(PrevisionAdapterListener listener) {
         this.mListener = listener;
     }
 
-    public interface BlogAdapterListener {
+    public interface PrevisionAdapterListener {
 
         void onRetryClick();
     }
@@ -129,7 +118,7 @@ public class PrevisionAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         @Override
         public void onBind(int position) {
-            final PrevisionByCategorie blog = mBlogResponseList.get(position);
+            final PrevisionByCategorie blog = mPrevisionList.get(position);
             mBlogItemViewModel = new PrevisionItemViewModel(blog, this);
             mBinding.setViewModel(mBlogItemViewModel);
 

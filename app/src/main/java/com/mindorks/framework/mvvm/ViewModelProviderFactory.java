@@ -9,7 +9,7 @@ import com.mindorks.framework.mvvm.ui.feed.dashboard.DashboardViewModel;
 import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceViewModel;
 import com.mindorks.framework.mvvm.ui.login.LoginViewModel;
 import com.mindorks.framework.mvvm.ui.main.MainViewModel;
-import com.mindorks.framework.mvvm.ui.main.rating.PrevisionViewModel;
+import com.mindorks.framework.mvvm.ui.main.rating.PrevisionDialogViewModel;
 import com.mindorks.framework.mvvm.ui.splash.SplashViewModel;
 import com.mindorks.framework.mvvm.utils.rx.SchedulerProvider;
 import javax.inject.Inject;
@@ -51,9 +51,9 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
       //noinspection unchecked
       return (T) new DashboardViewModel(dataManager,schedulerProvider);
     }
-    else if (modelClass.isAssignableFrom(PrevisionViewModel.class)) {
+    else if (modelClass.isAssignableFrom(PrevisionDialogViewModel.class)) {
       //noinspection unchecked
-      return (T) new PrevisionViewModel(dataManager,schedulerProvider);
+      return (T) new PrevisionDialogViewModel(dataManager,schedulerProvider);
     }
     else if (modelClass.isAssignableFrom(OpenSourceViewModel.class)) {
       //noinspection unchecked

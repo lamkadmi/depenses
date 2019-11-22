@@ -28,13 +28,13 @@ import com.mindorks.framework.mvvm.ViewModelProviderFactory;
 import com.mindorks.framework.mvvm.data.model.db.Categorie;
 import com.mindorks.framework.mvvm.databinding.DialogPrevisionBinding;
 import com.mindorks.framework.mvvm.ui.base.BaseDialog;
-import com.mindorks.framework.mvvm.ui.feed.dashboard.DashboardViewModel;
 
 import java.util.Locale;
 
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
@@ -44,18 +44,20 @@ import dagger.android.support.AndroidSupportInjection;
  * Created by lamkadmi on 17/11/19.
  */
 
-public class PrevisionDialog extends BaseDialog implements PrevisionCallback {
+public class PrevisionDialog extends BaseDialog implements PrevisionDialogNavigator {
 
     private static final String TAG = PrevisionDialog.class.getSimpleName();
 
     @Inject
     ViewModelProviderFactory factory;
 
-    private PrevisionViewModel mCategorieViewModel;
+    private PrevisionDialogViewModel mPrevisionViewModel;
 
-    private DashboardViewModel mDashboardViewModel;
+    //private DashboardViewModel dashboardViewModel;
 
-    private DialogPrevisionBinding binding;
+    private DialogPrevisionBinding mDialogPrevisionBinding;
+
+    private PrevisionDialogCallback listener;
 
     public static PrevisionDialog newInstance() {
         PrevisionDialog fragment = new PrevisionDialog();
@@ -65,28 +67,31 @@ public class PrevisionDialog extends BaseDialog implements PrevisionCallback {
     }
 
 
-
-    @Override
-    public void dismissDialog() {
-        dismissDialog(TAG);
-
-       // dashboardViewModel.fetchPrevisions();
-
-    }
+//    @Override
+//    public void dismissDialog() {
+//        dismissDialog(TAG);
+//    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.dialog_prevision, container, false);
-        View view = binding.getRoot();
+        mDialogPrevisionBinding = DataBindingUtil.inflate(inflater, R.layout.dialog_prevision, container, false);
+        View view = mDialogPrevisionBinding.getRoot();
 
         AndroidSupportInjection.inject(this);
-        mDashboardViewModel = ViewModelProviders.of(this,factory).get(DashboardViewModel.class);
-        binding.setViewModel(mDashboardViewModel);
 
-        //mDashboardViewModel.setNavigator(this);
+        mPrevisionViewModel = ViewModelProviders.of(this,factory).get(PrevisionDialogViewModel.class);
+
+        mDialogPrevisionBinding.setViewModel(mPrevisionViewModel);
+        mPrevisionViewModel.setNavigator(this);
         subscribeToLiveData();
         setUp();
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //dashboardViewModel = ViewModelProviders.of(getActivity(),factory).get(DashboardViewModel.class);
     }
 
     public void show(FragmentManager fragmentManager) {
@@ -94,19 +99,18 @@ public class PrevisionDialog extends BaseDialog implements PrevisionCallback {
     }
 
     private void subscribeToLiveData() {
-        mDashboardViewModel.getCategorieListLiveData().observe(this, mDatas -> {
-            ArrayAdapter<Categorie> dataAdapter = new ArrayAdapter<>(this.getContext(),R.layout.support_simple_spinner_dropdown_item,mDatas);
-            binding.categorie.setAdapter(dataAdapter);
-
+        mPrevisionViewModel.getCategorieListLiveData().observe(this, mDatas -> {
+            ArrayAdapter<Categorie> dataAdapter = new ArrayAdapter<>(this.getContext(), R.layout.support_simple_spinner_dropdown_item,mDatas);
+            mDialogPrevisionBinding.categorie.setAdapter(dataAdapter);
         });
     }
 
     private void setUp(){
-        binding.champDateValeur.setOnClickListener(view -> new RackMonthPicker(getContext())
-                .setLocale(Locale.FRANCE)
+        mDialogPrevisionBinding.champDateValeur.setOnClickListener(view -> new RackMonthPicker(getContext())
+                .setLocale(Locale.ENGLISH)
                 .setPositiveButton((month, startDate, endDate, year, monthLabel) -> {
                     String date = month+"/"+year;
-                    binding.champDateValeur.setText(date);
+                    mDialogPrevisionBinding.champDateValeur.setText(date);
                 })
                 .setNegativeButton(dialog -> {
                     dialog.dismiss();
@@ -114,4 +118,13 @@ public class PrevisionDialog extends BaseDialog implements PrevisionCallback {
     }
 
 
+    public void setListener(PrevisionDialogCallback listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void dismissDialog() {
+        dismissDialog(TAG);
+        listener.updateDashboard();
+    }
 }

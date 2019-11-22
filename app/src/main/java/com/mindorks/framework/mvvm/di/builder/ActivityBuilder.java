@@ -21,6 +21,7 @@ import com.mindorks.framework.mvvm.ui.feed.FeedActivity;
 import com.mindorks.framework.mvvm.ui.feed.FeedActivityModule;
 import com.mindorks.framework.mvvm.ui.feed.dashboard.DashboardFragmentProvider;
 import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceFragmentProvider;
+import com.mindorks.framework.mvvm.ui.feed.revenu.RevenuFragmentProvider;
 import com.mindorks.framework.mvvm.ui.login.LoginActivity;
 import com.mindorks.framework.mvvm.ui.main.MainActivity;
 import com.mindorks.framework.mvvm.ui.main.MainActivityModule;
@@ -39,7 +40,8 @@ public abstract class ActivityBuilder {
             FeedActivityModule.class,
             DashboardFragmentProvider.class,
             PrevisionDialogProvider.class,
-            OpenSourceFragmentProvider.class})
+            OpenSourceFragmentProvider.class,
+            RevenuFragmentProvider.class})
     abstract FeedActivity bindFeedActivity();
 
     @ContributesAndroidInjector

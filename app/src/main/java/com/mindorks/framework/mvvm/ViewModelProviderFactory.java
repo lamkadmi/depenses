@@ -7,6 +7,7 @@ import com.mindorks.framework.mvvm.ui.about.AboutViewModel;
 import com.mindorks.framework.mvvm.ui.feed.FeedViewModel;
 import com.mindorks.framework.mvvm.ui.feed.dashboard.DashboardViewModel;
 import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceViewModel;
+import com.mindorks.framework.mvvm.ui.feed.revenu.RevenuViewModel;
 import com.mindorks.framework.mvvm.ui.login.LoginViewModel;
 import com.mindorks.framework.mvvm.ui.main.MainViewModel;
 import com.mindorks.framework.mvvm.ui.main.rating.PrevisionDialogViewModel;
@@ -62,6 +63,10 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
     else if (modelClass.isAssignableFrom(SplashViewModel.class)) {
       //noinspection unchecked
       return (T) new SplashViewModel(dataManager,schedulerProvider);
+    }
+    else if (modelClass.isAssignableFrom(RevenuViewModel.class)) {
+      //noinspection unchecked
+      return (T) new RevenuViewModel(dataManager,schedulerProvider);
     }
     throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
   }

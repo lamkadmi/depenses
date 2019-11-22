@@ -20,6 +20,7 @@ import com.mindorks.framework.mvvm.data.model.db.Categorie;
 import com.mindorks.framework.mvvm.data.model.db.Option;
 import com.mindorks.framework.mvvm.data.model.db.Prevision;
 import com.mindorks.framework.mvvm.data.model.db.Question;
+import com.mindorks.framework.mvvm.data.model.db.Revenu;
 import com.mindorks.framework.mvvm.data.model.db.User;
 import com.mindorks.framework.mvvm.data.model.others.PrevisionByCategorie;
 
@@ -94,6 +95,11 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
+    public Observable<List<Revenu>> getRevenus() {
+        return mAppDatabase.revenuDao().loadAll().toObservable();
+    }
+
+    @Override
     public Observable<Boolean> isOptionEmpty() {
         return mAppDatabase.optionDao().loadAll()
                 .flatMapObservable(options -> Observable.just(options.isEmpty()));
@@ -142,6 +148,14 @@ public class AppDbHelper implements DbHelper {
     public Observable<Boolean> saveCategorie(final Categorie categorie) {
         return Observable.fromCallable(() -> {
             mAppDatabase.categorieDao().insert(categorie);
+            return true;
+        });
+    }
+
+    @Override
+    public Observable<Boolean> saveRevenu(final Revenu revenu) {
+        return Observable.fromCallable(() -> {
+            mAppDatabase.revenuDao().insert(revenu);
             return true;
         });
     }

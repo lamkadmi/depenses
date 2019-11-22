@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import com.mindorks.framework.mvvm.ui.feed.dashboard.DashboardFragment;
 import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceFragment;
+import com.mindorks.framework.mvvm.ui.feed.revenu.RevenuFragment;
 
 /**
  * Created by lamkadmi on 17/11/19.
@@ -50,6 +51,8 @@ public class FeedPagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return DashboardFragment.newInstance();
             case 1:
+                return RevenuFragment.newInstance();
+            case 2:
                 return OpenSourceFragment.newInstance();
             default:
                 return null;

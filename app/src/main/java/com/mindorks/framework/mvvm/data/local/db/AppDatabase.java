@@ -22,12 +22,14 @@ import com.mindorks.framework.mvvm.data.local.db.dao.DepenseDao;
 import com.mindorks.framework.mvvm.data.local.db.dao.OptionDao;
 import com.mindorks.framework.mvvm.data.local.db.dao.PrevisionDao;
 import com.mindorks.framework.mvvm.data.local.db.dao.QuestionDao;
+import com.mindorks.framework.mvvm.data.local.db.dao.RevenuDao;
 import com.mindorks.framework.mvvm.data.local.db.dao.UserDao;
 import com.mindorks.framework.mvvm.data.model.db.Categorie;
 import com.mindorks.framework.mvvm.data.model.db.Depense;
 import com.mindorks.framework.mvvm.data.model.db.Option;
 import com.mindorks.framework.mvvm.data.model.db.Prevision;
 import com.mindorks.framework.mvvm.data.model.db.Question;
+import com.mindorks.framework.mvvm.data.model.db.Revenu;
 import com.mindorks.framework.mvvm.data.model.db.User;
 
 import androidx.room.Database;
@@ -40,7 +42,7 @@ import androidx.room.TypeConverters;
 
 @TypeConverters({Converters.class})
 @Database(entities = {User.class, Question.class, Option.class, Categorie.class, Depense.class,
-        Prevision.class}, version = 1)
+        Prevision.class, Revenu.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract OptionDao optionDao();
@@ -54,4 +56,6 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract PrevisionDao previsionDao();
 
     public abstract DepenseDao depenseDao();
+
+    public abstract RevenuDao revenuDao();
 }

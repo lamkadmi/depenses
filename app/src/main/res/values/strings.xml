@@ -78,6 +78,7 @@
     <!--feed-->
     <string name="title">Dépense</string>
     <string name="detail">Mes dépenses</string>
+    <string name="revenu">Mes revenus</string>
     <string name="accueil">Accueil</string>
 
     <!--empty state-->

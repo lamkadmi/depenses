@@ -20,11 +20,13 @@ import com.mindorks.framework.mvvm.data.model.db.Categorie;
 import com.mindorks.framework.mvvm.data.model.db.Option;
 import com.mindorks.framework.mvvm.data.model.db.Prevision;
 import com.mindorks.framework.mvvm.data.model.db.Question;
+import com.mindorks.framework.mvvm.data.model.db.Revenu;
 import com.mindorks.framework.mvvm.data.model.db.User;
 import com.mindorks.framework.mvvm.data.model.others.PrevisionByCategorie;
 
-import io.reactivex.Observable;
 import java.util.List;
+
+import io.reactivex.Observable;
 
 /**
  * Created by lamkadmi on 17/11/19.
@@ -56,9 +58,13 @@ public interface DbHelper {
 
     Observable<Boolean> savePrevision(final Prevision prevision);
 
+    Observable<Boolean> saveRevenu(Revenu revenu);
+
     Observable<List<PrevisionByCategorie>> getPrevisions();
 
     Observable<List<Categorie>> getCategories();
+
+    Observable<List<Revenu>> getRevenus();
 
     Observable<List<PrevisionByCategorie>> getPrevisionsByDate(String date);
 }

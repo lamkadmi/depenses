@@ -20,11 +20,13 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.mindorks.framework.mvvm.data.model.db.Revenu;
 import com.mindorks.framework.mvvm.data.model.others.PrevisionByCategorie;
 import com.mindorks.framework.mvvm.data.model.others.QuestionCardData;
 import com.mindorks.framework.mvvm.ui.feed.dashboard.PrevisionAdapter;
 import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceAdapter;
 import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceItemViewModel;
+import com.mindorks.framework.mvvm.ui.feed.revenu.RevenuAdapter;
 import com.mindorks.framework.mvvm.ui.main.MainViewModel;
 import com.mindorks.framework.mvvm.ui.main.ObjectifAdapter;
 import com.mindorks.framework.mvvm.ui.main.QuestionCard;
@@ -51,6 +53,15 @@ public final class BindingUtils {
         if (adapter != null) {
             adapter.clearItems();
             adapter.addItems(blogs);
+        }
+    }
+
+    @BindingAdapter({"adapter"})
+    public static void addRevenuItems(RecyclerView recyclerView, List<Revenu> revenus) {
+        RevenuAdapter adapter = (RevenuAdapter) recyclerView.getAdapter();
+        if (adapter != null) {
+            adapter.clearItems();
+            adapter.addItems(revenus);
         }
     }
 

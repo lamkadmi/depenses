@@ -14,17 +14,17 @@
  *  limitations under the License
  */
 
-package com.mindorks.framework.mvvm.ui.feed.opensource;
+package com.mindorks.framework.mvvm.ui.feed.depense;
 
 /**
  * Created by lamkadmi on 17/11/19.
  */
 
-public class OpenSourceEmptyItemViewModel {
+public class DepenseEmptyItemViewModel {
 
-    private final OpenSourceEmptyItemViewModelListener mListener;
+    private final DepenseEmptyItemViewModelListener mListener;
 
-    public OpenSourceEmptyItemViewModel(OpenSourceEmptyItemViewModelListener listener) {
+    public DepenseEmptyItemViewModel(DepenseEmptyItemViewModelListener listener) {
         this.mListener = listener;
     }
 
@@ -32,7 +32,7 @@ public class OpenSourceEmptyItemViewModel {
         mListener.onRetryClick();
     }
 
-    public interface OpenSourceEmptyItemViewModelListener {
+    public interface DepenseEmptyItemViewModelListener {
 
         void onRetryClick();
     }

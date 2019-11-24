@@ -29,6 +29,7 @@ import com.mindorks.framework.mvvm.data.model.api.LoginResponse;
 import com.mindorks.framework.mvvm.data.model.api.LogoutResponse;
 import com.mindorks.framework.mvvm.data.model.api.OpenSourceResponse;
 import com.mindorks.framework.mvvm.data.model.db.Categorie;
+import com.mindorks.framework.mvvm.data.model.db.Depense;
 import com.mindorks.framework.mvvm.data.model.db.Option;
 import com.mindorks.framework.mvvm.data.model.db.Prevision;
 import com.mindorks.framework.mvvm.data.model.db.Question;
@@ -226,6 +227,10 @@ public class AppDataManager implements DataManager {
         return mDbHelper.getRevenus();
     }
 
+    @Override
+    public Observable<List<Depense>> getDepenses() {
+        return mDbHelper.getDepenses();
+    }
 
     @Override
     public Observable<Boolean> insertUser(User user) {

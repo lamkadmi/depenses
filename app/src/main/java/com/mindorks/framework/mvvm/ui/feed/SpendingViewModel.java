@@ -12,7 +12,7 @@ import androidx.databinding.ObservableField;
  * Created by Jyoti on 29/07/17.
  */
 
-public class FeedViewModel extends BaseViewModel {
+public class SpendingViewModel extends BaseViewModel {
 
     private final ObservableField<String> userName = new ObservableField<>();
 
@@ -20,7 +20,7 @@ public class FeedViewModel extends BaseViewModel {
 
     private final ObservableField<String> appVersion = new ObservableField<>();
 
-    public FeedViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
+    public SpendingViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
     }
 

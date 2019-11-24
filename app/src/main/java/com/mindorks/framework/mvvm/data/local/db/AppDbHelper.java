@@ -17,6 +17,7 @@
 package com.mindorks.framework.mvvm.data.local.db;
 
 import com.mindorks.framework.mvvm.data.model.db.Categorie;
+import com.mindorks.framework.mvvm.data.model.db.Depense;
 import com.mindorks.framework.mvvm.data.model.db.Option;
 import com.mindorks.framework.mvvm.data.model.db.Prevision;
 import com.mindorks.framework.mvvm.data.model.db.Question;
@@ -97,6 +98,11 @@ public class AppDbHelper implements DbHelper {
     @Override
     public Observable<List<Revenu>> getRevenus() {
         return mAppDatabase.revenuDao().loadAll().toObservable();
+    }
+
+    @Override
+    public Observable<List<Depense>> getDepenses() {
+        return mAppDatabase.depenseDao().loadAll().toObservable();
     }
 
     @Override

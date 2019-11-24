@@ -53,13 +53,13 @@ import dagger.android.support.HasSupportFragmentInjector;
  * Created by lamkadmi on 17/11/19.
  */
 
-public class FeedActivity extends BaseActivity<ActivityFeedBinding, FeedViewModel> implements MainNavigator, HasSupportFragmentInjector {
+public class SpendingActivity extends BaseActivity<ActivityFeedBinding, SpendingViewModel> implements MainNavigator, HasSupportFragmentInjector {
 
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
     @Inject
-    FeedPagerAdapter mPagerAdapter;
+    SpendingPagerAdapter mPagerAdapter;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -72,10 +72,10 @@ public class FeedActivity extends BaseActivity<ActivityFeedBinding, FeedViewMode
 
     private Toolbar mToolbar;
 
-    private FeedViewModel mFeedViewModel;
+    private SpendingViewModel mSpendingViewModel;
 
     public static Intent newIntent(Context context) {
-        return new Intent(context, FeedActivity.class);
+        return new Intent(context, SpendingActivity.class);
     }
 
     @Override
@@ -89,9 +89,9 @@ public class FeedActivity extends BaseActivity<ActivityFeedBinding, FeedViewMode
     }
 
     @Override
-    public FeedViewModel getViewModel() {
-        mFeedViewModel = ViewModelProviders.of(this,factory).get(FeedViewModel.class);
-        return mFeedViewModel;
+    public SpendingViewModel getViewModel() {
+        mSpendingViewModel = ViewModelProviders.of(this,factory).get(SpendingViewModel.class);
+        return mSpendingViewModel;
     }
 
 //    @Override
@@ -155,7 +155,7 @@ public class FeedActivity extends BaseActivity<ActivityFeedBinding, FeedViewMode
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivityFeedBinding = getViewDataBinding();
-        mFeedViewModel.setNavigator(this);
+        mSpendingViewModel.setNavigator(this);
         setUp();
     }
 
@@ -187,12 +187,12 @@ public class FeedActivity extends BaseActivity<ActivityFeedBinding, FeedViewMode
         mDrawer.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
         String version = getString(R.string.version) + " " + BuildConfig.VERSION_NAME;
-        mFeedViewModel.updateAppVersion(version);
+        mSpendingViewModel.updateAppVersion(version);
         setupNavMenu();
 
-        mFeedViewModel.onNavMenuCreated();
+        mSpendingViewModel.onNavMenuCreated();
 
-        mPagerAdapter.setCount(2);
+        mPagerAdapter.setCount(3);
 
         mActivityFeedBinding.feedViewPager.setAdapter(mPagerAdapter);
 
@@ -236,7 +236,7 @@ public class FeedActivity extends BaseActivity<ActivityFeedBinding, FeedViewMode
         NavHeaderMainBinding navHeaderMainBinding = DataBindingUtil.inflate(getLayoutInflater(),
                 R.layout.nav_header_main, mActivityFeedBinding.navigationView, false);
         mActivityFeedBinding.navigationView.addHeaderView(navHeaderMainBinding.getRoot());
-        navHeaderMainBinding.setViewModel(mFeedViewModel);
+        navHeaderMainBinding.setViewModel(mSpendingViewModel);
 
         mNavigationView.setNavigationItemSelectedListener(
                 item -> {
@@ -249,7 +249,7 @@ public class FeedActivity extends BaseActivity<ActivityFeedBinding, FeedViewMode
 //                            PrevisionDialog.newInstance().show(getSupportFragmentManager());
 //                            return true;
                         case R.id.navItemFeed:
-                            startActivity(FeedActivity.newIntent(FeedActivity.this));
+                            startActivity(SpendingActivity.newIntent(SpendingActivity.this));
                             return true;
                         case R.id.navItemLogout:
                             //mMainViewModel.logout();

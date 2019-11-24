@@ -14,20 +14,17 @@
  *  limitations under the License
  */
 
-package com.mindorks.framework.mvvm.ui.feed;
+package com.mindorks.framework.mvvm.ui.feed.depense;
 
 import dagger.Module;
-import dagger.Provides;
+import dagger.android.ContributesAndroidInjector;
 
 /**
  * Created by lamkadmi on 17/11/19.
  */
 @Module
-public class FeedActivityModule {
+public abstract class DepenseFragmentProvider {
 
-    @Provides
-    FeedPagerAdapter provideFeedPagerAdapter(FeedActivity activity) {
-        return new FeedPagerAdapter(activity.getSupportFragmentManager());
-    }
-
+    @ContributesAndroidInjector(modules = DepenseFragmentModule.class)
+    abstract DepenseFragment provideOpenSourceFragmentFactory();
 }

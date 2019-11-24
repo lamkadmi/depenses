@@ -4,10 +4,11 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import com.mindorks.framework.mvvm.data.DataManager;
 import com.mindorks.framework.mvvm.ui.about.AboutViewModel;
-import com.mindorks.framework.mvvm.ui.feed.FeedViewModel;
+import com.mindorks.framework.mvvm.ui.feed.SpendingViewModel;
 import com.mindorks.framework.mvvm.ui.feed.dashboard.DashboardViewModel;
-import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceViewModel;
+import com.mindorks.framework.mvvm.ui.feed.depense.DepenseViewModel;
 import com.mindorks.framework.mvvm.ui.feed.revenu.RevenuViewModel;
+import com.mindorks.framework.mvvm.ui.feed.revenu.dialog.RevenuDialogViewModel;
 import com.mindorks.framework.mvvm.ui.login.LoginViewModel;
 import com.mindorks.framework.mvvm.ui.main.MainViewModel;
 import com.mindorks.framework.mvvm.ui.main.rating.PrevisionDialogViewModel;
@@ -38,9 +39,9 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
     if (modelClass.isAssignableFrom(AboutViewModel.class)) {
       //noinspection unchecked
       return (T) new AboutViewModel(dataManager,schedulerProvider);
-    } else if (modelClass.isAssignableFrom(FeedViewModel.class)) {
+    } else if (modelClass.isAssignableFrom(SpendingViewModel.class)) {
       //noinspection unchecked
-      return (T) new FeedViewModel(dataManager,schedulerProvider);
+      return (T) new SpendingViewModel(dataManager,schedulerProvider);
     } else if (modelClass.isAssignableFrom(LoginViewModel.class)) {
       //noinspection unchecked
       return (T) new LoginViewModel(dataManager,schedulerProvider);
@@ -56,9 +57,13 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
       //noinspection unchecked
       return (T) new PrevisionDialogViewModel(dataManager,schedulerProvider);
     }
-    else if (modelClass.isAssignableFrom(OpenSourceViewModel.class)) {
+    else if (modelClass.isAssignableFrom(RevenuDialogViewModel.class)) {
       //noinspection unchecked
-      return (T) new OpenSourceViewModel(dataManager,schedulerProvider);
+      return (T) new RevenuDialogViewModel(dataManager,schedulerProvider);
+    }
+    else if (modelClass.isAssignableFrom(DepenseViewModel.class)) {
+      //noinspection unchecked
+      return (T) new DepenseViewModel(dataManager,schedulerProvider);
     }
     else if (modelClass.isAssignableFrom(SplashViewModel.class)) {
       //noinspection unchecked

@@ -53,7 +53,7 @@ import com.mindorks.framework.mvvm.databinding.ActivityMainBinding;
 import com.mindorks.framework.mvvm.databinding.NavHeaderMainBinding;
 import com.mindorks.framework.mvvm.ui.about.AboutFragment;
 import com.mindorks.framework.mvvm.ui.base.BaseActivity;
-import com.mindorks.framework.mvvm.ui.feed.FeedActivity;
+import com.mindorks.framework.mvvm.ui.feed.SpendingActivity;
 import com.mindorks.framework.mvvm.ui.login.LoginActivity;
 import com.mindorks.framework.mvvm.utils.ScreenUtils;
 import com.mindorks.placeholderview.SwipeDecor;
@@ -328,7 +328,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 //                            PrevisionDialog.newInstance().show(getSupportFragmentManager());
 //                            return true;
                         case R.id.navItemFeed:
-                            startActivity(FeedActivity.newIntent(MainActivity.this));
+                            startActivity(SpendingActivity.newIntent(MainActivity.this));
                             return true;
                         case R.id.navItemLogout:
                             mMainViewModel.logout();

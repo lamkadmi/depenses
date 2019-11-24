@@ -17,6 +17,7 @@
 package com.mindorks.framework.mvvm.data.local.db;
 
 import com.mindorks.framework.mvvm.data.model.db.Categorie;
+import com.mindorks.framework.mvvm.data.model.db.Depense;
 import com.mindorks.framework.mvvm.data.model.db.Option;
 import com.mindorks.framework.mvvm.data.model.db.Prevision;
 import com.mindorks.framework.mvvm.data.model.db.Question;
@@ -65,6 +66,8 @@ public interface DbHelper {
     Observable<List<Categorie>> getCategories();
 
     Observable<List<Revenu>> getRevenus();
+
+    Observable<List<Depense>> getDepenses();
 
     Observable<List<PrevisionByCategorie>> getPrevisionsByDate(String date);
 }

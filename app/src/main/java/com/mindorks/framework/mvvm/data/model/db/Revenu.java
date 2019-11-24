@@ -8,11 +8,18 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "revenu")
 public class Revenu {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private Long id;
     private String mois_annee;
     private Date date;
     private Float montant;
+    private String description;
+
+    public Revenu(String mois_annee, Float montant, String description) {
+        this.mois_annee = mois_annee;
+         this.montant = montant;
+        this.description = description;
+    }
 
     public Long getId() {
         return id;
@@ -44,5 +51,13 @@ public class Revenu {
 
     public void setMontant(Float montant) {
         this.montant = montant;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

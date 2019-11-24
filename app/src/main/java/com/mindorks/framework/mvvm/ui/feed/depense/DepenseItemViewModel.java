@@ -14,7 +14,9 @@
  *  limitations under the License
  */
 
-package com.mindorks.framework.mvvm.ui.feed.opensource;
+package com.mindorks.framework.mvvm.ui.feed.depense;
+
+import com.mindorks.framework.mvvm.data.model.db.Depense;
 
 import androidx.databinding.ObservableField;
 
@@ -22,20 +24,27 @@ import androidx.databinding.ObservableField;
  * Created by lamkadmi on 17/11/19.
  */
 
-public class OpenSourceItemViewModel {
+public class DepenseItemViewModel {
 
     public final ObservableField<String> content = new ObservableField<>();
 
     public final ObservableField<String> imageUrl = new ObservableField<>();
 
-    public final ObservableField<String> projectUrl = new ObservableField<>();
+    public final ObservableField<String> montant = new ObservableField<>();
 
     public final ObservableField<String> title = new ObservableField<>();
 
-    public OpenSourceItemViewModel(String imageUrl, String title, String content, String projectUrl) {
+    public DepenseItemViewModel(String imageUrl, String title, String content, String montant) {
         this.imageUrl.set(imageUrl);
         this.title.set(title);
         this.content.set(content);
-        this.projectUrl.set(projectUrl);
+        this.montant.set(montant);
+    }
+
+    public DepenseItemViewModel(Depense depense) {
+        //this.imageUrl.set(imageUrl);
+        this.title.set(depense.getDetail());
+        this.content.set(depense.getDetail());
+        this.montant.set(String.valueOf(depense.getMontant()));
     }
 }

@@ -14,42 +14,46 @@
  *  limitations under the License
  */
 
-package com.mindorks.framework.mvvm.ui.feed.opensource;
+package com.mindorks.framework.mvvm.ui.feed.depense;
 
 
-import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.View;
+
 import com.mindorks.framework.mvvm.BR;
 import com.mindorks.framework.mvvm.R;
 import com.mindorks.framework.mvvm.ViewModelProviderFactory;
-import com.mindorks.framework.mvvm.databinding.FragmentOpenSourceBinding;
+import com.mindorks.framework.mvvm.databinding.FragmentDepenseBinding;
 import com.mindorks.framework.mvvm.ui.base.BaseFragment;
+
 import javax.inject.Inject;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by lamkadmi on 17/11/19.
  */
 
-public class OpenSourceFragment extends BaseFragment<FragmentOpenSourceBinding, OpenSourceViewModel>
-        implements OpenSourceNavigator, OpenSourceAdapter.OpenSourceAdapterListener {
+public class DepenseFragment extends BaseFragment<FragmentDepenseBinding, DepenseViewModel>
+        implements DepenseNavigator, DepenseAdapter.DepenseAdapterListener {
 
-    FragmentOpenSourceBinding mFragmentOpenSourceBinding;
+    FragmentDepenseBinding mFragmentDepenseBinding;
     @Inject
     LinearLayoutManager mLayoutManager;
     @Inject
-    OpenSourceAdapter mOpenSourceAdapter;
+    DepenseAdapter mDepenseAdapter;
     @Inject
     ViewModelProviderFactory factory;
-    private OpenSourceViewModel mOpenSourceViewModel;
+    private DepenseViewModel mDepenseViewModel;
 
-    public static OpenSourceFragment newInstance() {
+    public static DepenseFragment newInstance() {
         Bundle args = new Bundle();
-        OpenSourceFragment fragment = new OpenSourceFragment();
+        DepenseFragment fragment = new DepenseFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,13 +65,13 @@ public class OpenSourceFragment extends BaseFragment<FragmentOpenSourceBinding, 
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_open_source;
+        return R.layout.fragment_depense;
     }
 
     @Override
-    public OpenSourceViewModel getViewModel() {
-        mOpenSourceViewModel = ViewModelProviders.of(this, factory).get(OpenSourceViewModel.class);
-        return mOpenSourceViewModel;
+    public DepenseViewModel getViewModel() {
+        mDepenseViewModel = ViewModelProviders.of(this, factory).get(DepenseViewModel.class);
+        return mDepenseViewModel;
     }
 
     @Override
@@ -78,26 +82,26 @@ public class OpenSourceFragment extends BaseFragment<FragmentOpenSourceBinding, 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mOpenSourceViewModel.setNavigator(this);
-        mOpenSourceAdapter.setListener(this);
+        mDepenseViewModel.setNavigator(this);
+        mDepenseAdapter.setListener(this);
     }
 
     @Override
     public void onRetryClick() {
-        mOpenSourceViewModel.fetchRepos();
+        mDepenseViewModel.fetchDepenses();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mFragmentOpenSourceBinding = getViewDataBinding();
+        mFragmentDepenseBinding = getViewDataBinding();
         setUp();
     }
 
     private void setUp() {
-        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mFragmentOpenSourceBinding.openSourceRecyclerView.setLayoutManager(mLayoutManager);
-        mFragmentOpenSourceBinding.openSourceRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mFragmentOpenSourceBinding.openSourceRecyclerView.setAdapter(mOpenSourceAdapter);
+        mLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        mFragmentDepenseBinding.openSourceRecyclerView.setLayoutManager(mLayoutManager);
+        mFragmentDepenseBinding.openSourceRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mFragmentDepenseBinding.openSourceRecyclerView.setAdapter(mDepenseAdapter);
     }
 }

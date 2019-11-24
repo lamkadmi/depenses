@@ -21,7 +21,7 @@
 
         <variable
             name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.feed.revenu.RevenuItemViewModel" />
+            type="com.mindorks.framework.mvvm.ui.feed.depense.DepenseItemViewModel" />
 
     </data>
 
@@ -54,14 +54,14 @@
                         style="@style/TextStyle.Title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.description}"
+
                         tools:text="Description" />
 
                     <TextView
                         style="@style/TextStyle.Title.Sub"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.date}"
+
                         tools:text="Date" />
 
                 </LinearLayout>
@@ -79,7 +79,7 @@
                         android:drawableLeft="@drawable/ic_monetization"
                         android:drawableTint="@color/google"
                         android:layout_gravity="center|left"
-                        android:text="@{viewModel.montant}"
+
                         tools:text="Revenu" />
                 </LinearLayout>
 

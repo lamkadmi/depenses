@@ -31,6 +31,8 @@ public class RevenuItemViewModel {
 
     public final ObservableField<String> date;
 
+    public final ObservableField<String> description;
+
     public final RevenuItemViewModelListener mListener;
 
 
@@ -42,6 +44,7 @@ public class RevenuItemViewModel {
 
         date = new ObservableField<>(mRevenu.getMois_annee());
         montant = new ObservableField<>(String.valueOf(mRevenu.getMontant()));
+        description = new ObservableField<>(mRevenu.getDescription());
     }
 
     public void onItemClick() {

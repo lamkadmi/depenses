@@ -16,6 +16,6 @@ public interface RevenuDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Revenu revenu);
 
-    @Query("SELECT * FROM revenu")
+    @Query("SELECT * FROM revenu order by mois_annee")
     Single<List<Revenu>> loadAll();
 }

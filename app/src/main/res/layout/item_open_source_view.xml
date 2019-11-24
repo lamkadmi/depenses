@@ -21,7 +21,7 @@
 
         <variable
             name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceItemViewModel" />
+            type="com.mindorks.framework.mvvm.ui.feed.depense.DepenseItemViewModel" />
 
     </data>
 

@@ -16,9 +16,6 @@
 
 package com.mindorks.framework.mvvm.ui.main;
 
-import com.mindorks.framework.mvvm.ui.feed.FeedActivity;
-import com.mindorks.framework.mvvm.ui.feed.FeedPagerAdapter;
-
 import java.util.ArrayList;
 
 import dagger.Module;

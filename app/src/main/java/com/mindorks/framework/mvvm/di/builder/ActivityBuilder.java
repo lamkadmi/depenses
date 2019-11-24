@@ -17,16 +17,18 @@
 package com.mindorks.framework.mvvm.di.builder;
 
 import com.mindorks.framework.mvvm.ui.about.AboutFragmentProvider;
-import com.mindorks.framework.mvvm.ui.feed.FeedActivity;
-import com.mindorks.framework.mvvm.ui.feed.FeedActivityModule;
+import com.mindorks.framework.mvvm.ui.feed.SpendingActivity;
+import com.mindorks.framework.mvvm.ui.feed.SpendingActivityModule;
 import com.mindorks.framework.mvvm.ui.feed.dashboard.DashboardFragmentProvider;
-import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceFragmentProvider;
+import com.mindorks.framework.mvvm.ui.feed.depense.DepenseFragmentProvider;
 import com.mindorks.framework.mvvm.ui.feed.revenu.RevenuFragmentProvider;
+import com.mindorks.framework.mvvm.ui.feed.revenu.dialog.RevenuDialogProvider;
 import com.mindorks.framework.mvvm.ui.login.LoginActivity;
 import com.mindorks.framework.mvvm.ui.main.MainActivity;
 import com.mindorks.framework.mvvm.ui.main.MainActivityModule;
 import com.mindorks.framework.mvvm.ui.main.rating.PrevisionDialogProvider;
 import com.mindorks.framework.mvvm.ui.splash.SplashActivity;
+
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
@@ -37,12 +39,13 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = {
-            FeedActivityModule.class,
+            SpendingActivityModule.class,
             DashboardFragmentProvider.class,
             PrevisionDialogProvider.class,
-            OpenSourceFragmentProvider.class,
+            RevenuDialogProvider.class,
+            DepenseFragmentProvider.class,
             RevenuFragmentProvider.class})
-    abstract FeedActivity bindFeedActivity();
+    abstract SpendingActivity bindSpendingActivity();
 
     @ContributesAndroidInjector
     abstract LoginActivity bindLoginActivity();

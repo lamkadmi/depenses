@@ -20,12 +20,13 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.mindorks.framework.mvvm.data.model.db.Depense;
 import com.mindorks.framework.mvvm.data.model.db.Revenu;
 import com.mindorks.framework.mvvm.data.model.others.PrevisionByCategorie;
 import com.mindorks.framework.mvvm.data.model.others.QuestionCardData;
 import com.mindorks.framework.mvvm.ui.feed.dashboard.PrevisionAdapter;
-import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceAdapter;
-import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceItemViewModel;
+import com.mindorks.framework.mvvm.ui.feed.depense.DepenseAdapter;
+import com.mindorks.framework.mvvm.ui.feed.depense.DepenseItemViewModel;
 import com.mindorks.framework.mvvm.ui.feed.revenu.RevenuAdapter;
 import com.mindorks.framework.mvvm.ui.main.MainViewModel;
 import com.mindorks.framework.mvvm.ui.main.ObjectifAdapter;
@@ -75,13 +76,24 @@ public final class BindingUtils {
     }
 
     @BindingAdapter({"adapter"})
-    public static void addOpenSourceItems(RecyclerView recyclerView, List<OpenSourceItemViewModel> openSourceItems) {
-        OpenSourceAdapter adapter = (OpenSourceAdapter) recyclerView.getAdapter();
+    public static void addDepenseItems(RecyclerView recyclerView, List<Depense> depenseItems) {
+        DepenseAdapter adapter = (DepenseAdapter) recyclerView.getAdapter();
+        if (adapter != null) {
+            adapter.clearItems();
+            adapter.addItems(depenseItems);
+        }
+    }
+
+  /*  @BindingAdapter({"adapter"})
+    public static void addDepenseItems(RecyclerView recyclerView, List<DepenseItemViewModel> openSourceItems) {
+        DepenseAdapter adapter = (DepenseAdapter) recyclerView.getAdapter();
         if (adapter != null) {
             adapter.clearItems();
             adapter.addItems(openSourceItems);
         }
-    }
+    }*/
+
+
 
     @BindingAdapter({"adapter", "action"})
     public static void addQuestionItems(SwipePlaceHolderView mCardsContainerView, List<QuestionCardData> mQuestionList, int mAction) {

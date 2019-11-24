@@ -14,43 +14,48 @@
  *  limitations under the License
  */
 
-package com.mindorks.framework.mvvm.ui.feed.opensource;
+package com.mindorks.framework.mvvm.ui.feed.depense;
 
 import android.content.Intent;
 import android.net.Uri;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.mindorks.framework.mvvm.data.model.db.Depense;
+import com.mindorks.framework.mvvm.databinding.ItemDepenseViewBinding;
 import com.mindorks.framework.mvvm.databinding.ItemOpenSourceEmptyViewBinding;
-import com.mindorks.framework.mvvm.databinding.ItemOpenSourceViewBinding;
 import com.mindorks.framework.mvvm.ui.base.BaseViewHolder;
+import com.mindorks.framework.mvvm.ui.feed.revenu.RevenuItemViewModel;
 import com.mindorks.framework.mvvm.utils.AppLogger;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by lamkadmi on 17/11/19.
  */
 
-public class OpenSourceAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class DepenseAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     public static final int VIEW_TYPE_EMPTY = 0;
 
     public static final int VIEW_TYPE_NORMAL = 1;
 
-    private final List<OpenSourceItemViewModel> mOpenSourceResponseList;
+    private final List<Depense> mDepenseResponseList;
 
-    private OpenSourceAdapterListener mListener;
+    private DepenseAdapterListener mListener;
 
-    public OpenSourceAdapter() {
-        this.mOpenSourceResponseList = new ArrayList<>();
+    public DepenseAdapter() {
+        this.mDepenseResponseList = new ArrayList<>();
     }
 
     @Override
     public int getItemCount() {
-        if (!mOpenSourceResponseList.isEmpty()) {
-            return mOpenSourceResponseList.size();
+        if (!mDepenseResponseList.isEmpty()) {
+            return mDepenseResponseList.size();
         } else {
             return 1;
         }
@@ -58,7 +63,7 @@ public class OpenSourceAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        if (!mOpenSourceResponseList.isEmpty()) {
+        if (!mDepenseResponseList.isEmpty()) {
             return VIEW_TYPE_NORMAL;
         } else {
             return VIEW_TYPE_EMPTY;
@@ -74,9 +79,9 @@ public class OpenSourceAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case VIEW_TYPE_NORMAL:
-                ItemOpenSourceViewBinding openSourceViewBinding = ItemOpenSourceViewBinding
+                ItemDepenseViewBinding openSourceViewBinding = ItemDepenseViewBinding
                         .inflate(LayoutInflater.from(parent.getContext()), parent, false);
-                return new OpenSourceViewHolder(openSourceViewBinding);
+                return new DepenseViewHolder(openSourceViewBinding);
             case VIEW_TYPE_EMPTY:
             default:
                 ItemOpenSourceEmptyViewBinding emptyViewBinding = ItemOpenSourceEmptyViewBinding
@@ -85,25 +90,25 @@ public class OpenSourceAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
     }
 
-    public void addItems(List<OpenSourceItemViewModel> repoList) {
-        mOpenSourceResponseList.addAll(repoList);
+    public void addItems(List<Depense> repoList) {
+        mDepenseResponseList.addAll(repoList);
         notifyDataSetChanged();
     }
 
     public void clearItems() {
-        mOpenSourceResponseList.clear();
+        mDepenseResponseList.clear();
     }
 
-    public void setListener(OpenSourceAdapterListener listener) {
+    public void setListener(DepenseAdapterListener listener) {
         this.mListener = listener;
     }
 
-    public interface OpenSourceAdapterListener {
+    public interface DepenseAdapterListener {
 
         void onRetryClick();
     }
 
-    public class EmptyViewHolder extends BaseViewHolder implements OpenSourceEmptyItemViewModel.OpenSourceEmptyItemViewModelListener {
+    public class EmptyViewHolder extends BaseViewHolder implements DepenseEmptyItemViewModel.DepenseEmptyItemViewModelListener {
 
         private final ItemOpenSourceEmptyViewBinding mBinding;
 
@@ -114,7 +119,7 @@ public class OpenSourceAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         @Override
         public void onBind(int position) {
-            OpenSourceEmptyItemViewModel emptyItemViewModel = new OpenSourceEmptyItemViewModel(this);
+            DepenseEmptyItemViewModel emptyItemViewModel = new DepenseEmptyItemViewModel(this);
             mBinding.setViewModel(emptyItemViewModel);
         }
 
@@ -124,19 +129,25 @@ public class OpenSourceAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
     }
 
-    public class OpenSourceViewHolder extends BaseViewHolder implements View.OnClickListener {
+    public class DepenseViewHolder extends BaseViewHolder implements View.OnClickListener {
 
-        private final ItemOpenSourceViewBinding mBinding;
+        private final ItemDepenseViewBinding mBinding;
 
-        public OpenSourceViewHolder(ItemOpenSourceViewBinding binding) {
+        private DepenseItemViewModel mDepenseItemViewModel;
+
+
+        public DepenseViewHolder(ItemDepenseViewBinding binding) {
             super(binding.getRoot());
             this.mBinding = binding;
         }
 
         @Override
         public void onBind(int position) {
-            final OpenSourceItemViewModel mOpenSourceItemViewModel = mOpenSourceResponseList.get(position);
-            mBinding.setViewModel(mOpenSourceItemViewModel);
+            final Depense mDepense = mDepenseResponseList.get(position);
+            mDepenseItemViewModel = new DepenseItemViewModel(mDepense);
+            mBinding.setViewModel(mDepenseItemViewModel);
+
+            //mBinding.setViewModel(mDepenseItemViewModel);
 
             // Immediate Binding
             // When a variable or observable changes, the binding will be scheduled to change before
@@ -147,17 +158,17 @@ public class OpenSourceAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         @Override
         public void onClick(View view) {
-            if (mOpenSourceResponseList.get(0).projectUrl.get() != null) {
+           /* if (mDepenseResponseList.get(0).montant.get() != null) {
                 try {
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_VIEW);
                     intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                    intent.setData(Uri.parse(mOpenSourceResponseList.get(0).projectUrl.get()));
+                    intent.setData(Uri.parse(mDepenseResponseList.get(0).montant.get()));
                     itemView.getContext().startActivity(intent);
                 } catch (Exception e) {
                     AppLogger.d("url error");
                 }
-            }
+            }*/
         }
     }
 }

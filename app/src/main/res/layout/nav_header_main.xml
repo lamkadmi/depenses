@@ -22,7 +22,7 @@
 
         <variable
             name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.feed.FeedViewModel" />
+            type="com.mindorks.framework.mvvm.ui.feed.SpendingViewModel" />
 
     </data>
 

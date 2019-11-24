@@ -14,13 +14,13 @@
  *  limitations under the License
  */
 
-package com.mindorks.framework.mvvm.ui.feed.opensource;
+package com.mindorks.framework.mvvm.ui.feed.depense;
 
 /**
  * Created by lamkadmi on 17/11/19.
  */
 
-public interface OpenSourceNavigator {
+public interface DepenseNavigator {
 
     void handleError(Throwable throwable);
 }

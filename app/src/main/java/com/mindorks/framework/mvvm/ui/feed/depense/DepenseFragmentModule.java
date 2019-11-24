@@ -14,7 +14,7 @@
  *  limitations under the License
  */
 
-package com.mindorks.framework.mvvm.ui.feed.opensource;
+package com.mindorks.framework.mvvm.ui.feed.depense;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import dagger.Module;
@@ -24,16 +24,16 @@ import dagger.Provides;
  * Created by lamkadmi on 17/11/19.
  */
 @Module
-public class OpenSourceFragmentModule {
+public class DepenseFragmentModule {
 
     @Provides
-    LinearLayoutManager provideLinearLayoutManager(OpenSourceFragment fragment) {
+    LinearLayoutManager provideLinearLayoutManager(DepenseFragment fragment) {
         return new LinearLayoutManager(fragment.getActivity());
     }
 
     @Provides
-    OpenSourceAdapter provideOpenSourceAdapter() {
-        return new OpenSourceAdapter();
+    DepenseAdapter provideOpenSourceAdapter() {
+        return new DepenseAdapter();
     }
 
 }

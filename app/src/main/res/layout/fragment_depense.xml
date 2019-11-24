@@ -23,7 +23,7 @@
 
         <variable
             name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceViewModel" />
+            type="com.mindorks.framework.mvvm.ui.feed.depense.DepenseViewModel" />
 
     </data>
 
@@ -41,8 +41,8 @@
                 android:id="@+id/openSourceRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:adapter="@{viewModel.openSourceItemsLiveData}"
-                tools:listitem="@layout/item_prevevision_view" />
+                app:adapter="@{viewModel.depenseItemsLiveData}"
+                tools:listitem="@layout/item_depense_view" />
 
         </LinearLayout>
 

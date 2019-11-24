@@ -14,17 +14,20 @@
  *  limitations under the License
  */
 
-package com.mindorks.framework.mvvm.ui.feed.opensource;
+package com.mindorks.framework.mvvm.ui.feed;
 
 import dagger.Module;
-import dagger.android.ContributesAndroidInjector;
+import dagger.Provides;
 
 /**
  * Created by lamkadmi on 17/11/19.
  */
 @Module
-public abstract class OpenSourceFragmentProvider {
+public class SpendingActivityModule {
 
-    @ContributesAndroidInjector(modules = OpenSourceFragmentModule.class)
-    abstract OpenSourceFragment provideOpenSourceFragmentFactory();
+    @Provides
+    SpendingPagerAdapter provideFeedPagerAdapter(SpendingActivity activity) {
+        return new SpendingPagerAdapter(activity.getSupportFragmentManager());
+    }
+
 }

@@ -60,6 +60,7 @@
 
     <!--rating dialog-->
     <string name="prevision_titre">Ajouter une Prévision</string>
+    <string name="revenu_titre">Ajouter un Revenu</string>
     <string name="rating_message">Please let us know, how can we improve ourselves?</string>
     <string name="rating_play_store_redirect_message_line_1">Awesome! Thank you for the 5 stars.</string>
     <string name="rating_play_store_redirect_message_line_2">Please help others, in knowing some good things about this app.</string>
@@ -82,7 +83,7 @@
     <string name="accueil">Accueil</string>
 
     <!--empty state-->
-    <string name="empty_screen">We do not have anything\nhere right now.</string>
-    <string name="please_retry">Please Retry</string>
-    <string name="retry">Retry</string>
+    <string name="empty_screen">Aucune donnée à afficher.</string>
+    <string name="please_retry">Veuillez réessayer</string>
+    <string name="retry">Réessayer</string>
 </resources>

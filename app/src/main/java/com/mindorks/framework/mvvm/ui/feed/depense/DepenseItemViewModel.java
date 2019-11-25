@@ -17,6 +17,7 @@
 package com.mindorks.framework.mvvm.ui.feed.depense;
 
 import com.mindorks.framework.mvvm.data.model.db.Depense;
+import com.mindorks.framework.mvvm.data.model.others.DepenseByCategorie;
 
 import androidx.databinding.ObservableField;
 
@@ -26,25 +27,27 @@ import androidx.databinding.ObservableField;
 
 public class DepenseItemViewModel {
 
-    public final ObservableField<String> content = new ObservableField<>();
+    public final ObservableField<String> mois_anne = new ObservableField<>();
 
-    public final ObservableField<String> imageUrl = new ObservableField<>();
+    public final ObservableField<String> libelle = new ObservableField<>();
 
     public final ObservableField<String> montant = new ObservableField<>();
 
-    public final ObservableField<String> title = new ObservableField<>();
+    public final ObservableField<String> categorie = new ObservableField<>();
 
-    public DepenseItemViewModel(String imageUrl, String title, String content, String montant) {
-        this.imageUrl.set(imageUrl);
-        this.title.set(title);
-        this.content.set(content);
+
+    public DepenseItemViewModel(String mois_anne, String title, String montant, String categorie) {
+        this.mois_anne.set(mois_anne);
+        this.libelle.set(title);
+        this.categorie.set(categorie);
         this.montant.set(montant);
     }
 
-    public DepenseItemViewModel(Depense depense) {
+    public DepenseItemViewModel(DepenseByCategorie depense) {
         //this.imageUrl.set(imageUrl);
-        this.title.set(depense.getDetail());
-        this.content.set(depense.getDetail());
+        this.mois_anne.set(depense.getMois_annee());
+        this.libelle.set(depense.getLibelle());
+        this.categorie.set(depense.getCategorie());
         this.montant.set(String.valueOf(depense.getMontant()));
     }
 }

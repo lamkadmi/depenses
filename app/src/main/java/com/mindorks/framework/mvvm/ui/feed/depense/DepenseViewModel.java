@@ -19,6 +19,7 @@ package com.mindorks.framework.mvvm.ui.feed.depense;
 import com.mindorks.framework.mvvm.data.DataManager;
 import com.mindorks.framework.mvvm.data.model.api.OpenSourceResponse;
 import com.mindorks.framework.mvvm.data.model.db.Depense;
+import com.mindorks.framework.mvvm.data.model.others.DepenseByCategorie;
 import com.mindorks.framework.mvvm.ui.base.BaseViewModel;
 import com.mindorks.framework.mvvm.utils.rx.SchedulerProvider;
 
@@ -35,7 +36,7 @@ import io.reactivex.Single;
 
 public class DepenseViewModel extends BaseViewModel<DepenseNavigator> {
 
-    private final MutableLiveData<List<Depense>> depenseItemsLiveData;
+    private final MutableLiveData<List<DepenseByCategorie>> depenseItemsLiveData;
 
     public DepenseViewModel(DataManager dataManager,
                             SchedulerProvider schedulerProvider) {
@@ -78,7 +79,7 @@ public class DepenseViewModel extends BaseViewModel<DepenseNavigator> {
                 }));
     }
 
-    public LiveData<List<Depense>> getDepenseItemsLiveData() {
+    public LiveData<List<DepenseByCategorie>> getDepenseItemsLiveData() {
         return depenseItemsLiveData;
     }
 

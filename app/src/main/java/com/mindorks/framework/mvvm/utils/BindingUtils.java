@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.mindorks.framework.mvvm.data.model.db.Depense;
 import com.mindorks.framework.mvvm.data.model.db.Revenu;
+import com.mindorks.framework.mvvm.data.model.others.DepenseByCategorie;
 import com.mindorks.framework.mvvm.data.model.others.PrevisionByCategorie;
 import com.mindorks.framework.mvvm.data.model.others.QuestionCardData;
 import com.mindorks.framework.mvvm.ui.feed.dashboard.PrevisionAdapter;
@@ -76,7 +77,7 @@ public final class BindingUtils {
     }
 
     @BindingAdapter({"adapter"})
-    public static void addDepenseItems(RecyclerView recyclerView, List<Depense> depenseItems) {
+    public static void addDepenseItems(RecyclerView recyclerView, List<DepenseByCategorie> depenseItems) {
         DepenseAdapter adapter = (DepenseAdapter) recyclerView.getAdapter();
         if (adapter != null) {
             adapter.clearItems();

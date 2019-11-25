@@ -36,6 +36,8 @@ public class Depense {
 
     private Date mois;
 
+    private String mois_annee;
+
     private Float montant;
 
     private String detail;
@@ -86,5 +88,13 @@ public class Depense {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    public String getMois_annee() {
+        return mois_annee;
+    }
+
+    public void setMois_annee(String mois_annee) {
+        this.mois_annee = mois_annee;
     }
 }

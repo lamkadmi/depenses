@@ -54,14 +54,23 @@
                         style="@style/TextStyle.Title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
+                        android:text="@{viewModel.libelle}"
                         tools:text="Description" />
+
+                    <TextView
+                        style="@style/TextStyle.Comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_arrow"
+                        android:drawableTint="@color/google"
+                        android:text="@{viewModel.categorie}"
+                        tools:text="Categorie" />
 
                     <TextView
                         style="@style/TextStyle.Title.Sub"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
+                        android:text="@{viewModel.mois_anne}"
                         tools:text="Date" />
 
                 </LinearLayout>
@@ -79,8 +88,8 @@
                         android:drawableLeft="@drawable/ic_monetization"
                         android:drawableTint="@color/google"
                         android:layout_gravity="center|left"
-
-                        tools:text="Revenu" />
+                        android:text="@{viewModel.montant}"
+                        tools:text="Montant" />
                 </LinearLayout>
 
                 <LinearLayout

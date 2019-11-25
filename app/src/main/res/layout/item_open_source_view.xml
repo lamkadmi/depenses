@@ -50,7 +50,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:scaleType="fitCenter"
-                    app:imageUrl="@{viewModel.imageUrl}"
                     tools:src="@drawable/ic_rabbit" />
 
                 <TextView
@@ -61,7 +60,6 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="20dp"
-                    android:text="@{viewModel.title}"
                     tools:text="Android MVP Architecture" />
 
                 <TextView
@@ -71,7 +69,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:text="@{viewModel.content}"
                     android:textStyle="normal"
                     tools:text="This repository contains a detailed sample app that implements MVP architecture using Dagger2, GreenDao, RxJava2, FastAndroidNetworking and PlaceholderView" />
             </LinearLayout>

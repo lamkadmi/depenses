@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mindorks.framework.mvvm.data.model.db.Depense;
+import com.mindorks.framework.mvvm.data.model.others.DepenseByCategorie;
 import com.mindorks.framework.mvvm.databinding.ItemDepenseViewBinding;
 import com.mindorks.framework.mvvm.databinding.ItemOpenSourceEmptyViewBinding;
 import com.mindorks.framework.mvvm.ui.base.BaseViewHolder;
@@ -44,7 +45,7 @@ public class DepenseAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     public static final int VIEW_TYPE_NORMAL = 1;
 
-    private final List<Depense> mDepenseResponseList;
+    private final List<DepenseByCategorie> mDepenseResponseList;
 
     private DepenseAdapterListener mListener;
 
@@ -90,7 +91,7 @@ public class DepenseAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
     }
 
-    public void addItems(List<Depense> repoList) {
+    public void addItems(List<DepenseByCategorie> repoList) {
         mDepenseResponseList.addAll(repoList);
         notifyDataSetChanged();
     }
@@ -143,7 +144,7 @@ public class DepenseAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         @Override
         public void onBind(int position) {
-            final Depense mDepense = mDepenseResponseList.get(position);
+            final DepenseByCategorie mDepense = mDepenseResponseList.get(position);
             mDepenseItemViewModel = new DepenseItemViewModel(mDepense);
             mBinding.setViewModel(mDepenseItemViewModel);
 

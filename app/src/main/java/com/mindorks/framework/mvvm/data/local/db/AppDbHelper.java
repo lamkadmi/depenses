@@ -23,6 +23,7 @@ import com.mindorks.framework.mvvm.data.model.db.Prevision;
 import com.mindorks.framework.mvvm.data.model.db.Question;
 import com.mindorks.framework.mvvm.data.model.db.Revenu;
 import com.mindorks.framework.mvvm.data.model.db.User;
+import com.mindorks.framework.mvvm.data.model.others.DepenseByCategorie;
 import com.mindorks.framework.mvvm.data.model.others.PrevisionByCategorie;
 
 import java.util.List;
@@ -101,7 +102,7 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
-    public Observable<List<Depense>> getDepenses() {
+    public Observable<List<DepenseByCategorie>> getDepenses() {
         return mAppDatabase.depenseDao().loadAll().toObservable();
     }
 

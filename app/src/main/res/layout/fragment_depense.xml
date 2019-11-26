@@ -31,20 +31,101 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
+
+            <!-- Les boutons Filtre et Tri -->
+            <LinearLayout
+                android:id="@+id/fragment_liste_entete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/fragment_liste_bouton_filtre"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_filter_list_black_24dp"
+                        android:contentDescription="TOTO" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="FILTRE"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/separator" />
+
+                <LinearLayout
+                    android:id="@+id/fragment_liste_bouton_tri"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_sort_black_24dp"/>
+
+                    <TextView
+                        android:id="@+id/label_tri"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TRI"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/separator"
+                android:layout_below="@+id/fragment_liste_entete"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/separator"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/openSourceRecyclerView"
+                android:layout_below="@+id/separator"
                 android:layout_width="match_parent"
+                android:scrollbars="vertical"
                 android:layout_height="match_parent"
                 app:adapter="@{viewModel.depenseItemsLiveData}"
                 tools:listitem="@layout/item_depense_view" />
 
-        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/conteneur_btn_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical">
+
+               
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/disabled_material_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:text="Ajouter une dépense"/>
+
+            </LinearLayout>
+        </RelativeLayout>
 
         <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/address_looking_up"
@@ -53,6 +134,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
+
+
+
+
+
     </FrameLayout>
 
 </layout>

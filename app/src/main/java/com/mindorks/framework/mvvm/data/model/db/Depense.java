@@ -42,6 +42,14 @@ public class Depense {
 
     private String detail;
 
+    public Depense(Long categorieId, Long previsionId, String mois_annee, Float montant, String detail) {
+        this.categorieId = categorieId;
+        this.previsionId = previsionId;
+        this.mois_annee = mois_annee;
+        this.montant = montant;
+        this.detail = detail;
+    }
+
     public Long getId() {
         return id;
     }

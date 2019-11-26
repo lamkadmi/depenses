@@ -7,6 +7,7 @@ import com.mindorks.framework.mvvm.ui.about.AboutViewModel;
 import com.mindorks.framework.mvvm.ui.feed.SpendingViewModel;
 import com.mindorks.framework.mvvm.ui.feed.dashboard.DashboardViewModel;
 import com.mindorks.framework.mvvm.ui.feed.depense.DepenseViewModel;
+import com.mindorks.framework.mvvm.ui.feed.depense.dialog.DepenseDialogViewModel;
 import com.mindorks.framework.mvvm.ui.feed.revenu.RevenuViewModel;
 import com.mindorks.framework.mvvm.ui.feed.revenu.dialog.RevenuDialogViewModel;
 import com.mindorks.framework.mvvm.ui.login.LoginViewModel;
@@ -60,6 +61,10 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
     else if (modelClass.isAssignableFrom(RevenuDialogViewModel.class)) {
       //noinspection unchecked
       return (T) new RevenuDialogViewModel(dataManager,schedulerProvider);
+    }
+    else if (modelClass.isAssignableFrom(DepenseDialogViewModel.class)) {
+      //noinspection unchecked
+      return (T) new DepenseDialogViewModel(dataManager,schedulerProvider);
     }
     else if (modelClass.isAssignableFrom(DepenseViewModel.class)) {
       //noinspection unchecked

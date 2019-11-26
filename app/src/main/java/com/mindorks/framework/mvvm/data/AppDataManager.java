@@ -284,6 +284,11 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<Boolean> saveDepense(Depense depense) {
+        return mDbHelper.saveDepense(depense);
+    }
+
+    @Override
     public Observable<Boolean> seedDatabaseOptions() {
         return mDbHelper.isOptionEmpty()
                 .concatMap(isEmpty -> {

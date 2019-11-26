@@ -62,6 +62,8 @@ public interface DbHelper {
 
     Observable<Boolean> saveRevenu(Revenu revenu);
 
+    Observable<Boolean> saveDepense(Depense depense);
+
     Observable<List<PrevisionByCategorie>> getPrevisions();
 
     Observable<List<Categorie>> getCategories();

@@ -83,7 +83,6 @@ public class PrevisionDialog extends BaseDialog implements PrevisionDialogNaviga
 
         mDialogPrevisionBinding.setViewModel(mPrevisionViewModel);
         mPrevisionViewModel.setNavigator(this);
-        subscribeToLiveData();
         setUp();
         return view;
     }
@@ -106,6 +105,7 @@ public class PrevisionDialog extends BaseDialog implements PrevisionDialogNaviga
     }
 
     private void setUp(){
+        subscribeToLiveData();
         mDialogPrevisionBinding.champDateValeur.setOnClickListener(view -> new RackMonthPicker(getContext())
                 .setLocale(Locale.ENGLISH)
                 .setPositiveButton((month, startDate, endDate, year, monthLabel) -> {

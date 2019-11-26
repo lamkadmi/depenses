@@ -21,6 +21,7 @@ import com.mindorks.framework.mvvm.ui.feed.SpendingActivity;
 import com.mindorks.framework.mvvm.ui.feed.SpendingActivityModule;
 import com.mindorks.framework.mvvm.ui.feed.dashboard.DashboardFragmentProvider;
 import com.mindorks.framework.mvvm.ui.feed.depense.DepenseFragmentProvider;
+import com.mindorks.framework.mvvm.ui.feed.depense.dialog.DepenseDialogProvider;
 import com.mindorks.framework.mvvm.ui.feed.revenu.RevenuFragmentProvider;
 import com.mindorks.framework.mvvm.ui.feed.revenu.dialog.RevenuDialogProvider;
 import com.mindorks.framework.mvvm.ui.login.LoginActivity;
@@ -42,6 +43,7 @@ public abstract class ActivityBuilder {
             SpendingActivityModule.class,
             DashboardFragmentProvider.class,
             PrevisionDialogProvider.class,
+            DepenseDialogProvider.class,
             RevenuDialogProvider.class,
             DepenseFragmentProvider.class,
             RevenuFragmentProvider.class})

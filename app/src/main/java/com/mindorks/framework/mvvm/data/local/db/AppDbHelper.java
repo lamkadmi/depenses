@@ -166,4 +166,12 @@ public class AppDbHelper implements DbHelper {
             return true;
         });
     }
+
+    @Override
+    public Observable<Boolean> saveDepense(final Depense depense) {
+        return Observable.fromCallable(() -> {
+            mAppDatabase.depenseDao().insert(depense);
+            return true;
+        });
+    }
 }

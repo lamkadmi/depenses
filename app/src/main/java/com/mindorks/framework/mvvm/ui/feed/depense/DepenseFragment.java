@@ -25,6 +25,10 @@ import com.mindorks.framework.mvvm.R;
 import com.mindorks.framework.mvvm.ViewModelProviderFactory;
 import com.mindorks.framework.mvvm.databinding.FragmentDepenseBinding;
 import com.mindorks.framework.mvvm.ui.base.BaseFragment;
+import com.mindorks.framework.mvvm.ui.feed.depense.dialog.DepenseDialog;
+import com.mindorks.framework.mvvm.ui.feed.depense.dialog.DepenseDialogCallback;
+import com.mindorks.framework.mvvm.ui.main.rating.PrevisionDialog;
+import com.mindorks.framework.mvvm.ui.main.rating.PrevisionDialogCallback;
 
 import javax.inject.Inject;
 
@@ -40,7 +44,7 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 
 public class DepenseFragment extends BaseFragment<FragmentDepenseBinding, DepenseViewModel>
-        implements DepenseNavigator, DepenseAdapter.DepenseAdapterListener {
+        implements DepenseNavigator, DepenseAdapter.DepenseAdapterListener,DepenseDialogCallback {
 
     FragmentDepenseBinding mFragmentDepenseBinding;
     @Inject
@@ -103,5 +107,16 @@ public class DepenseFragment extends BaseFragment<FragmentDepenseBinding, Depens
         mFragmentDepenseBinding.openSourceRecyclerView.setLayoutManager(mLayoutManager);
         mFragmentDepenseBinding.openSourceRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mFragmentDepenseBinding.openSourceRecyclerView.setAdapter(mDepenseAdapter);
+        mFragmentDepenseBinding.addDepense.setOnClickListener(v -> {
+            DepenseDialog dialog =  DepenseDialog.newInstance();
+            dialog.setListener(this);
+            dialog.show(getFragmentManager());
+        });
+
+    }
+
+    @Override
+    public void updateListeDepenses() {
+        mDepenseViewModel.fetchDepenses();
     }
 }

@@ -60,6 +60,7 @@
 
     <!--rating dialog-->
     <string name="prevision_titre">Ajouter une Prévision</string>
+    <string name="depense_titre">Ajouter une Dépense</string>
     <string name="revenu_titre">Ajouter un Revenu</string>
     <string name="rating_message">Please let us know, how can we improve ourselves?</string>
     <string name="rating_play_store_redirect_message_line_1">Awesome! Thank you for the 5 stars.</string>

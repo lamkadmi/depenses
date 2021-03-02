@@ -20,15 +20,15 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.mindorks.framework.mvvm.data.model.db.Depense;
+import com.mindorks.framework.mvvm.data.model.db.Categorie;
 import com.mindorks.framework.mvvm.data.model.db.Revenu;
 import com.mindorks.framework.mvvm.data.model.others.DepenseByCategorie;
 import com.mindorks.framework.mvvm.data.model.others.PrevisionByCategorie;
 import com.mindorks.framework.mvvm.data.model.others.QuestionCardData;
-import com.mindorks.framework.mvvm.ui.feed.dashboard.PrevisionAdapter;
-import com.mindorks.framework.mvvm.ui.feed.depense.DepenseAdapter;
-import com.mindorks.framework.mvvm.ui.feed.depense.DepenseItemViewModel;
-import com.mindorks.framework.mvvm.ui.feed.revenu.RevenuAdapter;
+import com.mindorks.framework.mvvm.ui.categorie.CategorieAdapter;
+import com.mindorks.framework.mvvm.ui.home.dashboard.PrevisionAdapter;
+import com.mindorks.framework.mvvm.ui.home.depense.DepenseAdapter;
+import com.mindorks.framework.mvvm.ui.home.revenu.RevenuAdapter;
 import com.mindorks.framework.mvvm.ui.main.MainViewModel;
 import com.mindorks.framework.mvvm.ui.main.ObjectifAdapter;
 import com.mindorks.framework.mvvm.ui.main.QuestionCard;
@@ -50,11 +50,30 @@ public final class BindingUtils {
     }
 
     @BindingAdapter({"adapter"})
-    public static void addBlogItems(RecyclerView recyclerView, List<PrevisionByCategorie> blogs) {
+    public static void addBlogItems(RecyclerView recyclerView, List<PrevisionByCategorie> previsions) {
         PrevisionAdapter adapter = (PrevisionAdapter) recyclerView.getAdapter();
         if (adapter != null) {
             adapter.clearItems();
-            adapter.addItems(blogs);
+            adapter.addItems(previsions);
+        }
+    }
+
+    @BindingAdapter({"adapter"})
+    public static void addCategorieItems(RecyclerView recyclerView, List<Categorie> categories) {
+        CategorieAdapter adapter = (CategorieAdapter) recyclerView.getAdapter();
+        if (adapter != null) {
+            adapter.clearItems();
+            adapter.addItems(categories);
+        }
+    }
+
+
+    @BindingAdapter({"adapter"})
+    public static void addDepenseItems(RecyclerView recyclerView, List<DepenseByCategorie> depenseItems) {
+        DepenseAdapter adapter = (DepenseAdapter) recyclerView.getAdapter();
+        if (adapter != null) {
+            adapter.clearItems();
+            adapter.addItems(depenseItems);
         }
     }
 
@@ -75,25 +94,6 @@ public final class BindingUtils {
             adapter.addItems(objectifs);
         }
     }
-
-    @BindingAdapter({"adapter"})
-    public static void addDepenseItems(RecyclerView recyclerView, List<DepenseByCategorie> depenseItems) {
-        DepenseAdapter adapter = (DepenseAdapter) recyclerView.getAdapter();
-        if (adapter != null) {
-            adapter.clearItems();
-            adapter.addItems(depenseItems);
-        }
-    }
-
-  /*  @BindingAdapter({"adapter"})
-    public static void addDepenseItems(RecyclerView recyclerView, List<DepenseItemViewModel> openSourceItems) {
-        DepenseAdapter adapter = (DepenseAdapter) recyclerView.getAdapter();
-        if (adapter != null) {
-            adapter.clearItems();
-            adapter.addItems(openSourceItems);
-        }
-    }*/
-
 
 
     @BindingAdapter({"adapter", "action"})

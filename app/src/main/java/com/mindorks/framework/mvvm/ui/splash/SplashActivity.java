@@ -25,7 +25,7 @@ import com.mindorks.framework.mvvm.R;
 import com.mindorks.framework.mvvm.ViewModelProviderFactory;
 import com.mindorks.framework.mvvm.databinding.ActivitySplashBinding;
 import com.mindorks.framework.mvvm.ui.base.BaseActivity;
-import com.mindorks.framework.mvvm.ui.feed.SpendingActivity;
+import com.mindorks.framework.mvvm.ui.home.SpendingActivity;
 import com.mindorks.framework.mvvm.ui.login.LoginActivity;
 import com.mindorks.framework.mvvm.ui.main.MainActivity;
 import javax.inject.Inject;
@@ -82,6 +82,6 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSplashViewModel.setNavigator(this);
-        mSplashViewModel.startSeeding();
+        mSplashViewModel.startDashboard();
     }
 }

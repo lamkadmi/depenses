@@ -18,13 +18,11 @@
 
 buildscript {
     repositories {
-        maven { url "http://librepos.ermont.infra.sncf.fr:8081/nexus/content/groups/isi_global" }
-        maven { url "http://librepos.ermont.infra.sncf.fr:8081/nexus/content/groups/isi_public" }
-        maven { url 'http://librepos.ermont.infra.sncf.fr:8081/nexus/content/repositories/android-support-libraries/android/arch/persistence' }
-        maven { url 'https://repository-achartengine.forge.cloudbees.com/snapshot' }
+        google()
+        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:4.0.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -33,11 +31,9 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url "http://librepos.ermont.infra.sncf.fr:8081/nexus/content/groups/isi_global" }
-        maven { url "http://librepos.ermont.infra.sncf.fr:8081/nexus/content/groups/isi_public" }
-        maven { url 'http://librepos.ermont.infra.sncf.fr:8081/nexus/content/repositories/android-support-libraries/android/arch/persistence' }
-        maven { url 'https://repository-achartengine.forge.cloudbees.com/snapshot' }
-
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 
@@ -52,19 +48,19 @@ ext {
     targetSdkVersion = 28
     compileSdkVersion = 28
     buildToolsVersion = '28.0.3'
-    constraintLayoutVersion = '1.1.3'
-    recyclerViewVersion = '1.0.0'
+    constraintLayoutVersion = '2.0.4'
+    recyclerViewVersion = '1.1.0'
     cardViewVersion = '1.0.0'
 
     // App dependencies
-    supportLibraryVersion = '1.0.2'
-    materialVersion = '1.0.0'
-    vectorDrawableVersion = '1.0.1'
-    animatedVectorDrawableVersion = '1.0.0'
+    supportLibraryVersion = '1.2.0'
+    materialVersion = '1.0.0-alpha1'
+    vectorDrawableVersion = '1.1.0'
+    animatedVectorDrawableVersion = '1.1.0'
     gsonVersion = '2.8.2'
     calligraphyVersion = '2.2.0'
     glideVersion = '3.7.0'
-    roomDatabaseVersion = '2.0.0'
+    roomDatabaseVersion = '2.2.6'
     rx2FastAndroidNetworking = '1.0.1'
 
     dagger2Version = '2.16'

@@ -17,17 +17,20 @@
 package com.mindorks.framework.mvvm.di.builder;
 
 import com.mindorks.framework.mvvm.ui.about.AboutFragmentProvider;
-import com.mindorks.framework.mvvm.ui.feed.SpendingActivity;
-import com.mindorks.framework.mvvm.ui.feed.SpendingActivityModule;
-import com.mindorks.framework.mvvm.ui.feed.dashboard.DashboardFragmentProvider;
-import com.mindorks.framework.mvvm.ui.feed.depense.DepenseFragmentProvider;
-import com.mindorks.framework.mvvm.ui.feed.depense.dialog.DepenseDialogProvider;
-import com.mindorks.framework.mvvm.ui.feed.revenu.RevenuFragmentProvider;
-import com.mindorks.framework.mvvm.ui.feed.revenu.dialog.RevenuDialogProvider;
+import com.mindorks.framework.mvvm.ui.categorie.CategorieActivity;
+import com.mindorks.framework.mvvm.ui.categorie.CategorieActivityModule;
+import com.mindorks.framework.mvvm.ui.categorie.dialog.CategorieDialogProvider;
+import com.mindorks.framework.mvvm.ui.home.SpendingActivity;
+import com.mindorks.framework.mvvm.ui.home.SpendingActivityModule;
+import com.mindorks.framework.mvvm.ui.home.dashboard.DashboardFragmentProvider;
+import com.mindorks.framework.mvvm.ui.home.dashboard.dialog.PrevisionDialogProvider;
+import com.mindorks.framework.mvvm.ui.home.depense.DepenseFragmentProvider;
+import com.mindorks.framework.mvvm.ui.home.depense.dialog.DepenseDialogProvider;
+import com.mindorks.framework.mvvm.ui.home.revenu.RevenuFragmentProvider;
+import com.mindorks.framework.mvvm.ui.home.revenu.dialog.RevenuDialogProvider;
 import com.mindorks.framework.mvvm.ui.login.LoginActivity;
 import com.mindorks.framework.mvvm.ui.main.MainActivity;
 import com.mindorks.framework.mvvm.ui.main.MainActivityModule;
-import com.mindorks.framework.mvvm.ui.main.rating.PrevisionDialogProvider;
 import com.mindorks.framework.mvvm.ui.splash.SplashActivity;
 
 import dagger.Module;
@@ -46,8 +49,14 @@ public abstract class ActivityBuilder {
             DepenseDialogProvider.class,
             RevenuDialogProvider.class,
             DepenseFragmentProvider.class,
+            CategorieDialogProvider.class,
             RevenuFragmentProvider.class})
     abstract SpendingActivity bindSpendingActivity();
+
+    @ContributesAndroidInjector(modules = {
+            CategorieActivityModule.class,
+            CategorieDialogProvider.class})
+    abstract CategorieActivity bindCategorieActivity();
 
     @ContributesAndroidInjector
     abstract LoginActivity bindLoginActivity();

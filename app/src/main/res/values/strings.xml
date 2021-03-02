@@ -23,7 +23,6 @@
     <string name="copy">Copy</string>
     <string name="paste">Paste</string>
     <string name="delete">Delete</string>
-    <string name="share">Share</string>
 
     <!--Drawer-->
     <string name="open_drawer">Drawer Open</string>
@@ -60,6 +59,7 @@
 
     <!--rating dialog-->
     <string name="prevision_titre">Ajouter une Prévision</string>
+    <string name="categorie_titre">Ajouter une Categorie</string>
     <string name="depense_titre">Ajouter une Dépense</string>
     <string name="revenu_titre">Ajouter un Revenu</string>
     <string name="rating_message">Please let us know, how can we improve ourselves?</string>
@@ -77,11 +77,11 @@
     <string name="later">Fermer</string>
     <string name="submit">Sauvegader</string>
 
-    <!--feed-->
+    <!--Menus-->
     <string name="title">Dépense</string>
     <string name="detail">Mes dépenses</string>
     <string name="revenu">Mes revenus</string>
-    <string name="accueil">Accueil</string>
+    <string name="accueil">Tableau de bord</string>
 
     <!--empty state-->
     <string name="empty_screen">Aucune donnée à afficher.</string>

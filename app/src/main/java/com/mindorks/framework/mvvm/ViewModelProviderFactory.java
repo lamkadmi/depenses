@@ -4,15 +4,17 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import com.mindorks.framework.mvvm.data.DataManager;
 import com.mindorks.framework.mvvm.ui.about.AboutViewModel;
-import com.mindorks.framework.mvvm.ui.feed.SpendingViewModel;
-import com.mindorks.framework.mvvm.ui.feed.dashboard.DashboardViewModel;
-import com.mindorks.framework.mvvm.ui.feed.depense.DepenseViewModel;
-import com.mindorks.framework.mvvm.ui.feed.depense.dialog.DepenseDialogViewModel;
-import com.mindorks.framework.mvvm.ui.feed.revenu.RevenuViewModel;
-import com.mindorks.framework.mvvm.ui.feed.revenu.dialog.RevenuDialogViewModel;
+import com.mindorks.framework.mvvm.ui.categorie.CategorieViewModel;
+import com.mindorks.framework.mvvm.ui.home.SpendingViewModel;
+import com.mindorks.framework.mvvm.ui.categorie.dialog.CategorieDialogViewModel;
+import com.mindorks.framework.mvvm.ui.home.dashboard.DashboardViewModel;
+import com.mindorks.framework.mvvm.ui.home.depense.DepenseViewModel;
+import com.mindorks.framework.mvvm.ui.home.depense.dialog.DepenseDialogViewModel;
+import com.mindorks.framework.mvvm.ui.home.revenu.RevenuViewModel;
+import com.mindorks.framework.mvvm.ui.home.revenu.dialog.RevenuDialogViewModel;
 import com.mindorks.framework.mvvm.ui.login.LoginViewModel;
 import com.mindorks.framework.mvvm.ui.main.MainViewModel;
-import com.mindorks.framework.mvvm.ui.main.rating.PrevisionDialogViewModel;
+import com.mindorks.framework.mvvm.ui.home.dashboard.dialog.PrevisionDialogViewModel;
 import com.mindorks.framework.mvvm.ui.splash.SplashViewModel;
 import com.mindorks.framework.mvvm.utils.rx.SchedulerProvider;
 import javax.inject.Inject;
@@ -77,6 +79,14 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
     else if (modelClass.isAssignableFrom(RevenuViewModel.class)) {
       //noinspection unchecked
       return (T) new RevenuViewModel(dataManager,schedulerProvider);
+    }
+    else if (modelClass.isAssignableFrom(CategorieDialogViewModel.class)) {
+      //noinspection unchecked
+      return (T) new CategorieDialogViewModel(dataManager,schedulerProvider);
+    }
+    else if (modelClass.isAssignableFrom(CategorieViewModel.class)) {
+      //noinspection unchecked
+      return (T) new CategorieViewModel(dataManager,schedulerProvider);
     }
     throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
   }

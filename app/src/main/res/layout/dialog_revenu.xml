@@ -21,7 +21,7 @@
 
         <variable
             name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.feed.revenu.dialog.RevenuDialogViewModel" />
+            type="com.mindorks.framework.mvvm.ui.home.revenu.dialog.RevenuDialogViewModel" />
 
     </data>
 

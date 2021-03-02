@@ -174,7 +174,6 @@
     <style name="ChampDateEtHeure" parent="@android:style/TextAppearance">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:focusable">false</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:hint">format_date_heure</item>
         <item name="android:textSize">15sp</item>

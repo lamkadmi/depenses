@@ -26,9 +26,9 @@
             <!--android:icon="@drawable/ic_star"-->
             <!--android:title="@string/rate_us" />-->
         <item
-            android:id="@+id/navItemFeed"
+            android:id="@+id/navItemCategories"
             android:checked="true"
-            android:icon="@drawable/ic_rss_symbol"
+            android:icon="@drawable/ic_categories"
             android:title="@string/categories" />
         <item
             android:id="@+id/navItemLogout"

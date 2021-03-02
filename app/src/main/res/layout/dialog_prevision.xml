@@ -21,7 +21,7 @@
 
         <variable
             name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.main.rating.PrevisionDialogViewModel" />
+            type="com.mindorks.framework.mvvm.ui.home.dashboard.dialog.PrevisionDialogViewModel" />
 
     </data>
 
@@ -66,11 +66,11 @@
 
                 <EditText
                     android:id="@+id/champ_date_valeur"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="Saisir une date"
                     android:layout_gravity="center"
-                    android:text="@{viewModel.date}"
+                    android:text="@={viewModel.date}"
                     android:drawableEnd="@drawable/ic_date"
                     android:gravity="center"/>
 

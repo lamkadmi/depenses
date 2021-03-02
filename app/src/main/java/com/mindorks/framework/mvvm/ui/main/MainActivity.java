@@ -53,7 +53,8 @@ import com.mindorks.framework.mvvm.databinding.ActivityMainBinding;
 import com.mindorks.framework.mvvm.databinding.NavHeaderMainBinding;
 import com.mindorks.framework.mvvm.ui.about.AboutFragment;
 import com.mindorks.framework.mvvm.ui.base.BaseActivity;
-import com.mindorks.framework.mvvm.ui.feed.SpendingActivity;
+import com.mindorks.framework.mvvm.ui.categorie.CategorieActivity;
+import com.mindorks.framework.mvvm.ui.home.SpendingActivity;
 import com.mindorks.framework.mvvm.ui.login.LoginActivity;
 import com.mindorks.framework.mvvm.utils.ScreenUtils;
 import com.mindorks.placeholderview.SwipeDecor;
@@ -164,13 +165,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
             ((Animatable) drawable).start();
         }
         switch (item.getItemId()) {
-            case R.id.action_cut:
-                return true;
-            case R.id.action_copy:
-                return true;
-            case R.id.action_share:
-                return true;
-            case R.id.action_delete:
+            case R.id.action_home:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -324,11 +319,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                         case R.id.navItemAbout:
                             showAboutFragment();
                             return true;
-//                        case R.id.navItemRateUs:
-//                            PrevisionDialog.newInstance().show(getSupportFragmentManager());
-//                            return true;
-                        case R.id.navItemFeed:
-                            startActivity(SpendingActivity.newIntent(MainActivity.this));
+                        case R.id.navItemCategories:
+                            startActivity(CategorieActivity.newIntent(this));
                             return true;
                         case R.id.navItemLogout:
                             mMainViewModel.logout();

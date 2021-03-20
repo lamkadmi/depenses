@@ -51,8 +51,6 @@ public class SpendingPagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return DashboardFragment.newInstance();
             case 1:
-                return DepenseFragment.newInstance();
-            case 2:
                 return RevenuFragment.newInstance();
             default:
                 return null;

@@ -1,19 +1,21 @@
 package com.mindorks.framework.mvvm.ui.home.depense.dialog;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import com.kal.rackmonthpicker.RackMonthPicker;
 import com.mindorks.framework.mvvm.R;
 import com.mindorks.framework.mvvm.ViewModelProviderFactory;
 import com.mindorks.framework.mvvm.data.model.db.Categorie;
 import com.mindorks.framework.mvvm.databinding.DialogDepenseBinding;
 import com.mindorks.framework.mvvm.ui.base.BaseDialog;
+import com.mindorks.framework.mvvm.utils.AppUtils;
 
-import java.util.Locale;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 import javax.inject.Inject;
 
@@ -56,7 +58,7 @@ public class DepenseDialog extends BaseDialog implements DepenseDialogNavigator 
 
         AndroidSupportInjection.inject(this);
 
-        mDepenseDialogViewModel = ViewModelProviders.of(this,factory).get(DepenseDialogViewModel.class);
+        mDepenseDialogViewModel = ViewModelProviders.of(this, factory).get(DepenseDialogViewModel.class);
 
         mDepenseDialogBinding.setViewModel(mDepenseDialogViewModel);
         mDepenseDialogViewModel.setNavigator(this);
@@ -66,22 +68,23 @@ public class DepenseDialog extends BaseDialog implements DepenseDialogNavigator 
         return view;
     }
 
-    private void setUp(){
+    private void setUp() {
         subscribeToLiveData();
-        mDepenseDialogBinding.champDateValeur.setOnClickListener(view -> new RackMonthPicker(getContext())
-                .setLocale(Locale.FRANCE)
-                .setPositiveButton((month, startDate, endDate, year, monthLabel) -> {
-                    String date = month+"/"+year;
-                    mDepenseDialogBinding.champDateValeur.setText(date);
-                })
-                .setNegativeButton(dialog -> {
-                    dialog.dismiss();
-                }).show());
+        mDepenseDialogBinding.champDateValeur.setOnClickListener(v -> {
+            DatePickerDialog.OnDateSetListener listener = (v1, year, monthOfYear, dayOfMonth) -> {
+                String data = AppUtils.getDate(year, monthOfYear, dayOfMonth);
+                mDepenseDialogBinding.champDateValeur.setText(data);
+            };
+            Calendar cal = Calendar.getInstance(TimeZone.getDefault());
+            DatePickerDialog dpDialog = new DatePickerDialog(this.getContext(), listener, cal.get(1), cal.get(2), cal.get(5));
+            dpDialog.show();
+
+        });
     }
 
     private void subscribeToLiveData() {
         mDepenseDialogViewModel.getCategorieListLiveData().observe(this, mDatas -> {
-            ArrayAdapter<Categorie> dataAdapter = new ArrayAdapter<>(this.getContext(), R.layout.support_simple_spinner_dropdown_item,mDatas);
+            ArrayAdapter<Categorie> dataAdapter = new ArrayAdapter<>(this.getContext(), R.layout.support_simple_spinner_dropdown_item, mDatas);
             mDepenseDialogBinding.categorie.setAdapter(dataAdapter);
         });
     }

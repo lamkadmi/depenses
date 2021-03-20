@@ -65,8 +65,8 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
-    public Observable<List<PrevisionByCategorie>> getPrevisions() {
-        return mAppDatabase.previsionDao().loadPrevisionsByCategories()
+    public Observable<List<DepenseByCategorie>> getDepenseByCategories() {
+        return mAppDatabase.depenseDao().loadDepensesByCategories()
                 .toObservable();
     }
 

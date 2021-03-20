@@ -7,6 +7,7 @@ import com.mindorks.framework.mvvm.data.DataManager;
 import com.mindorks.framework.mvvm.data.model.db.Categorie;
 import com.mindorks.framework.mvvm.data.model.db.Depense;
 import com.mindorks.framework.mvvm.ui.base.BaseViewModel;
+import com.mindorks.framework.mvvm.utils.AppUtils;
 import com.mindorks.framework.mvvm.utils.rx.SchedulerProvider;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import androidx.lifecycle.MutableLiveData;
 
 public class DepenseDialogViewModel extends BaseViewModel<DepenseDialogNavigator> {
 
-    private final ObservableField<String> date = new ObservableField<>();
+    private final ObservableField<String> depenseDate = new ObservableField<>();
 
     private final ObservableField<String> description = new ObservableField<>();
 
@@ -31,27 +32,6 @@ public class DepenseDialogViewModel extends BaseViewModel<DepenseDialogNavigator
         super(dataManager, schedulerProvider);
         categorieListLiveData = new MutableLiveData<>();
         fetchCategories();
-        date.set("1/2019");
-    }
-
-    public ObservableField<String> getDate() {
-        return date;
-    }
-
-    public ObservableField<String> getDescription() {
-        return description;
-    }
-
-    public ObservableField<String> getMontant() {
-        return montant;
-    }
-
-    public ObservableField<Categorie> getCategorie() {
-        return categorie;
-    }
-
-    public MutableLiveData<List<Categorie>> getCategorieListLiveData() {
-        return categorieListLiveData;
     }
 
     public void onLaterClick() {
@@ -62,14 +42,14 @@ public class DepenseDialogViewModel extends BaseViewModel<DepenseDialogNavigator
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
                 .saveDepense(new Depense(getCategorie().get().getId(),
-                        getCategorie().get().getId(),
-                        getDate().get(),
+                        AppUtils.getDateFromString(getDepenseDate().get()),
                         Float.valueOf(getMontant().get()),
                         getDescription().get()))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
                     if (response != null) {
+                        fetchCategories();
                         getNavigator().dismissDialog();
                     }
                     setIsLoading(false);
@@ -96,7 +76,7 @@ public class DepenseDialogViewModel extends BaseViewModel<DepenseDialogNavigator
                 }));
     }
 
-    public void onSelectItem(AdapterView<?> parent, View view, int pos, long id){
+    public void onSelectItem(AdapterView<?> parent, View view, int pos, long id) {
         categorie.set((Categorie) parent.getSelectedItem());
         //pos                                 get selected item position
         //view.getText()                      get lable of selected item
@@ -105,6 +85,27 @@ public class DepenseDialogViewModel extends BaseViewModel<DepenseDialogNavigator
         //parent.getCount()                   get item count
         //parent.getSelectedItem()            get selected item
         //and other...
+    }
+
+
+    public ObservableField<String> getDepenseDate() {
+        return depenseDate;
+    }
+
+    public ObservableField<String> getDescription() {
+        return description;
+    }
+
+    public ObservableField<String> getMontant() {
+        return montant;
+    }
+
+    public ObservableField<Categorie> getCategorie() {
+        return categorie;
+    }
+
+    public MutableLiveData<List<Categorie>> getCategorieListLiveData() {
+        return categorieListLiveData;
     }
 
 

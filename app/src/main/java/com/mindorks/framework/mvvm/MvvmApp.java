@@ -18,14 +18,17 @@ package com.mindorks.framework.mvvm;
 
 import android.app.Activity;
 import android.app.Application;
+
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor;
 import com.facebook.stetho.Stetho;
 import com.mindorks.framework.mvvm.di.component.DaggerAppComponent;
 import com.mindorks.framework.mvvm.utils.AppLogger;
+
+import javax.inject.Inject;
+
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
-import javax.inject.Inject;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**

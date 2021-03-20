@@ -214,8 +214,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<List<PrevisionByCategorie>> getPrevisions() {
-        return mDbHelper.getPrevisions();
+    public Observable<List<DepenseByCategorie>> getDepenseByCategories() {
+        return mDbHelper.getDepenseByCategories();
     }
 
     @Override

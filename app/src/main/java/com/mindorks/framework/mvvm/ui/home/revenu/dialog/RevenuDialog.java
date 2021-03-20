@@ -1,14 +1,27 @@
 package com.mindorks.framework.mvvm.ui.home.revenu.dialog;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.Toast;
 
+import com.kal.rackmonthpicker.RackMonthPicker;
 import com.mindorks.framework.mvvm.R;
 import com.mindorks.framework.mvvm.ViewModelProviderFactory;
 import com.mindorks.framework.mvvm.databinding.DialogRevenuBinding;
 import com.mindorks.framework.mvvm.ui.base.BaseDialog;
+import com.mindorks.framework.mvvm.utils.AppUtils;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.inject.Inject;
 
@@ -51,10 +64,32 @@ public class RevenuDialog extends BaseDialog implements RevenuDialogNavigator {
 
         AndroidSupportInjection.inject(this);
 
-        mRevenuDialogViewModel = ViewModelProviders.of(this,factory).get(RevenuDialogViewModel.class);
+        mRevenuDialogViewModel = ViewModelProviders.of(this, factory).get(RevenuDialogViewModel.class);
 
         mRevenuDialogBinding.setViewModel(mRevenuDialogViewModel);
         mRevenuDialogViewModel.setNavigator(this);
+
+/*       mRevenuDialogBinding.revenuDate.setOnClickListener(pView -> new RackMonthPicker(getContext())
+                .setLocale(Locale.FRANCE)
+                .setPositiveButton((month, startDate, endDate, year, monthLabel) -> {
+                    String date = month + "/" + year;
+                    mRevenuDialogBinding.revenuDate.setText(date);
+                    // mRevenuDialogViewModel.sfetchPrevisionsByDate(date);
+                })
+                .setNegativeButton(dialog -> {
+                    dialog.dismiss();
+                }).show());*/
+
+        mRevenuDialogBinding.revenuDate.setOnClickListener(v -> {
+            DatePickerDialog.OnDateSetListener listener = (v1, year, monthOfYear, dayOfMonth) -> {
+                String data = AppUtils.getDate(year, monthOfYear, dayOfMonth);
+                mRevenuDialogBinding.revenuDate.setText(data);
+            };
+            Calendar cal = Calendar.getInstance(TimeZone.getDefault());
+            DatePickerDialog dpDialog = new DatePickerDialog(this.getContext(), listener, cal.get(1), cal.get(2), cal.get(5));
+            dpDialog.show();
+
+        });
 
         return view;
     }

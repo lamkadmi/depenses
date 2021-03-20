@@ -25,7 +25,6 @@ import com.mindorks.framework.mvvm.R;
 import com.mindorks.framework.mvvm.ViewModelProviderFactory;
 import com.mindorks.framework.mvvm.databinding.DialogCategorieBinding;
 import com.mindorks.framework.mvvm.ui.base.BaseDialog;
-import com.mindorks.framework.mvvm.ui.home.dashboard.dialog.PrevisionDialogNavigator;
 
 import javax.inject.Inject;
 
@@ -40,7 +39,7 @@ import dagger.android.support.AndroidSupportInjection;
  * Created by lamkadmi on 17/11/19.
  */
 
-public class CategorieDialog extends BaseDialog implements PrevisionDialogNavigator {
+public class CategorieDialog extends BaseDialog implements CategorieDialogNavigator {
 
     private static final String TAG = CategorieDialog.class.getSimpleName();
 

@@ -7,8 +7,10 @@ import com.kal.rackmonthpicker.RackMonthPicker;
 import com.mindorks.framework.mvvm.BR;
 import com.mindorks.framework.mvvm.R;
 import com.mindorks.framework.mvvm.ViewModelProviderFactory;
+import com.mindorks.framework.mvvm.databinding.ActivitySpendingBinding;
 import com.mindorks.framework.mvvm.databinding.FragmentRevenuBinding;
 import com.mindorks.framework.mvvm.ui.base.BaseFragment;
+import com.mindorks.framework.mvvm.ui.home.SpendingActivity;
 import com.mindorks.framework.mvvm.ui.home.revenu.dialog.RevenuDialog;
 import com.mindorks.framework.mvvm.ui.home.revenu.dialog.RevenuDialogCallback;
 
@@ -23,7 +25,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RevenuFragment extends BaseFragment<FragmentRevenuBinding,RevenuViewModel> implements RevenuNavigator,RevenuDialogCallback {
+public class RevenuFragment extends BaseFragment<FragmentRevenuBinding, RevenuViewModel> implements
+        RevenuNavigator, RevenuDialogCallback {
 
     @Inject
     LinearLayoutManager mLayoutManager;
@@ -38,7 +41,10 @@ public class RevenuFragment extends BaseFragment<FragmentRevenuBinding,RevenuVie
 
     FragmentRevenuBinding mFragmentRevenuBinding;
 
-    public static RevenuFragment newInstance(){
+    private ActivitySpendingBinding mActivitySpendingBinding;
+
+
+    public static RevenuFragment newInstance() {
         Bundle args = new Bundle();
         RevenuFragment fragment = new RevenuFragment();
         fragment.setArguments(args);
@@ -57,7 +63,7 @@ public class RevenuFragment extends BaseFragment<FragmentRevenuBinding,RevenuVie
 
     @Override
     public RevenuViewModel getViewModel() {
-        mRevenuViewModel = ViewModelProviders.of(this,mFactory).get(RevenuViewModel.class);
+        mRevenuViewModel = ViewModelProviders.of(this, mFactory).get(RevenuViewModel.class);
         return mRevenuViewModel;
     }
 
@@ -65,6 +71,12 @@ public class RevenuFragment extends BaseFragment<FragmentRevenuBinding,RevenuVie
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mRevenuViewModel.setNavigator(this);
+        mActivitySpendingBinding = (ActivitySpendingBinding) getBaseActivity().getViewDataBinding();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -72,18 +84,17 @@ public class RevenuFragment extends BaseFragment<FragmentRevenuBinding,RevenuVie
         super.onViewCreated(view, savedInstanceState);
         mFragmentRevenuBinding = getViewDataBinding();
         setUp();
-
     }
 
-    private void setUp(){
+    private void setUp() {
         mLayoutManager.setOrientation(RecyclerView.VERTICAL);
         mFragmentRevenuBinding.revenuRecyclerView.setLayoutManager(mLayoutManager);
         mFragmentRevenuBinding.revenuRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mFragmentRevenuBinding.revenuRecyclerView.setAdapter(mRevenuRecyclerViewAdapter);
         mFragmentRevenuBinding.champDateValeur.setOnClickListener(view -> new RackMonthPicker(getContext())
-                .setLocale(Locale.ENGLISH)
+                .setLocale(Locale.FRANCE)
                 .setPositiveButton((month, startDate, endDate, year, monthLabel) -> {
-                    String date = month+"/"+year;
+                    String date = month + "/" + year;
                     mFragmentRevenuBinding.champDateValeur.setText(date);
                     mRevenuViewModel.fetchRevenus();
                 })
@@ -91,18 +102,20 @@ public class RevenuFragment extends BaseFragment<FragmentRevenuBinding,RevenuVie
                     dialog.dismiss();
                 }).show());
 
-        mFragmentRevenuBinding.addRevenu.setOnClickListener(v -> {
-            RevenuDialog dialog =  RevenuDialog.newInstance();
-            dialog.setListener(this);
-            dialog.show(getFragmentManager());
-        });
-
         subscribeToLiveData();
+
+        ((SpendingActivity) getActivity()).setRevenuFragmentListener(() -> setupRevenuDialog());
+    }
+
+    private void setupRevenuDialog() {
+        RevenuDialog dialog = RevenuDialog.newInstance();
+        dialog.setListener(this);
+        dialog.show(getFragmentManager());
     }
 
     private void subscribeToLiveData() {
         mRevenuViewModel.getRevenuListLiveData().observe(this, mRevenus -> {
-                mRevenuRecyclerViewAdapter.addItems(mRevenus);
+            mRevenuRecyclerViewAdapter.addItems(mRevenus);
         });
     }
 

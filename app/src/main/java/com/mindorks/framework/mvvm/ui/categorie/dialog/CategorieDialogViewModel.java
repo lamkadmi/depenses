@@ -19,7 +19,6 @@ package com.mindorks.framework.mvvm.ui.categorie.dialog;
 import com.mindorks.framework.mvvm.data.DataManager;
 import com.mindorks.framework.mvvm.data.model.db.Categorie;
 import com.mindorks.framework.mvvm.ui.base.BaseViewModel;
-import com.mindorks.framework.mvvm.ui.home.dashboard.dialog.PrevisionDialogNavigator;
 import com.mindorks.framework.mvvm.utils.rx.SchedulerProvider;
 
 import androidx.databinding.ObservableField;
@@ -28,7 +27,7 @@ import androidx.databinding.ObservableField;
  * Created by lamkadmi on 17/11/19.
  */
 
-public class CategorieDialogViewModel extends BaseViewModel<PrevisionDialogNavigator> {
+public class CategorieDialogViewModel extends BaseViewModel<CategorieDialogNavigator> {
 
 
     private final ObservableField<String> categorie = new ObservableField<>();

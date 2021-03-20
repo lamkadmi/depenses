@@ -1,19 +1,3 @@
-/*
- *  Copyright (C) 2017 MINDORKS NEXTGEN PRIVATE LIMITED
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      https://mindorks.com/license/apache-v2
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License
- */
-
 package com.mindorks.framework.mvvm.ui.home;
 
 import android.content.Context;
@@ -82,6 +66,11 @@ public class SpendingActivity extends BaseActivity<ActivitySpendingBinding, Spen
 
     private SpendingViewModel mSpendingViewModel;
 
+    private DashboardFragmentListener dashboardFragmentListener;
+
+    private RevenuFragmentListener revenuFragmentListener;
+
+
     public static Intent newIntent(Context context) {
         return new Intent(context, SpendingActivity.class);
     }
@@ -98,40 +87,14 @@ public class SpendingActivity extends BaseActivity<ActivitySpendingBinding, Spen
 
     @Override
     public SpendingViewModel getViewModel() {
-        mSpendingViewModel = ViewModelProviders.of(this,factory).get(SpendingViewModel.class);
+        mSpendingViewModel = ViewModelProviders.of(this, factory).get(SpendingViewModel.class);
         return mSpendingViewModel;
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            // Respond to the action bar's Up/Home button
-//            case android.R.id.home:
-//                Intent upIntent = NavUtils.getParentActivityIntent(this);
-//                upIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
-//                    // This activity is NOT part of this app's task, so create a new task
-//                    // when navigating up, with a synthesized back stack.
-//                    TaskStackBuilder.create(this)
-//                            // Add all of this activity's parents to the back stack
-//                            .addNextIntentWithParentStack(upIntent)
-//                            // Navigate up to the closest parent
-//                            .startActivities();
-//                } else {
-//                    // This activity is part of this app's task, so simply
-//                    // navigate up to the logical parent activity.
-//                    NavUtils.navigateUpTo(this, upIntent);
-//                }
-//                return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.main, menu);
-        //mBottomToolbar.inflateMenu(R.menu.main);
         return true;
     }
 
@@ -190,7 +153,6 @@ public class SpendingActivity extends BaseActivity<ActivitySpendingBinding, Spen
         };
 
         mDrawer.addDrawerListener(mDrawerToggle);
-        mDrawer.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
         String version = getString(R.string.version) + " " + BuildConfig.VERSION_NAME;
         mSpendingViewModel.updateAppVersion(version);
@@ -198,12 +160,12 @@ public class SpendingActivity extends BaseActivity<ActivitySpendingBinding, Spen
 
         mSpendingViewModel.onNavMenuCreated();
 
-        mPagerAdapter.setCount(3);
+        mPagerAdapter.setCount(2);
 
         mActivitySpendingBinding.feedViewPager.setAdapter(mPagerAdapter);
 
         mActivitySpendingBinding.tabLayout.addTab(mActivitySpendingBinding.tabLayout.newTab().setText(getString(R.string.accueil)));
-        mActivitySpendingBinding.tabLayout.addTab(mActivitySpendingBinding.tabLayout.newTab().setText(getString(R.string.detail)));
+
         mActivitySpendingBinding.tabLayout.addTab(mActivitySpendingBinding.tabLayout.newTab().setText(getString(R.string.revenu)));
 
         mActivitySpendingBinding.feedViewPager.setOffscreenPageLimit(mActivitySpendingBinding.tabLayout.getTabCount());
@@ -227,6 +189,14 @@ public class SpendingActivity extends BaseActivity<ActivitySpendingBinding, Spen
             }
         });
 
+        mActivitySpendingBinding.btnAdd.setOnClickListener(v -> {
+            if(mActivitySpendingBinding.tabLayout.getSelectedTabPosition()==0){
+                dashboardFragmentListener.onDepenseAdd();
+            }else{
+                revenuFragmentListener.onRevenuAdd();
+            }
+
+        });
 
     }
 
@@ -243,7 +213,9 @@ public class SpendingActivity extends BaseActivity<ActivitySpendingBinding, Spen
     private void setupNavMenu() {
         NavHeaderMainBinding navHeaderMainBinding = DataBindingUtil.inflate(getLayoutInflater(),
                 R.layout.nav_header_main, mActivitySpendingBinding.navigationView, false);
+
         mActivitySpendingBinding.navigationView.addHeaderView(navHeaderMainBinding.getRoot());
+
         navHeaderMainBinding.setViewModel(mSpendingViewModel);
 
         mBottomNavigationView.setOnNavigationItemSelectedListener(
@@ -253,15 +225,10 @@ public class SpendingActivity extends BaseActivity<ActivitySpendingBinding, Spen
                         case R.id.action_home:
                             mActivitySpendingBinding.feedViewPager.setCurrentItem(0);
                             return true;
-//                        case R.id.navItemRateUs:
-//                            PrevisionDialog.newInstance().show(getSupportFragmentManager());
-//                            return true;
                         case R.id.action_revenu:
                             mActivitySpendingBinding.feedViewPager.setCurrentItem(1);
-
                             return true;
                         case R.id.navItemLogout:
-                            //mMainViewModel.logout();
                             return true;
                         default:
                             return false;
@@ -269,8 +236,25 @@ public class SpendingActivity extends BaseActivity<ActivitySpendingBinding, Spen
                 });
     }
 
+
     @Override
     public void updateDashboard() {
         mPagerAdapter.notifyDataSetChanged();
+    }
+
+    public interface DashboardFragmentListener {
+        void onDepenseAdd();
+    }
+
+    public interface RevenuFragmentListener {
+        void onRevenuAdd();
+    }
+
+    public void setDashboardFragmentListener(DashboardFragmentListener dashboardFragmentListener) {
+        this.dashboardFragmentListener = dashboardFragmentListener;
+    }
+
+    public void setRevenuFragmentListener(RevenuFragmentListener revenuFragmentListener) {
+        this.revenuFragmentListener = revenuFragmentListener;
     }
 }

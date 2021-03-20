@@ -1,6 +1,7 @@
 package com.mindorks.framework.mvvm.data.model.db;
 
 import java.util.Date;
+import java.util.Objects;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -59,5 +60,18 @@ public class Revenu {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Revenu revenu = (Revenu) o;
+        return date.equals(revenu.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(date);
     }
 }

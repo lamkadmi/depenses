@@ -54,7 +54,7 @@ public abstract class BaseDialog extends DialogFragment {
         // the content
         final RelativeLayout root = new RelativeLayout(getActivity());
         root.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
 
         // creating the fullscreen dialog
@@ -64,7 +64,7 @@ public abstract class BaseDialog extends DialogFragment {
         if (dialog.getWindow() != null) {
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.getWindow().setLayout(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT);
         }
         dialog.setCanceledOnTouchOutside(false);

@@ -1,31 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-  ~  Copyright (C) 2017 MINDORKS NEXTGEN PRIVATE LIMITED
-  ~
-  ~  Licensed under the Apache License, Version 2.0 (the "License");
-  ~  you may not use this file except in compliance with the License.
-  ~  You may obtain a copy of the License at
-  ~
-  ~      https://mindorks.com/license/apache-v2
-  ~
-  ~  Unless required by applicable law or agreed to in writing, software
-  ~  distributed under the License is distributed on an "AS IS" BASIS,
-  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~  See the License for the specific language governing permissions and
-  ~  limitations under the License
-  -->
+<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.home.revenu.RevenuViewModel" />
-
-    </data>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -35,19 +11,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:weightSum="10"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="10">
 
             <EditText
                 android:id="@+id/champ_date_valeur"
                 style="@style/ChampDateEtHeure"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:hint="Saisir une date"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:drawableEnd="@drawable/ic_date"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:focusable="false"
+                android:hint="Saisir une date" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/revenuRecyclerView"
@@ -56,16 +33,6 @@
                 android:layout_weight="8"
                 app:adapter="@{viewModel.revenuListLiveData}"
                 tools:listitem="@layout/item_revenu_view" />
-
-            <Button
-                android:id="@+id/addRevenu"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@color/fb"
-                android:text="Nouveau Revenu"
-                android:textColor="@color/white"
-                />
 
         </LinearLayout>
 
@@ -77,5 +44,15 @@
             android:layout_gravity="center"
             android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
     </FrameLayout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.mindorks.framework.mvvm.ui.home.revenu.RevenuViewModel" />
+
+    </data>
 
 </layout>

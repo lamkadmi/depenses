@@ -9,7 +9,6 @@ import com.mindorks.framework.mvvm.R;
 import com.mindorks.framework.mvvm.ViewModelProviderFactory;
 import com.mindorks.framework.mvvm.databinding.ActivityCategorieBinding;
 import com.mindorks.framework.mvvm.ui.base.BaseActivity;
-import com.mindorks.framework.mvvm.ui.categorie.dialog.CategorieDialog;
 import com.mindorks.framework.mvvm.ui.categorie.dialog.CategorieDialogCallback;
 
 import javax.inject.Inject;

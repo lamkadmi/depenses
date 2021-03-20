@@ -1,33 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-  ~  Copyright (C) 2017 MINDORKS NEXTGEN PRIVATE LIMITED
-  ~
-  ~  Licensed under the Apache License, Version 2.0 (the "License");
-  ~  you may not use this file except in compliance with the License.
-  ~  You may obtain a copy of the License at
-  ~
-  ~      https://mindorks.com/license/apache-v2
-  ~
-  ~  Unless required by applicable law or agreed to in writing, software
-  ~  distributed under the License is distributed on an "AS IS" BASIS,
-  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~  See the License for the specific language governing permissions and
-  ~  limitations under the License
-  -->
-
+<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.home.revenu.dialog.RevenuDialogViewModel" />
-
-    </data>
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_vertical_margin">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -41,10 +19,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingBottom="65dp"
                 android:paddingLeft="16dp"
+                android:paddingTop="30dp"
                 android:paddingRight="16dp"
-                android:paddingTop="30dp">
+                android:paddingBottom="65dp">
 
                 <TextView
                     style="@style/TextStyle.Heading"
@@ -55,36 +33,37 @@
                     android:text="@string/revenu_titre" />
 
                 <EditText
-                    android:id="@+id/champ_date_valeur"
+                    android:id="@+id/revenuDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Saisir une date"
                     android:layout_gravity="center"
-                    android:text="@{viewModel.date}"
-                    android:drawableEnd="@drawable/ic_date"
-                    android:gravity="center"/>
+                    android:drawableEnd="@drawable/ic_calendar"
+                    android:gravity="center"
+                    android:focusable="false"
+                    android:hint="Saisir une date"
+                    android:text="@={viewModel.revenuDate}" />
 
                 <EditText
                     android:id="@+id/budjet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Revenu"
                     android:layout_gravity="center"
-                    android:text="@={viewModel.revenu}"
-                    android:drawableEnd="@drawable/ic_monetization"
+                    android:drawableEnd="@drawable/ic_wallet"
                     android:ems="10"
+                    android:gravity="center"
+                    android:hint="Somme"
                     android:inputType="numberDecimal|numberSigned"
-                    android:gravity="center"/>
+                    android:text="@={viewModel.revenu}" />
 
                 <EditText
                     android:id="@+id/revenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Description"
                     android:layout_gravity="center"
-                    android:text="@={viewModel.description}"
                     android:drawableEnd="@drawable/ic_edit_black_24dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:hint="Description"
+                    android:text="@={viewModel.description}" />
 
             </LinearLayout>
 
@@ -99,8 +78,8 @@
                     style="@style/Button.Action.Negative"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:onClick="@{() -> viewModel.onLaterClick()}"
                     android:text="@string/later" />
@@ -117,5 +96,13 @@
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.mindorks.framework.mvvm.ui.home.revenu.dialog.RevenuDialogViewModel" />
+
+    </data>
 
 </layout>

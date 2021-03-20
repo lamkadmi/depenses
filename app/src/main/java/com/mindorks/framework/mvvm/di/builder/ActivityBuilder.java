@@ -23,7 +23,6 @@ import com.mindorks.framework.mvvm.ui.categorie.dialog.CategorieDialogProvider;
 import com.mindorks.framework.mvvm.ui.home.SpendingActivity;
 import com.mindorks.framework.mvvm.ui.home.SpendingActivityModule;
 import com.mindorks.framework.mvvm.ui.home.dashboard.DashboardFragmentProvider;
-import com.mindorks.framework.mvvm.ui.home.dashboard.dialog.PrevisionDialogProvider;
 import com.mindorks.framework.mvvm.ui.home.depense.DepenseFragmentProvider;
 import com.mindorks.framework.mvvm.ui.home.depense.dialog.DepenseDialogProvider;
 import com.mindorks.framework.mvvm.ui.home.revenu.RevenuFragmentProvider;
@@ -45,7 +44,6 @@ public abstract class ActivityBuilder {
     @ContributesAndroidInjector(modules = {
             SpendingActivityModule.class,
             DashboardFragmentProvider.class,
-            PrevisionDialogProvider.class,
             DepenseDialogProvider.class,
             RevenuDialogProvider.class,
             DepenseFragmentProvider.class,
@@ -63,8 +61,7 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = {
             MainActivityModule.class,
-            AboutFragmentProvider.class,
-            PrevisionDialogProvider.class})
+            AboutFragmentProvider.class})
     abstract MainActivity bindMainActivity();
 
     @ContributesAndroidInjector

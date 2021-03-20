@@ -20,7 +20,11 @@ public interface DepenseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Depense> depenses);
 
-    @Query("SELECT d.detail as libelle,d.montant,d.mois_annee,c.libelle as categorie " +
-            "FROM depense d, prevision p,categorie c where d.previsionId = p.id and d.categorieId=c.id")
+    @Query("SELECT d.detail as libelle,d.montant,d.depenseDate,c.libelle as categorie " +
+            "FROM depense d, categorie c where d.categorieId=c.id")
     Single<List<DepenseByCategorie>> loadAll();
+
+    @Query("select categorie.id, categorie.libelle categorie, sum(depense.montant) montant, depense.depenseDate date from categorie, depense " +
+            "where depense.categorieId=categorie.id group by categorie.libelle")
+    Single<List<DepenseByCategorie>> loadDepensesByCategories();
 }

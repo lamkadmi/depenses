@@ -1,35 +1,38 @@
 package com.mindorks.framework.mvvm.ui.home.dashboard;
 
-import android.graphics.Color;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 
-import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.kal.rackmonthpicker.RackMonthPicker;
 import com.mindorks.framework.mvvm.BR;
 import com.mindorks.framework.mvvm.R;
 import com.mindorks.framework.mvvm.ViewModelProviderFactory;
+import com.mindorks.framework.mvvm.data.model.others.DepenseByCategorie;
 import com.mindorks.framework.mvvm.data.model.others.PrevisionByCategorie;
-import com.mindorks.framework.mvvm.databinding.ActivitySpendingBinding;
 import com.mindorks.framework.mvvm.databinding.FragmentDashboardBinding;
 import com.mindorks.framework.mvvm.ui.base.BaseFragment;
+import com.mindorks.framework.mvvm.ui.home.SpendingActivity;
 import com.mindorks.framework.mvvm.ui.home.depense.DepenseAdapter;
 import com.mindorks.framework.mvvm.ui.home.depense.dialog.DepenseDialog;
 import com.mindorks.framework.mvvm.ui.home.depense.dialog.DepenseDialogCallback;
+import com.mindorks.framework.mvvm.utils.AppUtils;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.inject.Inject;
 
@@ -45,7 +48,8 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 
 public class DashboardFragment extends BaseFragment<FragmentDashboardBinding, DashboardViewModel>
-        implements DashboardNavigator, OnChartValueSelectedListener, DepenseAdapter.DepenseAdapterListener, DepenseDialogCallback {
+        implements DashboardNavigator, OnChartValueSelectedListener, DepenseAdapter.DepenseAdapterListener,
+        DepenseDialogCallback {
 
     @Inject
     PrevisionAdapter mPrevisionRecyclerViewAdapter;
@@ -54,8 +58,6 @@ public class DashboardFragment extends BaseFragment<FragmentDashboardBinding, Da
     DepenseAdapter mDepenseRecyclerViewAdapter;
 
     FragmentDashboardBinding mFragmentDashboardBinding;
-
-    private ActivitySpendingBinding mActivitySpendingBinding;
 
     @Inject
     LinearLayoutManager mLayoutManager;
@@ -67,11 +69,20 @@ public class DashboardFragment extends BaseFragment<FragmentDashboardBinding, Da
 
     private PieChart mContainerPieView;
 
+    private BarChart mContainerBarView;
+
+    ArrayList<String> severityStringList;
+
     public static DashboardFragment newInstance() {
         Bundle args = new Bundle();
         DashboardFragment fragment = new DashboardFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -100,20 +111,19 @@ public class DashboardFragment extends BaseFragment<FragmentDashboardBinding, Da
         super.onCreate(savedInstanceState);
         mDashboardViewModel.setNavigator(this);
         mDepenseRecyclerViewAdapter.setListener(this);
-        mDashboardViewModel.fetchCategories();
-
+        mDashboardViewModel.fetchAllDepenses();
+        mDashboardViewModel.fetchDepensesByCategorie();
     }
 
     @Override
     public void onRetryClick() {
-        mDashboardViewModel.fetchDepenses();
+        mDashboardViewModel.fetchAllDepenses();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mFragmentDashboardBinding = getViewDataBinding();
-        mActivitySpendingBinding = (ActivitySpendingBinding) getBaseActivity().getViewDataBinding();
         subscribeToLiveData();
         setUp();
     }
@@ -121,137 +131,133 @@ public class DashboardFragment extends BaseFragment<FragmentDashboardBinding, Da
     @Override
     public void updatePrevisions(List<PrevisionByCategorie> blogList) {
         mPrevisionRecyclerViewAdapter.addItems(blogList);
-        Collection<PieEntry> pieEntries = getPrevisionPieEntries(blogList);
-        mContainerPieView.setData(getPieData(pieEntries));
-        mContainerPieView.setOnChartValueSelectedListener(this);
-        mContainerPieView.setTransparentCircleRadius(58f);
-        mContainerPieView.setHoleRadius(58f);
-        mContainerPieView.setUsePercentValues(true);
+    }
+
+    @Override
+    public void updateListeDepenses() {
+        mDashboardViewModel.fetchAllDepenses();
+        mDashboardViewModel.fetchDepensesByCategorie();
     }
 
     private void setUp() {
+        ((SpendingActivity) getActivity()).setDashboardFragmentListener(() -> setupDepenseDialog());
         mLayoutManager.setOrientation(RecyclerView.VERTICAL);
         mFragmentDashboardBinding.depensesRecyclerView.setLayoutManager(mLayoutManager);
         mFragmentDashboardBinding.depensesRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mFragmentDashboardBinding.depensesRecyclerView.setAdapter(mDepenseRecyclerViewAdapter);
 
-        mFragmentDashboardBinding.champDateValeur.setOnClickListener(view -> new RackMonthPicker(getContext())
-                .setLocale(Locale.ENGLISH)
-                .setPositiveButton((month, startDate, endDate, year, monthLabel) -> {
-                    String date = month + "/" + year;
-                    mFragmentDashboardBinding.champDateValeur.setText(date);
-                    mDashboardViewModel.fetchPrevisionsByDate(date);
-                })
-                .setNegativeButton(dialog -> {
-                    dialog.dismiss();
-                }).show());
-
+        mFragmentDashboardBinding.champDateValeur.setOnClickListener(v -> {
+            DatePickerDialog.OnDateSetListener listener = (v1, year, monthOfYear, dayOfMonth) -> {
+                String data = AppUtils.getDate(year, monthOfYear, dayOfMonth);
+                mFragmentDashboardBinding.champDateValeur.setText(data);
+            };
+            Calendar cal = Calendar.getInstance(TimeZone.getDefault());
+            DatePickerDialog dpDialog = new DatePickerDialog(this.getContext(), listener, cal.get(1), cal.get(2), cal.get(5));
+            dpDialog.show();
+        });
 
         mContainerPieView = mFragmentDashboardBinding.chart;
 
-        mActivitySpendingBinding.btnAdd.setOnClickListener(v -> {
-            DepenseDialog dialog = DepenseDialog.newInstance();
-            dialog.setListener(this);
-            dialog.show(getFragmentManager());
-        });
+        mContainerBarView = mFragmentDashboardBinding.chart1;
+    }
 
-        setupPieContainerView();
-
+    /**
+     * Display Depense dialog
+     */
+    private void setupDepenseDialog() {
+        DepenseDialog dialog = DepenseDialog.newInstance();
+        dialog.setListener(this);
+        dialog.show(getFragmentManager());
     }
 
     private void subscribeToLiveData() {
-        mDashboardViewModel.getDashboardListLiveData().observe(this, mPrevisions -> {
-            setupPieContainerView();
-            Collection<PieEntry> pieEntries = getPrevisionPieEntries(mPrevisions);
-            mContainerPieView.setData(getPieData(pieEntries));
+        mDashboardViewModel.getDepensesListLiveData().observe(this, mAllDepenses -> {
             mDepenseRecyclerViewAdapter.notifyDataSetChanged();
-
+        });
+        mDashboardViewModel.getDepenseByCategorieBarChartLiveData().observe(this, mDepensesByCategories -> {
+            setupDepenseByCategorieBarChartView(mDepensesByCategories);
         });
     }
 
-
-    private void setupPieContainerView() {
-        mContainerPieView.setUsePercentValues(true);
-        mContainerPieView.getDescription().setEnabled(false);
-        //mContainerPieView.setExtraOffsets(5, 10, 5, 5);
-        mContainerPieView.setDragDecelerationFrictionCoef(0.95f);
-        // mContainerPieView.setCenterText(generateCenterSpannableText());
-        mContainerPieView.setDrawHoleEnabled(false);
-        mContainerPieView.setHoleColor(Color.WHITE);
-        mContainerPieView.setTransparentCircleColor(Color.WHITE);
-        mContainerPieView.setTransparentCircleAlpha(110);
-        mContainerPieView.setHoleRadius(58f);
-        mContainerPieView.setTransparentCircleRadius(61f);
-        mContainerPieView.setDrawCenterText(false);
-        mContainerPieView.setRotationAngle(0);
-        mContainerPieView.setRotationEnabled(false);
-        mContainerPieView.setHighlightPerTapEnabled(true);
-        mContainerPieView.animateY(1400, Easing.EaseInSine);
-        mContainerPieView.setEntryLabelColor(Color.BLACK);
-        mContainerPieView.setEntryLabelTextSize(10f);
-
+    private void setupDepenseByCategorieBarChartView(List<DepenseByCategorie> pData) {
+        BarData data = createChartData(pData);
+        configureChartAppearance();
+        prepareChartData(data);
     }
 
-    /**
-     * Permet de créer les element du camembert
-     *
-     * @param questionCardDatas
-     * @return
-     */
-    @NonNull
-    private Collection<PieEntry> getPrevisionPieEntries(@NonNull List<PrevisionByCategorie> questionCardDatas) {
-        List<PieEntry> pieEntries = new ArrayList<>();
-        for (PrevisionByCategorie item : questionCardDatas) {
-            PieEntry pieEntry = new PieEntry(item.getMontant(), item.getCategorie(), item);
-            pieEntries.add(pieEntry);
+    private BarData createChartData(List<DepenseByCategorie> depensesByCategories) {
+        List<BarEntry> barEntries = new ArrayList<>();
+        severityStringList = new ArrayList<>();
+        for (DepenseByCategorie item : depensesByCategories) {
+            severityStringList.add(item.getCategorie());
+            BarEntry pieEntry = new BarEntry(depensesByCategories.indexOf(item), item.getMontant());
+            barEntries.add(pieEntry);
         }
-        return pieEntries;
-    }
-
-    /**
-     * Permet d'initialiser le diagramme
-     *
-     * @param pieEntries
-     * @return
-     */
-    private PieData getPieData(@NonNull Collection<PieEntry> pieEntries) {
-        PieDataSet dataSet = new PieDataSet(new ArrayList<>(pieEntries), "");
-        dataSet.setDrawIcons(false);
-        dataSet.setSliceSpace(3f);
-        // dataSet.setIconsOffset(new MPPointF(0, 40));
-        //dataSet.setSelectionShift(20f);
-        dataSet.setHighlightEnabled(true);
-        //dataSet.setValueLinePart1OffsetPercentage(90.f);
-        //dataSet.setValueLinePart1Length(0.2f);
-        //dataSet.setValueLinePart2Length(0.4f);
-        dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
-        //dataSet.setValueLineColor(Color.BLACK);
+        BarDataSet dataSet = new BarDataSet(barEntries, "");
 
         ArrayList<Integer> colors = new ArrayList<>();
-
         for (int c : ColorTemplate.VORDIPLOM_COLORS)
             colors.add(c);
 
-        for (int c : ColorTemplate.JOYFUL_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.COLORFUL_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.LIBERTY_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.PASTEL_COLORS)
-            colors.add(c);
-
         colors.add(ColorTemplate.getHoloBlue());
+
         dataSet.setColors(colors);
 
-        PieData data = new PieData(dataSet);
-        data.setValueFormatter(new PercentFormatter());
-        data.setValueTextSize(10f);
-        data.setValueTextColor(Color.BLACK);
+        ArrayList<IBarDataSet> dataSets = new ArrayList<>();
+
+        dataSets.add(dataSet);
+
+        BarData data = new BarData(dataSet);
+
         return data;
+    }
+
+    private void configureChartAppearance() {
+        mContainerBarView.getDescription().setEnabled(false);
+        mContainerBarView.setDrawValueAboveBar(false);
+        //mContainerBarView.setMaxVisibleValueCount(4);
+        //mContainerBarView.getXAxis().setDrawGridLines(false);
+        mContainerBarView.setPinchZoom(false);
+        mContainerBarView.setDrawBarShadow(false);
+        mContainerBarView.setDrawGridBackground(false);
+
+        XAxis xAxis = mContainerBarView.getXAxis();
+        xAxis.setDrawGridLines(false);
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(severityStringList));
+        xAxis.setGranularity(1f);
+        mContainerBarView.getAxisLeft().setDrawGridLines(false);
+        mContainerBarView.getAxisLeft().setGranularity(10f);
+        //mContainerBarView.getAxisLeft().setAxisMinimum(2);
+        mContainerBarView.getAxisRight().setDrawGridLines(false);
+        mContainerBarView.getAxisRight().setEnabled(false);
+        mContainerBarView.getAxisLeft().setEnabled(true);
+        mContainerBarView.getXAxis().setDrawGridLines(false);
+        mContainerBarView.animateY(1500);
+
+
+        mContainerBarView.getLegend().setEnabled(false);
+
+        mContainerBarView.getAxisRight().setDrawLabels(false);
+        mContainerBarView.getAxisLeft().setDrawLabels(true);
+        mContainerBarView.setTouchEnabled(false);
+        mContainerBarView.setDoubleTapToZoomEnabled(false);
+        mContainerBarView.getXAxis().setEnabled(true);
+        mContainerBarView.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        mContainerBarView.invalidate();
+
+        /* YAxis axisLeft = mContainerBarView.getAxisLeft();
+        axisLeft.setGranularity(10f);
+        axisLeft.setAxisMinimum(0);
+
+        YAxis axisRight = mContainerBarView.getAxisRight();
+        axisRight.setGranularity(10f);
+        axisRight.setAxisMinimum(0);*/
+    }
+
+    private void prepareChartData(BarData data) {
+        data.setValueTextSize(10f);
+        mContainerBarView.setData(data);
+        mContainerBarView.invalidate();
     }
 
     @Override
@@ -265,8 +271,4 @@ public class DashboardFragment extends BaseFragment<FragmentDashboardBinding, Da
     }
 
 
-    @Override
-    public void updateListeDepenses() {
-        mDashboardViewModel.fetchDepenses();
-    }
 }

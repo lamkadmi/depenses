@@ -1,6 +1,5 @@
 package com.mindorks.framework.mvvm.data.model.db;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import androidx.room.ColumnInfo;
@@ -15,11 +14,6 @@ import androidx.room.PrimaryKey;
                         entity = Categorie.class,
                         parentColumns = "id",
                         childColumns = "categorieId"
-                ),
-                @ForeignKey(
-                        entity = Prevision.class,
-                        parentColumns = "id",
-                        childColumns = "categorieId"
                 )
         }
 )
@@ -31,21 +25,15 @@ public class Depense {
     @ColumnInfo(name = "categorieId", index = true)
     private Long categorieId;
 
-    @ColumnInfo(name = "previsionId", index = true)
-    private Long previsionId;
-
-    private Date mois;
-
-    private String mois_annee;
+    private Date depenseDate;
 
     private Float montant;
 
     private String detail;
 
-    public Depense(Long categorieId, Long previsionId, String mois_annee, Float montant, String detail) {
+    public Depense(Long categorieId, Date depenseDate, Float montant, String detail) {
         this.categorieId = categorieId;
-        this.previsionId = previsionId;
-        this.mois_annee = mois_annee;
+        this.depenseDate = depenseDate;
         this.montant = montant;
         this.detail = detail;
     }
@@ -66,20 +54,12 @@ public class Depense {
         this.categorieId = categorieId;
     }
 
-    public Long getPrevisionId() {
-        return previsionId;
+    public Date getDepenseDate() {
+        return depenseDate;
     }
 
-    public void setPrevisionId(Long previsionId) {
-        this.previsionId = previsionId;
-    }
-
-    public Date getMois() {
-        return mois;
-    }
-
-    public void setMois(Date mois) {
-        this.mois = mois;
+    public void setDepenseDate(Date depenseDate) {
+        this.depenseDate = depenseDate;
     }
 
     public Float getMontant() {
@@ -98,11 +78,4 @@ public class Depense {
         this.detail = detail;
     }
 
-    public String getMois_annee() {
-        return mois_annee;
-    }
-
-    public void setMois_annee(String mois_annee) {
-        this.mois_annee = mois_annee;
-    }
 }

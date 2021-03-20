@@ -9,27 +9,14 @@ import androidx.databinding.ObservableField;
 
 public class RevenuDialogViewModel extends BaseViewModel<RevenuDialogNavigator> {
 
-    private final ObservableField<String> date = new ObservableField<>();
-
     private final ObservableField<String> description = new ObservableField<>();
 
     private final ObservableField<String> revenu = new ObservableField<>();
 
+    private final ObservableField<String> revenuDate = new ObservableField<>();
+
     public RevenuDialogViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
-        date.set("1/2019");
-    }
-
-    public ObservableField<String> getDate() {
-        return date;
-    }
-
-    public ObservableField<String> getDescription() {
-        return description;
-    }
-
-    public ObservableField<String> getRevenu() {
-        return revenu;
     }
 
     public void onLaterClick() {
@@ -39,7 +26,7 @@ public class RevenuDialogViewModel extends BaseViewModel<RevenuDialogNavigator> 
     public void onSubmitClick() {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
-                .saveRevenu(new Revenu(getDate().get(),Float.valueOf(getRevenu().get()),getDescription().get()))
+                .saveRevenu(new Revenu(getRevenuDate().get(), Float.valueOf(getRevenu().get()), getDescription().get()))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
@@ -51,6 +38,17 @@ public class RevenuDialogViewModel extends BaseViewModel<RevenuDialogNavigator> 
                     setIsLoading(false);
                     //getNavigator().handleError(throwable);
                 }));
+    }
 
+    public ObservableField<String> getDescription() {
+        return description;
+    }
+
+    public ObservableField<String> getRevenu() {
+        return revenu;
+    }
+
+    public ObservableField<String> getRevenuDate() {
+        return revenuDate;
     }
 }

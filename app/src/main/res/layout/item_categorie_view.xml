@@ -21,7 +21,7 @@
 
         <variable
             name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.categorie.CategorieItemViewModel" />
+            type="com.project.depense.mvvm.ui.categorie.CategorieItemViewModel" />
 
     </data>
 

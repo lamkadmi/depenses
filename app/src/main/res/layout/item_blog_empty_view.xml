@@ -21,7 +21,7 @@
 
         <variable
             name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.home.dashboard.PrevisionEmptyItemViewModel" />
+            type="com.project.depense.mvvm.ui.home.dashboard.PrevisionEmptyItemViewModel" />
 
     </data>
 

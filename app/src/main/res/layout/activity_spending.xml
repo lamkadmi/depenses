@@ -3,7 +3,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.mindorks.framework.mvvm.ui.home.SpendingActivity">
+    tools:context="com.project.depense.mvvm.ui.home.SpendingActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -135,7 +135,7 @@
 
         <variable
             name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.home.SpendingViewModel" />
+            type="com.project.depense.mvvm.ui.home.SpendingViewModel" />
     </data>
 
 

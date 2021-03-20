@@ -23,7 +23,7 @@
 
         <variable
             name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.home.depense.DepenseViewModel" />
+            type="com.project.depense.mvvm.ui.home.depense.DepenseViewModel" />
 
     </data>
 

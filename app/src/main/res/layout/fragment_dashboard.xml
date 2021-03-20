@@ -87,7 +87,7 @@
 
         <variable
             name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.home.dashboard.DashboardViewModel" />
+            type="com.project.depense.mvvm.ui.home.dashboard.DashboardViewModel" />
 
     </data>
 

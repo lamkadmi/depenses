@@ -16,7 +16,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.mindorks.framework.mvvm.ui.main.MainActivity">
+    tools:context="com.project.depense.mvvm.ui.main.MainActivity">
 
     <data>
 
@@ -24,7 +24,7 @@
 
         <variable
             name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.categorie.CategorieViewModel" />
+            type="com.project.depense.mvvm.ui.categorie.CategorieViewModel" />
 
     </data>
 

@@ -101,7 +101,7 @@
 
         <variable
             name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.home.revenu.dialog.RevenuDialogViewModel" />
+            type="com.project.depense.mvvm.ui.home.revenu.dialog.RevenuDialogViewModel" />
 
     </data>
 

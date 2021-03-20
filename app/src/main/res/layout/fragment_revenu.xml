@@ -51,7 +51,7 @@
 
         <variable
             name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.home.revenu.RevenuViewModel" />
+            type="com.project.depense.mvvm.ui.home.revenu.RevenuViewModel" />
 
     </data>
 

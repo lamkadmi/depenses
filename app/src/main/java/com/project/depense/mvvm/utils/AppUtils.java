@@ -57,12 +57,21 @@ public final class AppUtils {
     }
 
     public static Date getDateFromString(String pDate) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         try {
             Date date = format.parse(pDate);
             return date;
         } catch (ParseException e) {
             return null;
         }
+    }
+
+    /**
+     * Retourne le texte d'une date au format standard dd/MM/yyyy
+     * @param pDate : java.util.Date
+     * @return le texte de la date
+     */
+    public static String getDateToString(Date pDate) {
+        return pDate == null ? null : new SimpleDateFormat("dd/MM/yyyy").format(pDate);
     }
 }

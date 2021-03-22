@@ -15,9 +15,10 @@ import java.util.List;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;
 
+/**
+ * Created by lamkadmi on 17/11/19.
+ */
 public class DepenseDialogViewModel extends BaseViewModel<DepenseDialogNavigator> {
-
-    private final ObservableField<String> depenseDate = new ObservableField<>();
 
     private final ObservableField<String> description = new ObservableField<>();
 
@@ -25,12 +26,12 @@ public class DepenseDialogViewModel extends BaseViewModel<DepenseDialogNavigator
 
     private final ObservableField<Categorie> categorie = new ObservableField<>();
 
-    private final MutableLiveData<List<Categorie>> categorieListLiveData;
+    private final MutableLiveData<List<Categorie>> categorieListLiveData = new MutableLiveData<>();
 
+    private final ObservableField<String> depenseDate = new ObservableField<>();
 
     public DepenseDialogViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
-        categorieListLiveData = new MutableLiveData<>();
         fetchCategories();
     }
 
@@ -55,6 +56,7 @@ public class DepenseDialogViewModel extends BaseViewModel<DepenseDialogNavigator
                     setIsLoading(false);
                 }, throwable -> {
                     setIsLoading(false);
+                    getNavigator().onError(throwable);
                 }));
 
     }
@@ -86,7 +88,6 @@ public class DepenseDialogViewModel extends BaseViewModel<DepenseDialogNavigator
         //parent.getSelectedItem()            get selected item
         //and other...
     }
-
 
     public ObservableField<String> getDepenseDate() {
         return depenseDate;

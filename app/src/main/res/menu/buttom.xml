@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/ic_home"
+        android:iconTint="@color/white"
+        android:title="@string/accueil"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/placeholder"
+        android:title="" />
+    <item
+        android:id="@+id/placeholder"
+        android:title="" />
+    <item
+        android:id="@+id/action_revenu"
+        android:icon="@drawable/ic_revenu"
+        android:iconTint="@color/white"
+        android:title="@string/revenu"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/Settings"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:iconTint="@color/white"
+        android:title="Settings" />
+</menu>

@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mindorks.framework.mvvm.R;
-import com.project.depense.mvvm.ViewModelProviderFactory;
 import com.mindorks.framework.mvvm.databinding.DialogRevenuBinding;
+import com.project.depense.mvvm.ViewModelProviderFactory;
 import com.project.depense.mvvm.ui.base.BaseDialog;
 import com.project.depense.mvvm.utils.AppUtils;
 
@@ -80,7 +80,6 @@ public class RevenuDialog extends BaseDialog implements RevenuDialogNavigator {
             Calendar cal = Calendar.getInstance(TimeZone.getDefault());
             DatePickerDialog dpDialog = new DatePickerDialog(this.getContext(), listener, cal.get(1), cal.get(2), cal.get(5));
             dpDialog.show();
-
         });
 
         return view;

@@ -1,11 +1,13 @@
 package com.project.depense.mvvm.data.model.others;
 
+import java.util.Date;
+
 public class DepenseByCategorie {
 
     private String libelle;
     private String categorie;
     private Long montant;
-    private String mois_annee;
+    private Date date;
 
     public String getLibelle() {
         return libelle;
@@ -31,11 +33,11 @@ public class DepenseByCategorie {
         this.montant = montant;
     }
 
-    public String getMois_annee() {
-        return mois_annee;
+    public Date getDate() {
+        return date;
     }
 
-    public void setMois_annee(String mois_annee) {
-        this.mois_annee = mois_annee;
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

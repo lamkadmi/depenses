@@ -20,7 +20,6 @@
         android:layout_height="match_parent">
 
         <androidx.drawerlayout.widget.DrawerLayout
-
             android:id="@+id/drawerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -57,14 +56,6 @@
                             android:background="@color/light_gray" />
 
                     </com.google.android.material.appbar.AppBarLayout>
-
-                    <com.github.mikephil.charting.charts.PieChart
-                        android:id="@+id/piechart"
-                        android:background="@android:color/transparent"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:visibility="gone"
-                        android:layout_weight="9"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/objectifs"

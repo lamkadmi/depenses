@@ -67,8 +67,6 @@ public class DashboardFragment extends BaseFragment<FragmentDashboardBinding, Da
 
     private DashboardViewModel mDashboardViewModel;
 
-    private PieChart mContainerPieView;
-
     private BarChart mContainerBarView;
 
     ArrayList<String> severityStringList;
@@ -155,8 +153,6 @@ public class DashboardFragment extends BaseFragment<FragmentDashboardBinding, Da
             DatePickerDialog dpDialog = new DatePickerDialog(this.getContext(), listener, cal.get(1), cal.get(2), cal.get(5));
             dpDialog.show();
         });
-
-        mContainerPieView = mFragmentDashboardBinding.chart;
 
         mContainerBarView = mFragmentDashboardBinding.chart1;
     }

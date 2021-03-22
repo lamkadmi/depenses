@@ -7,6 +7,9 @@ import com.project.depense.mvvm.utils.rx.SchedulerProvider;
 
 import androidx.databinding.ObservableField;
 
+/**
+ * Created by lamkadmi on 17/11/19.
+ */
 public class RevenuDialogViewModel extends BaseViewModel<RevenuDialogNavigator> {
 
     private final ObservableField<String> description = new ObservableField<>();

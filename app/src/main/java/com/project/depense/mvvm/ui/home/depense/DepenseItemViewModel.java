@@ -17,6 +17,7 @@
 package com.project.depense.mvvm.ui.home.depense;
 
 import com.project.depense.mvvm.data.model.others.DepenseByCategorie;
+import com.project.depense.mvvm.utils.AppUtils;
 
 import androidx.databinding.ObservableField;
 
@@ -36,7 +37,7 @@ public class DepenseItemViewModel {
 
     public DepenseItemViewModel(DepenseByCategorie depense) {
         //this.imageUrl.set(imageUrl);
-        this.mois_anne.set(depense.getMois_annee());
+        this.mois_anne.set(AppUtils.getDateToString(depense.getDate()));
         this.libelle.set(depense.getLibelle());
         this.categorie.set(depense.getCategorie());
         this.montant.set(String.valueOf(depense.getMontant()));

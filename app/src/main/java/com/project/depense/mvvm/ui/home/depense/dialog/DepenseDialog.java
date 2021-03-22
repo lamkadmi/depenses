@@ -6,11 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.mindorks.framework.mvvm.R;
+import com.mindorks.framework.mvvm.databinding.DialogDepenseBinding;
 import com.project.depense.mvvm.ViewModelProviderFactory;
 import com.project.depense.mvvm.data.model.db.Categorie;
-import com.mindorks.framework.mvvm.databinding.DialogDepenseBinding;
 import com.project.depense.mvvm.ui.base.BaseDialog;
 import com.project.depense.mvvm.utils.AppUtils;
 
@@ -61,6 +62,7 @@ public class DepenseDialog extends BaseDialog implements DepenseDialogNavigator 
         mDepenseDialogViewModel = ViewModelProviders.of(this, factory).get(DepenseDialogViewModel.class);
 
         mDepenseDialogBinding.setViewModel(mDepenseDialogViewModel);
+
         mDepenseDialogViewModel.setNavigator(this);
 
         setUp();
@@ -70,15 +72,14 @@ public class DepenseDialog extends BaseDialog implements DepenseDialogNavigator 
 
     private void setUp() {
         subscribeToLiveData();
-        mDepenseDialogBinding.champDateValeur.setOnClickListener(v -> {
+        mDepenseDialogBinding.depenseDate.setOnClickListener(v -> {
             DatePickerDialog.OnDateSetListener listener = (v1, year, monthOfYear, dayOfMonth) -> {
                 String data = AppUtils.getDate(year, monthOfYear, dayOfMonth);
-                mDepenseDialogBinding.champDateValeur.setText(data);
+                mDepenseDialogBinding.depenseDate.setText(data);
             };
             Calendar cal = Calendar.getInstance(TimeZone.getDefault());
             DatePickerDialog dpDialog = new DatePickerDialog(this.getContext(), listener, cal.get(1), cal.get(2), cal.get(5));
             dpDialog.show();
-
         });
     }
 
@@ -98,4 +99,11 @@ public class DepenseDialog extends BaseDialog implements DepenseDialogNavigator 
         dismissDialog(TAG);
         listener.updateListeDepenses();
     }
+
+    @Override
+    public void onError(Throwable error) {
+        Toast.makeText(getContext(), "Impossible de sauvegarder la dépense", Toast.LENGTH_SHORT).show();
+
+    }
+
 }

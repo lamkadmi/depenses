@@ -209,7 +209,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         mToolbar = mActivityMainBinding.toolbar;
         mNavigationView = mActivityMainBinding.navigationView;
         mContainerCardView = mActivityMainBinding.cardsContainer;
-        mContainerPieView = mActivityMainBinding.piechart;
 
         mActivityMainBinding.objectifs.setAdapter(mObjectifAdapter);
 

@@ -51,6 +51,7 @@ import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by lamkadmi on 17/11/19.
@@ -270,7 +271,17 @@ public class AppDataManager implements DataManager {
 
     @Override
     public Observable<Boolean> saveCategorie(Categorie categorie) {
-        return mDbHelper.saveCategorie(categorie);
+        return mDbHelper.saveCategorie(categorie).subscribeOn(Schedulers.io());
+    }
+
+    @Override
+    public Boolean insertCategorie(Categorie categorie) {
+        return mDbHelper.insertCategorie(categorie);
+    }
+
+    @Override
+    public Observable<Boolean> saveCategories(List<Categorie> categories) {
+        return mDbHelper.saveCategories(categories);
     }
 
     @Override

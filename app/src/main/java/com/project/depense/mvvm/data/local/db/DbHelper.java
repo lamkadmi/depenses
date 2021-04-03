@@ -58,6 +58,10 @@ public interface DbHelper {
 
     Observable<Boolean> saveCategorie(final Categorie categorie);
 
+    Boolean insertCategorie(final Categorie categorie);
+
+    Observable<Boolean> saveCategories (final List<Categorie> categories);
+
     Observable<Boolean> savePrevision(final Prevision prevision);
 
     Observable<Boolean> saveRevenu(Revenu revenu);

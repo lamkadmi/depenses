@@ -16,7 +16,8 @@
 
 package com.project.depense.mvvm.utils;
 
-import com.mindorks.framework.mvvm.BuildConfig;
+import com.project.depense.mvvm.BuildConfig;
+
 import timber.log.Timber;
 
 /**

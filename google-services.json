@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "55317680082",
+    "project_id": "depenses-7005b",
+    "storage_bucket": "depenses-7005b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:55317680082:android:151af76419087920d3420b",
+        "android_client_info": {
+          "package_name": "com.project.depense.mvvm.MvvmApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "55317680082-bup14a7ihm8j8bd9jfppv7ftmdmar77q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjqnewAXL0NjLOf-M8tV5i-uxe-HMyUDo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "55317680082-bup14a7ihm8j8bd9jfppv7ftmdmar77q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

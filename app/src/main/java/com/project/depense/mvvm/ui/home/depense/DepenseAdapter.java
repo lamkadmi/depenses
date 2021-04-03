@@ -4,10 +4,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mindorks.framework.mvvm.R;
+import com.project.depense.mvvm.R;
 import com.project.depense.mvvm.data.model.others.DepenseByCategorie;
-import com.mindorks.framework.mvvm.databinding.ItemDepenseViewBinding;
-import com.mindorks.framework.mvvm.databinding.ItemOpenSourceEmptyViewBinding;
+import com.project.depense.mvvm.databinding.ItemDepenseViewBinding;
+import com.project.depense.mvvm.databinding.ItemOpenSourceEmptyViewBinding;
 import com.project.depense.mvvm.ui.base.BaseViewHolder;
 
 import java.util.ArrayList;
@@ -58,8 +58,8 @@ public class DepenseAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
         holder.onBind(position);
-        if(holder instanceof DepenseViewHolder){
-            if(position % 2 == 0) {
+        if (holder instanceof DepenseViewHolder) {
+            if (position % 2 == 0) {
                 ((DepenseViewHolder) holder).mBinding.cardItem.setBackgroundResource(R.color.transparent);
             } else {
                 ((DepenseViewHolder) holder).mBinding.cardItem.setBackgroundResource(R.color.cyan_light);

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.mindorks.framework.mvvm.R;
+import com.project.depense.mvvm.R;
 
 import java.text.DateFormat;
 import java.text.ParseException;

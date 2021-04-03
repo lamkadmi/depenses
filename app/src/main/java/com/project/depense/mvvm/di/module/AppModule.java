@@ -17,12 +17,12 @@
 package com.project.depense.mvvm.di.module;
 
 import android.app.Application;
-import androidx.room.Room;
 import android.content.Context;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.mindorks.framework.mvvm.BuildConfig;
-import com.mindorks.framework.mvvm.R;
+import com.project.depense.mvvm.BuildConfig;
+import com.project.depense.mvvm.R;
 import com.project.depense.mvvm.data.AppDataManager;
 import com.project.depense.mvvm.data.DataManager;
 import com.project.depense.mvvm.data.local.db.AppDatabase;
@@ -40,9 +40,11 @@ import com.project.depense.mvvm.utils.AppConstants;
 import com.project.depense.mvvm.utils.rx.AppSchedulerProvider;
 import com.project.depense.mvvm.utils.rx.SchedulerProvider;
 
+import javax.inject.Singleton;
+
+import androidx.room.Room;
 import dagger.Module;
 import dagger.Provides;
-import javax.inject.Singleton;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**

@@ -1,33 +1,33 @@
-/*
- *  Copyright (C) 2017 MINDORKS NEXTGEN PRIVATE LIMITED
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      https://mindorks.com/license/apache-v2
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License
- */
 
 package com.project.depense.mvvm.ui.login;
 
-import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
-import com.mindorks.framework.mvvm.BR;
-import com.mindorks.framework.mvvm.R;
+
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.ErrorCodes;
+import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.project.depense.mvvm.BR;
+import com.project.depense.mvvm.R;
 import com.project.depense.mvvm.ViewModelProviderFactory;
-import com.mindorks.framework.mvvm.databinding.ActivityLoginBinding;
+import com.project.depense.mvvm.databinding.ActivityLoginBinding;
 import com.project.depense.mvvm.ui.base.BaseActivity;
-import com.project.depense.mvvm.ui.main.MainActivity;
+import com.project.depense.mvvm.ui.home.SpendingActivity;
+import com.project.depense.mvvm.utils.AppLogger;
+
+import java.util.Arrays;
+
 import javax.inject.Inject;
+
+import androidx.lifecycle.ViewModelProviders;
 
 /**
  * Created by lamkadmi on 17/11/19.
@@ -35,9 +35,15 @@ import javax.inject.Inject;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> implements LoginNavigator {
 
+    private static final int RC_SIGN_IN = 9001;
+
+    GoogleSignInClient mGoogleSignInClient;
+
     @Inject
     ViewModelProviderFactory factory;
+
     private LoginViewModel mLoginViewModel;
+
     private ActivityLoginBinding mActivityLoginBinding;
 
     public static Intent newIntent(Context context) {
@@ -56,32 +62,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public LoginViewModel getViewModel() {
-        mLoginViewModel = ViewModelProviders.of(this,factory).get(LoginViewModel.class);
+        mLoginViewModel = ViewModelProviders.of(this, factory).get(LoginViewModel.class);
         return mLoginViewModel;
-    }
-
-    @Override
-    public void handleError(Throwable throwable) {
-        // handle error
-    }
-
-    @Override
-    public void login() {
-        String email = mActivityLoginBinding.etEmail.getText().toString();
-        String password = mActivityLoginBinding.etPassword.getText().toString();
-        if (mLoginViewModel.isEmailAndPasswordValid(email, password)) {
-            hideKeyboard();
-            mLoginViewModel.login(email, password);
-        } else {
-            Toast.makeText(this, getString(R.string.invalid_email_password), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void openMainActivity() {
-        Intent intent = MainActivity.newIntent(LoginActivity.this);
-        startActivity(intent);
-        finish();
     }
 
     @Override
@@ -90,4 +72,79 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         mActivityLoginBinding = getViewDataBinding();
         mLoginViewModel.setNavigator(this);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (isCurrentUserLogged()) {
+            mLoginViewModel.synchroniseCategoriesFromFireStore();
+            Intent intent = SpendingActivity.newIntent(LoginActivity.this);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @Override
+    public void handleError(Throwable throwable) {
+        // handle error
+    }
+
+    @Override
+    public void signup() {
+        startActivityForResult(
+                AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setTheme(R.style.LoginTheme)
+                        .setAlwaysShowSignInMethodScreen(true)
+                        .setAvailableProviders(
+                                Arrays.asList(
+                                        new AuthUI.IdpConfig.EmailBuilder().build(),
+                                        new AuthUI.IdpConfig.GoogleBuilder().build(),
+                                        new AuthUI.IdpConfig.PhoneBuilder().build()))
+                        .setIsSmartLockEnabled(false, true)
+                        .setLogo(R.drawable.ic_logo)
+                        .build(),
+                RC_SIGN_IN);
+    }
+
+    @Override
+    public void openMainActivity() {
+        Intent intent = SpendingActivity.newIntent(LoginActivity.this);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        this.handleResponseAfterSignIn(requestCode, resultCode, data);
+    }
+
+    private void handleResponseAfterSignIn(int requestCode, int resultCode, Intent data) {
+        IdpResponse response = IdpResponse.fromResultIntent(data);
+        if (requestCode == RC_SIGN_IN) {
+            if (resultCode == RESULT_OK) { // SUCCESS
+                Toast.makeText(getApplicationContext(), "Signing Success", Toast.LENGTH_SHORT).show();
+                mLoginViewModel.synchroniseCategoriesFromFireStore();
+            } else { // ERRORS
+                if (response == null) {
+                    Toast.makeText(getApplicationContext(), "Signing error", Toast.LENGTH_SHORT).show();
+                } else if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
+                    Toast.makeText(getApplicationContext(), "NO_NETWORK", Toast.LENGTH_SHORT).show();
+                } else if (response.getError().getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
+                    Toast.makeText(getApplicationContext(), "UNKNOWN_ERROR", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    private void updateUI(FirebaseUser user) {
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+        AppLogger.w("signInWithCredential:failure", user.getDisplayName());
+    }
+
+    protected Boolean isCurrentUserLogged() {
+        return (this.getCurrentUser() != null);
+    }
+
 }

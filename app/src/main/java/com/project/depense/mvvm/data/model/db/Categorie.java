@@ -1,15 +1,27 @@
 package com.project.depense.mvvm.data.model.db;
 
+import com.google.firebase.firestore.PropertyName;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "categorie")
 public class Categorie {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey()
+    @PropertyName("id")
     private Long id;
 
+    @PropertyName("libelle")
     private String libelle;
+
+    public Categorie() {
+    }
+
+    public Categorie(Long id, String libelle) {
+        this.id = id;
+        this.libelle = libelle;
+    }
 
     public Long getId() {
         return id;

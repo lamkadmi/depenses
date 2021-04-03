@@ -9,19 +9,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
-import com.mindorks.framework.mvvm.BR;
-import com.mindorks.framework.mvvm.BuildConfig;
-import com.mindorks.framework.mvvm.R;
+import com.project.depense.mvvm.BR;
+import com.project.depense.mvvm.BuildConfig;
+import com.project.depense.mvvm.R;
 import com.project.depense.mvvm.ViewModelProviderFactory;
-import com.mindorks.framework.mvvm.databinding.ActivitySpendingBinding;
-import com.mindorks.framework.mvvm.databinding.NavHeaderMainBinding;
+import com.project.depense.mvvm.databinding.ActivitySpendingBinding;
+import com.project.depense.mvvm.databinding.NavHeaderMainBinding;
 import com.project.depense.mvvm.ui.base.BaseActivity;
 import com.project.depense.mvvm.ui.categorie.dialog.CategorieDialogCallback;
-import com.project.depense.mvvm.ui.main.MainNavigator;
+import com.project.depense.mvvm.ui.login.LoginActivity;
 
 import javax.inject.Inject;
 
@@ -40,8 +42,12 @@ import dagger.android.support.HasSupportFragmentInjector;
  * Created by lamkadmi on 17/11/19.
  */
 
-public class SpendingActivity extends BaseActivity<ActivitySpendingBinding, SpendingViewModel> implements MainNavigator,
+public class SpendingActivity extends BaseActivity<ActivitySpendingBinding, SpendingViewModel> implements SpendingNavigator,
         HasSupportFragmentInjector, CategorieDialogCallback {
+
+    private static final int SIGN_OUT_TASK = 10;
+
+    private static final int DELETE_USER_TASK = 20;
 
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
@@ -62,14 +68,11 @@ public class SpendingActivity extends BaseActivity<ActivitySpendingBinding, Spen
 
     private Toolbar mToolbar;
 
-    private BottomAppBar mBottomToolbar;
-
     private SpendingViewModel mSpendingViewModel;
 
     private DashboardFragmentListener dashboardFragmentListener;
 
     private RevenuFragmentListener revenuFragmentListener;
-
 
     public static Intent newIntent(Context context) {
         return new Intent(context, SpendingActivity.class);
@@ -126,8 +129,8 @@ public class SpendingActivity extends BaseActivity<ActivitySpendingBinding, Spen
     }
 
     private void setUp() {
+
         mToolbar = mActivitySpendingBinding.toolbar;
-        mBottomToolbar = mActivitySpendingBinding.bottomAppBar;
         mNavigationView = mActivitySpendingBinding.navigationView;
         mBottomNavigationView = mActivitySpendingBinding.bottomNavigation;
 
@@ -156,6 +159,7 @@ public class SpendingActivity extends BaseActivity<ActivitySpendingBinding, Spen
         mDrawerToggle.syncState();
         String version = getString(R.string.version) + " " + BuildConfig.VERSION_NAME;
         mSpendingViewModel.updateAppVersion(version);
+        getSupportActionBar().setTitle(R.string.accueil);
         setupNavMenu();
 
         mSpendingViewModel.onNavMenuCreated();
@@ -208,16 +212,6 @@ public class SpendingActivity extends BaseActivity<ActivitySpendingBinding, Spen
 
     }
 
-    @Override
-    public void handleError(Throwable throwable) {
-
-    }
-
-    @Override
-    public void openLoginActivity() {
-
-    }
-
     private void setupNavMenu() {
         NavHeaderMainBinding navHeaderMainBinding = DataBindingUtil.inflate(getLayoutInflater(),
                 R.layout.nav_header_main, mActivitySpendingBinding.navigationView, false);
@@ -236,7 +230,19 @@ public class SpendingActivity extends BaseActivity<ActivitySpendingBinding, Spen
                         case R.id.action_revenu:
                             mActivitySpendingBinding.feedViewPager.setCurrentItem(1);
                             return true;
+                        default:
+                            return false;
+                    }
+                });
+
+        mNavigationView.setNavigationItemSelectedListener(
+                item -> {
+                    mDrawer.closeDrawer(GravityCompat.START);
+                    switch (item.getItemId()) {
                         case R.id.navItemLogout:
+                            AuthUI.getInstance()
+                                    .signOut(getApplicationContext())
+                                    .addOnSuccessListener(this, this.updateUIAfterRESTRequestsCompleted(SIGN_OUT_TASK));
                             return true;
                         default:
                             return false;
@@ -244,18 +250,9 @@ public class SpendingActivity extends BaseActivity<ActivitySpendingBinding, Spen
                 });
     }
 
-
     @Override
     public void updateDashboard() {
         mPagerAdapter.notifyDataSetChanged();
-    }
-
-    public interface DashboardFragmentListener {
-        void onDepenseAdd();
-    }
-
-    public interface RevenuFragmentListener {
-        void onRevenuAdd();
     }
 
     public void setDashboardFragmentListener(DashboardFragmentListener dashboardFragmentListener) {
@@ -264,5 +261,27 @@ public class SpendingActivity extends BaseActivity<ActivitySpendingBinding, Spen
 
     public void setRevenuFragmentListener(RevenuFragmentListener revenuFragmentListener) {
         this.revenuFragmentListener = revenuFragmentListener;
+    }
+
+    private OnSuccessListener<Void> updateUIAfterRESTRequestsCompleted(final int origin) {
+        return aVoid -> {
+            switch (origin) {
+                case SIGN_OUT_TASK:
+                    Intent intent = LoginActivity.newIntent(SpendingActivity.this);
+                    startActivity(intent);
+                    finish();
+                    break;
+                default:
+                    break;
+            }
+        };
+    }
+
+    public interface DashboardFragmentListener {
+        void onDepenseAdd();
+    }
+
+    public interface RevenuFragmentListener {
+        void onRevenuAdd();
     }
 }

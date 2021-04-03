@@ -1,34 +1,22 @@
-/*
- *  Copyright (C) 2017 MINDORKS NEXTGEN PRIVATE LIMITED
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      https://mindorks.com/license/apache-v2
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License
- */
 
 package com.project.depense.mvvm.ui.splash;
 
-import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.mindorks.framework.mvvm.BR;
-import com.mindorks.framework.mvvm.R;
+import com.project.depense.mvvm.BR;
+import com.project.depense.mvvm.R;
 import com.project.depense.mvvm.ViewModelProviderFactory;
-import com.mindorks.framework.mvvm.databinding.ActivitySplashBinding;
+
+import com.project.depense.mvvm.databinding.ActivitySplashBinding;
 import com.project.depense.mvvm.ui.base.BaseActivity;
 import com.project.depense.mvvm.ui.home.SpendingActivity;
 import com.project.depense.mvvm.ui.login.LoginActivity;
 import com.project.depense.mvvm.ui.main.MainActivity;
+
 import javax.inject.Inject;
+
+import androidx.lifecycle.ViewModelProviders;
 
 /**
  * Created by lamkadmi on 17/11/19.
@@ -38,7 +26,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
 
     @Inject
     ViewModelProviderFactory factory;
-    
+
     private SplashViewModel mSplashViewModel;
 
     @Override
@@ -53,7 +41,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
 
     @Override
     public SplashViewModel getViewModel() {
-        mSplashViewModel = ViewModelProviders.of(this,factory).get(SplashViewModel.class);
+        mSplashViewModel = ViewModelProviders.of(this, factory).get(SplashViewModel.class);
         return mSplashViewModel;
     }
 
@@ -66,7 +54,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
 
     @Override
     public void openMainActivity() {
-        Intent intent = MainActivity.newIntent(SplashActivity.this);
+        Intent intent = SpendingActivity.newIntent(SplashActivity.this);
         startActivity(intent);
         finish();
     }

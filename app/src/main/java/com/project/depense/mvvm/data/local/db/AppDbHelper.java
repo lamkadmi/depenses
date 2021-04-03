@@ -160,6 +160,20 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
+    public Boolean insertCategorie(final Categorie categorie) {
+        mAppDatabase.categorieDao().insert(categorie);
+        return true;
+    }
+
+    @Override
+    public Observable<Boolean> saveCategories(final List<Categorie> categories) {
+        return Observable.fromCallable(() -> {
+            mAppDatabase.categorieDao().insertAll(categories);
+            return true;
+        });
+    }
+
+    @Override
     public Observable<Boolean> saveRevenu(final Revenu revenu) {
         return Observable.fromCallable(() -> {
             mAppDatabase.revenuDao().insert(revenu);

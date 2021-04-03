@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.mindorks.framework.mvvm.BR;
-import com.mindorks.framework.mvvm.R;
+import com.project.depense.mvvm.BR;
+import com.project.depense.mvvm.R;
 import com.project.depense.mvvm.ViewModelProviderFactory;
-import com.mindorks.framework.mvvm.databinding.ActivityCategorieBinding;
+import com.project.depense.mvvm.databinding.ActivityCategorieBinding;
 import com.project.depense.mvvm.ui.base.BaseActivity;
 import com.project.depense.mvvm.ui.categorie.dialog.CategorieDialogCallback;
 

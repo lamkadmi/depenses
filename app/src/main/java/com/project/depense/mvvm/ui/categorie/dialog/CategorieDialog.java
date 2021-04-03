@@ -21,9 +21,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mindorks.framework.mvvm.R;
+import com.project.depense.mvvm.R;
 import com.project.depense.mvvm.ViewModelProviderFactory;
-import com.mindorks.framework.mvvm.databinding.DialogCategorieBinding;
+import com.project.depense.mvvm.databinding.DialogCategorieBinding;
 import com.project.depense.mvvm.ui.base.BaseDialog;
 
 import javax.inject.Inject;

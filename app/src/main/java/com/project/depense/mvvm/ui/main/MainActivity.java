@@ -44,20 +44,20 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.google.android.material.navigation.NavigationView;
-import com.mindorks.framework.mvvm.BR;
-import com.mindorks.framework.mvvm.BuildConfig;
-import com.mindorks.framework.mvvm.R;
+import com.mindorks.placeholderview.SwipeDecor;
+import com.mindorks.placeholderview.SwipePlaceHolderView;
+import com.project.depense.mvvm.BR;
+import com.project.depense.mvvm.BuildConfig;
+import com.project.depense.mvvm.R;
 import com.project.depense.mvvm.ViewModelProviderFactory;
 import com.project.depense.mvvm.data.model.others.QuestionCardData;
-import com.mindorks.framework.mvvm.databinding.ActivityMainBinding;
-import com.mindorks.framework.mvvm.databinding.NavHeaderMainBinding;
+import com.project.depense.mvvm.databinding.ActivityMainBinding;
+import com.project.depense.mvvm.databinding.NavHeaderMainBinding;
 import com.project.depense.mvvm.ui.about.AboutFragment;
 import com.project.depense.mvvm.ui.base.BaseActivity;
 import com.project.depense.mvvm.ui.categorie.CategorieActivity;
 import com.project.depense.mvvm.ui.login.LoginActivity;
 import com.project.depense.mvvm.utils.ScreenUtils;
-import com.mindorks.placeholderview.SwipeDecor;
-import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -96,7 +96,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     private MainViewModel mMainViewModel;
     private NavigationView mNavigationView;
     private Toolbar mToolbar;
-
 
 
     public static Intent newIntent(Context context) {
@@ -274,7 +273,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         mContainerPieView.getDescription().setEnabled(false);
         mContainerPieView.setExtraOffsets(5, 10, 5, 5);
         mContainerPieView.setDragDecelerationFrictionCoef(0.95f);
-       // mContainerPieView.setCenterText(generateCenterSpannableText());
+        // mContainerPieView.setCenterText(generateCenterSpannableText());
         mContainerPieView.setDrawHoleEnabled(true);
         mContainerPieView.setHoleColor(Color.WHITE);
         mContainerPieView.setTransparentCircleColor(Color.WHITE);
@@ -298,9 +297,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         s.setSpan(new ForegroundColorSpan(Color.GRAY), 17, s.length() - 15, 0);
         s.setSpan(new ForegroundColorSpan(Color.GRAY), s.length() - 15, s.length(), 0);
         s.setSpan(new RelativeSizeSpan(.8f), 17, s.length() - 16, 0);
-        s.setSpan(new RelativeSizeSpan(.8f), s.length()-1, s.length(), 0);
-        s.setSpan(new StyleSpan(Typeface.ITALIC), s.length() - 17, s.length()-1, 0);
-        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length() - 17, s.length()-1, 0);
+        s.setSpan(new RelativeSizeSpan(.8f), s.length() - 1, s.length(), 0);
+        s.setSpan(new StyleSpan(Typeface.ITALIC), s.length() - 17, s.length() - 1, 0);
+        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length() - 17, s.length() - 1, 0);
         return s;
     }
 
@@ -355,6 +354,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     /**
      * Permet de créer les element du camembert
+     *
      * @param questionCardDatas
      * @return
      */
@@ -370,6 +370,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     /**
      * Permet d'initialiser le diagramme
+     *
      * @param pieEntries
      * @return
      */

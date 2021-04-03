@@ -40,25 +40,28 @@ public class DepenseDialogViewModel extends BaseViewModel<DepenseDialogNavigator
     }
 
     public void onSubmitClick() {
-        setIsLoading(true);
-        getCompositeDisposable().add(getDataManager()
-                .saveDepense(new Depense(getCategorie().get().getId(),
-                        AppUtils.getDateFromString(getDepenseDate().get()),
-                        Float.valueOf(getMontant().get()),
-                        getDescription().get()))
-                .subscribeOn(getSchedulerProvider().io())
-                .observeOn(getSchedulerProvider().ui())
-                .subscribe(response -> {
-                    if (response != null) {
-                        fetchCategories();
-                        getNavigator().dismissDialog();
-                    }
-                    setIsLoading(false);
-                }, throwable -> {
-                    setIsLoading(false);
-                    getNavigator().onError(throwable);
-                }));
-
+        if (getDepenseDate().get() == null || getMontant().get() == null) {
+            getNavigator().onError(new Exception("Veuillez renseigner les champs obligatoires"));
+        }else {
+            setIsLoading(true);
+            getCompositeDisposable().add(getDataManager()
+                    .saveDepense(new Depense(getCategorie().get().getId(),
+                            AppUtils.getDateFromString(getDepenseDate().get()),
+                            Float.valueOf(getMontant().get()),
+                            getDescription().get()))
+                    .subscribeOn(getSchedulerProvider().io())
+                    .observeOn(getSchedulerProvider().ui())
+                    .subscribe(response -> {
+                        if (response != null) {
+                            fetchCategories();
+                            getNavigator().dismissDialog();
+                        }
+                        setIsLoading(false);
+                    }, throwable -> {
+                        setIsLoading(false);
+                        getNavigator().onError(throwable);
+                    }));
+        }
     }
 
     public void fetchCategories() {

@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.mindorks.framework.mvvm.R;
-import com.mindorks.framework.mvvm.databinding.DialogDepenseBinding;
+import com.project.depense.mvvm.R;
 import com.project.depense.mvvm.ViewModelProviderFactory;
 import com.project.depense.mvvm.data.model.db.Categorie;
+import com.project.depense.mvvm.databinding.DialogDepenseBinding;
 import com.project.depense.mvvm.ui.base.BaseDialog;
 import com.project.depense.mvvm.utils.AppUtils;
 

@@ -17,17 +17,34 @@
 package com.project.depense.mvvm.ui.login;
 
 import android.text.TextUtils;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.project.depense.mvvm.data.DataManager;
 import com.project.depense.mvvm.data.model.api.LoginRequest;
+import com.project.depense.mvvm.data.model.db.Categorie;
 import com.project.depense.mvvm.ui.base.BaseViewModel;
 import com.project.depense.mvvm.utils.CommonUtils;
 import com.project.depense.mvvm.utils.rx.SchedulerProvider;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.ObservableField;
 
 /**
  * Created by lamkadmi on 17/11/19.
  */
 
 public class LoginViewModel extends BaseViewModel<LoginNavigator> {
+
+    private final ObservableField<String> login = new ObservableField<>();
+
+    private final ObservableField<String> password = new ObservableField<>();
+
+    private FirebaseAuth auth;
 
     public LoginViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
@@ -68,6 +85,10 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                     setIsLoading(false);
                     getNavigator().handleError(throwable);
                 }));
+    }
+
+    public void login(){
+        getNavigator().signup();
     }
 
     public void onFbLoginClick() {
@@ -117,6 +138,43 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
     }
 
     public void onServerLoginClick() {
-        getNavigator().login();
+        //getNavigator().login();
+        //Get Firebase auth instance
+        auth = FirebaseAuth.getInstance();
+        auth.signInWithEmailAndPassword(getLogin().get(), getPassword().get())
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            getNavigator().openMainActivity();
+                        }else{
+                            getNavigator().handleError(new Exception("Erreur d'authentification !"));
+                        }
+                    }
+                });
+
+    }
+
+    public void onGoogleLogin(){
+        getNavigator().signup();
+    }
+
+    public void synchroniseCategoriesFromFireStore(){
+        FirebaseFirestore.getInstance().collection("categories").get()
+                .addOnCompleteListener(task -> {
+                    for (DocumentSnapshot doc : task.getResult().getDocuments())
+                    {
+                        Categorie cat = doc.toObject(Categorie.class);
+                        getDataManager().saveCategorie(cat).blockingFirst();
+                    }
+                });
+    }
+
+    public ObservableField<String> getLogin() {
+        return login;
+    }
+
+    public ObservableField<String> getPassword() {
+        return password;
     }
 }

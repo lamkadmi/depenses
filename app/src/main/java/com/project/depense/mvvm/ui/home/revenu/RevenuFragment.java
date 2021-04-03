@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.kal.rackmonthpicker.RackMonthPicker;
-import com.mindorks.framework.mvvm.BR;
-import com.mindorks.framework.mvvm.R;
+import com.project.depense.mvvm.BR;
+import com.project.depense.mvvm.R;
 import com.project.depense.mvvm.ViewModelProviderFactory;
-import com.mindorks.framework.mvvm.databinding.ActivitySpendingBinding;
-import com.mindorks.framework.mvvm.databinding.FragmentRevenuBinding;
+import com.project.depense.mvvm.databinding.ActivitySpendingBinding;
+import com.project.depense.mvvm.databinding.FragmentRevenuBinding;
 import com.project.depense.mvvm.ui.base.BaseFragment;
 import com.project.depense.mvvm.ui.home.SpendingActivity;
 import com.project.depense.mvvm.ui.home.revenu.dialog.RevenuDialog;

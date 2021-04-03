@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.project.depense.mvvm.data.model.others.PrevisionByCategorie;
-import com.mindorks.framework.mvvm.databinding.ItemBlogEmptyViewBinding;
-import com.mindorks.framework.mvvm.databinding.ItemPrevevisionViewBinding;
+import com.project.depense.mvvm.databinding.ItemBlogEmptyViewBinding;
+import com.project.depense.mvvm.databinding.ItemPrevevisionViewBinding;
 import com.project.depense.mvvm.ui.base.BaseViewHolder;
 import com.project.depense.mvvm.utils.AppLogger;
 

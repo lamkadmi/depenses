@@ -16,6 +16,7 @@
 
 package com.project.depense.mvvm.ui.splash;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.project.depense.mvvm.data.DataManager;
 import com.project.depense.mvvm.ui.base.BaseViewModel;
 import com.project.depense.mvvm.utils.rx.SchedulerProvider;
@@ -30,7 +31,25 @@ public class SplashViewModel extends BaseViewModel<SplashNavigator> {
         super(dataManager, schedulerProvider);
     }
 
-   /* public void startSeeding() {
+
+    public void startDashboard() {
+        if(FirebaseAuth.getInstance().getCurrentUser()!=null){
+            getNavigator().openDashBoard();
+        }else {
+            getNavigator().openLoginActivity();
+        }
+
+    }
+
+    /*private void decideNextActivity() {
+        if (getDataManager().getCurrentUserLoggedInMode() == DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.getType()) {
+            getNavigator().openLoginActivity();
+        } else {
+            getNavigator().openDashBoard();
+        }
+    }*/
+
+    /*public void startSeeding() {
         getCompositeDisposable().add(getDataManager()
                 .seedDatabaseQuestions()
                 .flatMap(aBoolean -> getDataManager().seedDatabaseOptions())
@@ -41,17 +60,5 @@ public class SplashViewModel extends BaseViewModel<SplashNavigator> {
                 }, throwable -> {
                     decideNextActivity();
                 }));
-    }*/
-
-    public void startDashboard() {
-        getNavigator().openDashBoard();
-    }
-
-    /*private void decideNextActivity() {
-        if (getDataManager().getCurrentUserLoggedInMode() == DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.getType()) {
-            getNavigator().openLoginActivity();
-        } else {
-            getNavigator().openDashBoard();
-        }
     }*/
 }

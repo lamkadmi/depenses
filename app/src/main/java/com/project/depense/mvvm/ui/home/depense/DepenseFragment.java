@@ -20,10 +20,10 @@ package com.project.depense.mvvm.ui.home.depense;
 import android.os.Bundle;
 import android.view.View;
 
-import com.mindorks.framework.mvvm.BR;
-import com.mindorks.framework.mvvm.R;
+import com.project.depense.mvvm.BR;
+import com.project.depense.mvvm.R;
 import com.project.depense.mvvm.ViewModelProviderFactory;
-import com.mindorks.framework.mvvm.databinding.FragmentDepenseBinding;
+import com.project.depense.mvvm.databinding.FragmentDepenseBinding;
 import com.project.depense.mvvm.ui.base.BaseFragment;
 import com.project.depense.mvvm.ui.home.depense.dialog.DepenseDialog;
 import com.project.depense.mvvm.ui.home.depense.dialog.DepenseDialogCallback;

@@ -6,9 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mindorks.framework.mvvm.R;
-import com.mindorks.framework.mvvm.databinding.DialogRevenuBinding;
+import com.project.depense.mvvm.R;
 import com.project.depense.mvvm.ViewModelProviderFactory;
+import com.project.depense.mvvm.databinding.DialogRevenuBinding;
 import com.project.depense.mvvm.ui.base.BaseDialog;
 import com.project.depense.mvvm.utils.AppUtils;
 

@@ -29,6 +29,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.project.depense.mvvm.ui.login.LoginActivity;
 import com.project.depense.mvvm.utils.CommonUtils;
 import com.project.depense.mvvm.utils.NetworkUtils;
@@ -149,5 +152,8 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
         mViewDataBinding.setVariable(getBindingVariable(), mViewModel);
         mViewDataBinding.executePendingBindings();
     }
+
+    @Nullable
+    protected FirebaseUser getCurrentUser(){ return FirebaseAuth.getInstance().getCurrentUser(); }
 }
 

@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.project.depense.mvvm.data.model.db.Revenu;
-import com.mindorks.framework.mvvm.databinding.ItemBlogEmptyViewBinding;
-import com.mindorks.framework.mvvm.databinding.ItemRevenuViewBinding;
+import com.project.depense.mvvm.databinding.ItemBlogEmptyViewBinding;
+import com.project.depense.mvvm.databinding.ItemRevenuViewBinding;
 import com.project.depense.mvvm.ui.base.BaseViewHolder;
 import com.project.depense.mvvm.ui.home.dashboard.PrevisionEmptyItemViewModel;
 import com.project.depense.mvvm.utils.AppLogger;
@@ -17,7 +17,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RevenuAdapter extends RecyclerView.Adapter<BaseViewHolder>{
+public class RevenuAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     public static final int VIEW_TYPE_EMPTY = 0;
 

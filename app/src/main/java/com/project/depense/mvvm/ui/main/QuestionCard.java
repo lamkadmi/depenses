@@ -19,15 +19,16 @@ package com.project.depense.mvvm.ui.main;
 import android.graphics.Color;
 import android.widget.Button;
 import android.widget.TextView;
+
 import com.androidnetworking.widget.ANImageView;
-import com.mindorks.framework.mvvm.R;
-import com.project.depense.mvvm.data.model.db.Option;
-import com.project.depense.mvvm.data.model.others.QuestionCardData;
 import com.mindorks.placeholderview.annotations.Click;
 import com.mindorks.placeholderview.annotations.Layout;
 import com.mindorks.placeholderview.annotations.NonReusable;
 import com.mindorks.placeholderview.annotations.Resolve;
 import com.mindorks.placeholderview.annotations.View;
+import com.project.depense.mvvm.R;
+import com.project.depense.mvvm.data.model.db.Option;
+import com.project.depense.mvvm.data.model.others.QuestionCardData;
 
 /**
  * Created by lamkadmi on 17/11/19.

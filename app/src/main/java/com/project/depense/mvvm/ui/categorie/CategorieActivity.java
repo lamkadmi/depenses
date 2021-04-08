@@ -80,9 +80,7 @@ public class CategorieActivity extends BaseActivity<ActivityCategorieBinding, Ca
 
     private void setUp() {
         mLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        mActivityCategorieBinding.categories.setLayoutManager(mLayoutManager);
-        mActivityCategorieBinding.categories.setItemAnimator(new DefaultItemAnimator());
-        mActivityCategorieBinding.categories.setAdapter(mCategoriesAdapter);
+
        /* mActivityCategorieBinding.addCategorie.setOnClickListener(v -> {
             CategorieDialog dialog = CategorieDialog.newInstance();
             dialog.setListener(this);
@@ -93,12 +91,12 @@ public class CategorieActivity extends BaseActivity<ActivityCategorieBinding, Ca
 
     @Override
     public void onRetryClick() {
-        mCategorieViewModel.fetchCategories();
+        //mCategorieViewModel.fetchCategories();
     }
 
     @Override
     public void updateDashboard() {
-        mCategorieViewModel.fetchCategories();
+        //mCategorieViewModel.fetchCategories();
     }
 
     @Override
